@@ -1,5 +1,5 @@
 .about-section {
-  height: 100vh;
+  /* height: ; */
   /* padding: 20px; */
   width: 100%;
   color: white;
@@ -22,4 +22,32 @@
   height: 50vh;
   width: 70vh;
   padding: 40px 20px;
+}
+
+.aboutsubtitle {
+  border-top: 1px solid white;
+  padding: 20px 0px;
+}
+
+.about-section {
+  background-color: black;
+  color: white;
+  padding-bottom: 50px;
+}
+
+#abouttitle {
+  /* font-family: "Playfair Display", serif; */
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.aboutsubtitle {
+  border-top: 1px solid white;
+  padding: 20px 0;
+  font-size: 1.2rem;
+  font-family: "Cormorant Garamond", serif;
+  max-width: 800px;
+  margin: 0 auto;
+  color: #ccc;
+  font-style: italic;
 }

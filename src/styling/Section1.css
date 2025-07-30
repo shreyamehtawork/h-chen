@@ -1,15 +1,46 @@
-.section-one {
-  border: 2px solid black;
-  height: 80vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.women-image {
-  height: 80vh;
+.hero-section {
+  background-color: #fff;
 }
 
-#discover-style {
-  text-align: center;
-  font-size: 10rem;
+.badge-tag {
+  display: flex;
+  align-items: center;
+  background-color: #ffe78f;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  font-weight: 600;
+  max-width: max-content;
+  font-size: 0.8rem;
+}
+
+.badge-icon {
+  background: #000;
+  color: #fff;
+  border-radius: 50%;
+  padding: 0.3rem 0.5rem;
+  margin-right: 0.5rem;
+  font-size: 1rem;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #333;
+}
+
+@media (min-width: 768px) {
+  .hero-title {
+    font-size: 4.5rem;
+  }
+}
+
+.hero-subtitle {
+  font-size: 1rem;
+  color: #555;
+}
+
+.hero-img {
+  max-height: 500px;
+  object-fit: contain;
 }

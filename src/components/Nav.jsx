@@ -1,9 +1,18 @@
-import react from "react";
+import React from "react";
 import "../styling/Nav.css";
 import { FaSearch } from "react-icons/fa";
 import logo from "../assets/logofinal.png";
+import slugify from "slugify";
 
 function Nav() {
+  const categories = [
+    "Clo-Aura",
+    "Clo-Prime",
+    "Clo-Pixie",
+    "Clo-Zion",
+    "Clo-Bear",
+  ];
+
   return (
     <div className="mynavbar">
       <div className="headline">
@@ -14,10 +23,11 @@ function Nav() {
         <nav className="navbar navbar-expand-lg custom-navbar px-4 py-3">
           <a className="navbar-brand d-flex align-items-center" href="/">
             <div className="logo-circle d-flex align-items-center justify-content-center">
-              <img src={logo} alt="logo" className="oval-logo " />
+              <img src={logo} alt="logo" className="oval-logo" />
             </div>
-            <span className="brand-text">H.Chen</span>
+            <span className="brand-text">CHLOE'S VENTURE</span>
           </a>
+
           <button
             className="navbar-toggler"
             type="button"
@@ -29,40 +39,51 @@ function Nav() {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
+
           <div
             className="collapse navbar-collapse d-lg-flex"
             id="navbarsExample11"
           >
             <ul className="navbar-nav col-lg-6 justify-content-lg-center">
               <li className="nav-item">
-                <a className="nav-link" aria-current="page" href="/">
+                <a className="nav-link" href="/">
                   Home
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/shopall">
-                  Shop All
-                </a>
+                <li className="nav-item dropdown hover-dropdown">
+                  <a className="nav-link">Shop</a>
+                  <ul className="dropdown-menu show-on-hover">
+                    {categories.map((category, index) => {
+                      const slug = slugify(category, { lower: true });
+                      return (
+                        <li key={index}>
+                          <a className="dropdown-item" href={`/shop/${slug}`}>
+                            {category}
+                          </a>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </li>
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="/about">
                   About
                 </a>
               </li>
-              <li className="nav-item dropdown">
+
+              <li className="nav-item">
                 <a className="nav-link" href="/contact">
                   Contact
                 </a>
               </li>
             </ul>
+
             <div className="d-lg-flex col-lg-6 justify-content-lg-end">
               <div className="d-flex align-items-center gap-2 search-wrapper">
                 <FaSearch className="search-icon text-dark" />
-                <input
-                  type="search"
-                  placeholder="Search"
-                  className="search"
-                ></input>
+                <input type="search" placeholder="Search" className="search" />
               </div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -83,4 +104,5 @@ function Nav() {
     </div>
   );
 }
+
 export default Nav;

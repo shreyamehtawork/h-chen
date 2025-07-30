@@ -14,119 +14,79 @@ function ShopAll() {
   const products = [
     {
       id: 1,
-      name: "Premium Felt Fedora",
+      name: "Clo-Aura 1",
       price: 150,
       image: hat1,
-      category: "Contempory",
+      category: "clo-aura",
       size: "M",
       color: "Grey",
     },
     {
       id: 2,
-      name: "Handcrafted Boater Hat",
+      name: "Clo-Prime 1",
       price: 130,
       image: hat2,
-      category: "Contempory",
+      category: "clo-prime",
       size: "L",
       color: "Grey",
     },
     {
       id: 3,
-      name: "Leather Cowboy Hat",
+      name: "Clo-Pixie",
       price: 175,
       image: hat3,
-      category: "Contempory",
+      category: "clo-pixie",
       size: "S",
       color: "Grey",
     },
     {
       id: 4,
-      name: "Wool Newsboy Cap",
+      name: "clo-zion 1",
       price: 65,
       image: hat4,
-      category: "Classic",
+      category: "clo-zion",
       size: "L",
       color: "Navy",
     },
     {
       id: 5,
-      name: "Wool Newsboy Cap",
+      name: "Clo-Bear1",
       price: 65,
       image: hat5,
-      category: "Classic",
+      category: "clo-bear",
       size: "L",
       color: "Black",
     },
     {
       id: 6,
-      name: "Wool Newsboy Cap",
+      name: "Clo-Bear2",
       price: 65,
       image: hat6,
-      category: "Classic",
+      category: "clo-bear",
       size: "S",
       color: "Beige",
     },
     {
       id: 7,
-      name: "Wool Newsboy Cap",
+      name: "Clo-Zion",
       price: 170,
       image: hat7,
-      category: "Premium",
+      category: "clo-zion",
       size: "M",
       color: "Blue",
     },
     {
       id: 8,
-      name: "Wool Newsboy Cap",
+      name: "Clo-AUra2",
       price: 150,
       image: hat8,
-      category: "Premium",
+      category: "clo-aura",
       size: "L",
       color: "Grey",
     },
   ];
 
-  const [filters, setFilters] = useState({
-    category: [],
-    color: [],
-    price: { min: 50, max: 175 }, // default range
-  });
-
-  const handleFilterChange = (e) => {
-    const { name, value, checked } = e.target;
-
-    setFilters((prev) => {
-      if (name === "category" || name === "color") {
-        const updatedArray = checked
-          ? [...prev[name], value]
-          : prev[name].filter((item) => item !== value);
-        return { ...prev, [name]: updatedArray };
-      } else if (name === "price") {
-        return { ...prev, price: value }; // value is an object { min, max }
-      }
-      return prev;
-    });
-  };
-
-  const resetFilters = () => {
-    setFilters({ category: [], color: [], price: { min: 50, max: 175 } });
-  };
-
-  const filteredProducts = products.filter((product) => {
-    const matchCategory =
-      filters.category.length > 0
-        ? filters.category.includes(product.category)
-        : true;
-
-    const matchColor =
-      filters.color.length > 0 ? filters.color.includes(product.color) : true;
-
-    const matchPrice =
-      product.price >= filters.price.min && product.price <= filters.price.max;
-
-    return matchCategory && matchColor && matchPrice;
-  });
-
+  
   return (
     <div className="mt-5 row">
       <div className="col-md-2 container">

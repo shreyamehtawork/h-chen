@@ -42,35 +42,10 @@ function FilterSidebar({ filters, handleFilterChange, resetFilters }) {
 
   return (
     <div className="filter-sidebar">
-      <h5 className="section-title">Browse</h5>
-      <ul className="browse-links">
-        <li
-          className={filters.category.length === 0 ? "active" : ""}
-          onClick={resetFilters}
-        >
-          All Products
-        </li>
-      </ul>
+      <h5 className="section-title">Browse By</h5>
 
       <div className="filter-group">
-        <label className="filter-subtitle">Category</label>
-        {["Contempory", "Classic", "Premium"].map((cat) => (
-          <div className="form-check checkbox-list" key={cat}>
-            <input
-              className="form-check-input"
-              type="checkbox"
-              name="category"
-              value={cat}
-              checked={filters.category.includes(cat)}
-              onChange={handleFilterChange}
-            />
-            <label className="form-check-label">{cat}</label>
-          </div>
-        ))}
-      </div>
-
-      <div className="filter-group">
-        <label className="filter-subtitle">Color</label>
+        <label className="filter-subtitle">COLOR</label>
         {["Grey", "Navy", "Black", "Beige", "Blue"].map((color) => (
           <div className="form-check checkbox-list" key={color}>
             <input
@@ -87,7 +62,7 @@ function FilterSidebar({ filters, handleFilterChange, resetFilters }) {
       </div>
 
       <div className="filter-group">
-        <label className="filter-subtitle">Price Range</label>
+        <label className="filter-subtitle">PRICE RANGE</label>
         <div className="range-slider-wrapper">
           <div className="tooltip-container">
             <span className="tooltip">{filters.price.min}</span>

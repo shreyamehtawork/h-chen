@@ -9,6 +9,7 @@ function About() {
     <div
       style={{
         overflowX: "hidden",
+        backgroundColor: "black",
       }}
     >
       <About1 />

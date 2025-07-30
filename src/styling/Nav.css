@@ -54,3 +54,22 @@
   object-fit: contain;
   margin: 0;
 }
+/* Hover dropdown behavior */
+.hover-dropdown:hover .show-on-hover {
+  display: block;
+  margin-top: 0;
+}
+
+.hover-dropdown .dropdown-menu {
+  display: none;
+  transition: all 0.3s ease;
+  border: none;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Optional styling for dropdown items */
+.dropdown-menu .dropdown-item {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1rem;
+  padding: 10px 20px;
+}

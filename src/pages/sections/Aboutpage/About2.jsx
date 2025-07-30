@@ -7,7 +7,7 @@ function About2() {
       <img
         src={aboutImage2}
         style={{
-          height: "120vh",
+          height: "90vh",
           width: "95vw",
           objectFit: "fill",
           // padding: "50px",

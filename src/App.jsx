@@ -7,6 +7,8 @@ import ShopAll from "./pages/ShopAll";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Footer from "./pages/sections/Footer";
+import SingleProductsView from "./components/SingleProductsView";
+import CategoryPage from "./pages/CategoryPage";
 
 function App() {
   return (
@@ -14,9 +16,14 @@ function App() {
       <Nav />
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route exact path="/shopall" element={<ShopAll />} />
+        <Route path="/shop/:category" element={<CategoryPage />} />
         <Route exact path="/about" element={<About />} />
         <Route exact path="/contact" element={<Contact />} />
+        <Route
+          exact
+          path="/singleproductview"
+          element={<SingleProductsView />}
+        />
       </Routes>
       <Footer />
     </div>

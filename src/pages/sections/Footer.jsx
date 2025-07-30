@@ -7,10 +7,11 @@ const Footer = () => {
       <div className="row footer">
         {/* Left side */}
         <div className="col-md-6 ps-md-5 mb-md-0 left-side">
-          <h6 className="brand-name">H. Chen</h6>
+          <h6 className="brand-name">CHLOE'S VENTURE</h6>
           <h2 className="tagline">
-            Discover Your <br />
-            Perfect Hat
+            Where every identity is seen.
+            <br></br>
+            Where elegance feels like home.
           </h2>
         </div>
 

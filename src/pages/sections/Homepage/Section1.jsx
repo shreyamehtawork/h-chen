@@ -1,32 +1,39 @@
 import React from "react";
 import "../../../styling/Section1.css";
-import womanImage from "../../../assets/women.png";
+import heroImg from "../../../assets/images/hero.jpg"; // Replace with your image path
 
-function Section1() {
+const Section1 = () => {
   return (
-    <div>
-      <div className="container-fluid contact-wrapper d-flex justify-content-center align-items-center mt-5 mb-1">
-        <div className="row w-100 text-center">
-          <div className="col-md-4 d-flex justify-content-center align-items-center">
-            <p className="contact-info">info@mysite.com</p>
-          </div>
-          <div className="col-md-4 d-flex justify-content-center align-items-center">
-            <img
-              src={womanImage}
-              alt="Model"
-              className="img-fluid women-image"
-            />
-          </div>
-          <div className="col-md-4 d-flex justify-content-center align-items-center">
-            <p className="contact-info">123-456-7890</p>
-          </div>
+    <section className="hero-section container-fluid py-5">
+      <div className="row align-items-center">
+        {/* Left text */}
+        <div className="col-lg-6 text-center text-lg-start mb-4 mb-lg-0 px-4">
+          {/* <div className="badge-tag mb-3">
+            <span className="badge-icon">✳</span>
+            <span className="badge-text">
+              SUMMER IS HERE
+              <br />
+              GET READY!
+            </span>
+          </div> */}
+          <h1 className="hero-title">
+            UNDER <br className="d-none d-md-block" />
+            CONSTRUCTION <br className="d-none d-md-block" />
+            ⚠️🚀
+          </h1>
+          <p className="hero-subtitle mt-3">
+            Discover our new summer collection! <br />
+            Shop now and refresh wardrobe.
+          </p>
+        </div>
+
+        {/* Right image */}
+        <div className="col-lg-6 text-center px-4">
+          <img src={heroImg} alt="hero" className="img-fluid hero-img" />
         </div>
       </div>
-      <div className="col-12" id="discover-style">
-        DISCOVER STYLE
-      </div>
-    </div>
+    </section>
   );
-}
+};
 
 export default Section1;
