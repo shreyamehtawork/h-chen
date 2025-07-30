@@ -88,7 +88,6 @@ function FilterSidebar({ filters, handleFilterChange, resetFilters }) {
 
       <div className="filter-group">
         <label className="filter-subtitle">Price Range</label>
-
         <div className="range-slider-wrapper">
           <div className="tooltip-container">
             <span className="tooltip">{filters.price.min}</span>
