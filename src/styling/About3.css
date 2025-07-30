@@ -1,0 +1,23 @@
+#about3section {
+  background-color: black;
+  padding: 20px;
+  color: white;
+}
+
+.about-title {
+  font-size: 60px;
+}
+
+section {
+  background-color: black;
+  height: 100vh;
+}
+
+.about3content {
+  height: 60vh;
+  margin-top: 20px;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

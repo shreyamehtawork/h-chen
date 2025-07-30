@@ -1,0 +1,31 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap");
+
+.faq-section {
+  background-color: #000;
+  font-family: "Playfair Display", serif;
+  text-align: left;
+}
+
+.faq-title {
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.faq-description {
+  font-size: 1rem;
+  line-height: 1.7;
+  max-width: 850px;
+}
+
+.faq-question {
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin-bottom: 0.75rem;
+}
+
+.faq-answer {
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.7;
+  max-width: 900px;
+}

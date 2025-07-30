@@ -1,0 +1,29 @@
+.team-heading {
+  /* font-weight: 600; */
+  letter-spacing: 1px;
+}
+
+.team-name {
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+.team-description {
+  font-size: 1.4rem;
+  margin-top: 10px;
+  line-height: 1.6;
+}
+
+.team-contact {
+  margin-top: 15px;
+  font-size: 1rem;
+}
+
+.team-img {
+  max-width: 120px;
+  border-radius: 5px;
+}
+
+hr {
+  border-top: 1px solid #aaa;
+}

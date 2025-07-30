@@ -1,0 +1,15 @@
+.section-one {
+  border: 2px solid black;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.women-image {
+  height: 80vh;
+}
+
+#discover-style {
+  text-align: center;
+  font-size: 10rem;
+}
