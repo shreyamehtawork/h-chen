@@ -55,3 +55,38 @@ a:hover {
   color: #555;
   text-align: right;
 }
+
+/* Responsive adjustments — only adds, doesn't modify your original CSS */
+@media (max-width: 768px) {
+  .footer {
+    height: auto;
+    padding: 20px;
+  }
+
+  .left-side,
+  .right-side {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    border: none;
+    padding-bottom: 20px;
+  }
+
+  .right-side {
+    align-items: flex-start !important;
+  }
+
+  .tagline {
+    font-size: 15px;
+
+  }
+
+  .footer-links {
+    margin-top: 10px;
+  }
+
+  .copyright {
+    text-align: center;
+    padding-top: 1rem;
+  }
+}

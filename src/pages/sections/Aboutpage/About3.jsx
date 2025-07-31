@@ -10,7 +10,7 @@ function About3() {
         </div>
         <div className="container about3content">
           <div className="row mb-3 ">
-            <div className="col-md-4 mt-5">Our Philosophy</div>
+            <div className="col-md-5 mt-5">Our Philosophy</div>
             <div className="col-md-6 px-5 py-5" id="about-right">
               <p>
                 At Chloé, we don’t dress bodies —

@@ -3,7 +3,7 @@ import "../../../styling/About4.css";
 
 const About4 = () => {
   return (
-    <div className="about4-wrapper bg-white py-5">
+    <div className="about4-wrapper container bg-white py-5">
       <div className="container team-section text-center">
         <h1 className="team-heading mb-3">FOUNDER'S NOTE</h1>
         <hr className="divider" />

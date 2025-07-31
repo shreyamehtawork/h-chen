@@ -1,23 +1,54 @@
 #about3section {
   background-color: black;
-  padding: 20px;
+  /* padding: 20px; */
   color: white;
 }
 
+/* Title size adjusts for smaller screens */
 .about-title {
   font-size: 60px;
 }
 
-section {
-  background-color: black;
-  height: 100vh;
+@media (max-width: 768px) {
+  .about-title {
+    font-size: 36px;
+    text-align: center;
+  }
 }
 
+@media (max-width: 480px) {
+  .about-title {
+    font-size: 28px;
+  }
+}
+
+/* Section height adapts on small screens */
+section {
+  background-color: black;
+  min-height: 80vh; /* use min-height instead of fixed height for better flexibility */
+}
+
+/* Make content flexible and wrap if needed */
 .about3content {
-  height: 60vh;
-  margin-top: 20px;
   font-size: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
+  /* padding: 10px; */
+}
+
+/* Adjust font-size on smaller devices */
+@media (max-width: 768px) {
+  .about3content {
+    font-size: 18px;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .about3content {
+    font-size: 16px;
+    /* padding: 5px; */
+    text-align: center;
+  }
 }

@@ -86,7 +86,6 @@ function ShopAll() {
     },
   ];
 
-  
   return (
     <div className="mt-5 row">
       <div className="col-md-2 container">

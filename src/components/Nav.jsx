@@ -20,7 +20,7 @@ function Nav() {
       </div>
 
       <div className="container-fluid">
-        <nav className="navbar navbar-expand-lg custom-navbar px-4 py-3">
+        <nav className="navbar navbar-expand-lg">
           <a className="navbar-brand d-flex align-items-center" href="/">
             <div className="logo-circle d-flex align-items-center justify-content-center">
               <img src={logo} alt="logo" className="oval-logo" />

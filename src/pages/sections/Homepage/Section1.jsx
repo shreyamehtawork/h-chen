@@ -1,39 +1,34 @@
 import React from "react";
 import "../../../styling/Section1.css";
-import heroImg from "../../../assets/images/hero.jpg"; // Replace with your image path
+import modelImage from "../../../assets/images//hero.png"; // Replace with your image path
 
-const Section1 = () => {
+function HeroSection() {
   return (
-    <section className="hero-section container-fluid py-5">
-      <div className="row align-items-center">
-        {/* Left text */}
-        <div className="col-lg-6 text-center text-lg-start mb-4 mb-lg-0 px-4">
-          {/* <div className="badge-tag mb-3">
-            <span className="badge-icon">✳</span>
-            <span className="badge-text">
-              SUMMER IS HERE
-              <br />
-              GET READY!
-            </span>
-          </div> */}
-          <h1 className="hero-title">
-            UNDER <br className="d-none d-md-block" />
-            CONSTRUCTION <br className="d-none d-md-block" />
-            ⚠️🚀
-          </h1>
-          <p className="hero-subtitle mt-3">
-            Discover our new summer collection! <br />
-            Shop now and refresh wardrobe.
-          </p>
+    <section className="hero-section container-fluid">
+      <div className="row align-items-center justify-content-center gx-0">
+        {/* LEFT TEXT */}
+        <div className="col-4 text-end hero-text-left">
+          <h1 className="hero-word">YOUR</h1>
+          <h1 className="hero-word">STARTS</h1>
         </div>
 
-        {/* Right image */}
-        <div className="col-lg-6 text-center px-4">
-          <img src={heroImg} alt="hero" className="img-fluid hero-img" />
+        {/* CENTER IMAGE */}
+        <div className="col-4 text-center position-relative">
+          <img
+            src={modelImage}
+            alt="Model"
+            className="hero-model-img position-relative"
+          />
+        </div>
+
+        {/* RIGHT TEXT */}
+        <div className="col-4 text-start hero-text-right">
+          <h1 className="hero-word">STYLE</h1>
+          <h1 className="hero-word">HERE</h1>
         </div>
       </div>
     </section>
   );
-};
+}
 
-export default Section1;
+export default HeroSection;
