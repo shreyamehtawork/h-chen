@@ -1,7 +1,8 @@
 .about-section {
   /* height: ; */
   /* padding: 20px; */
-  width: 100%;
+  /* width: 100%; */
+
   color: white;
   background-color: black;
 }
@@ -19,11 +20,13 @@
 }
 
 #about-left > img {
-  width: 75%;
-  height: auto;
+  /* width:?%; */
+  width: 450px;
+  height: 350px;
   padding: 40px 20px;
   max-width: 100%;
-  object-fit: contain;
+  object-fit: cover;
+  object-position: top center;
 }
 
 .aboutsubtitle {

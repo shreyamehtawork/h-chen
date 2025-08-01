@@ -1,5 +1,5 @@
 import React from "react";
-import aboutImg from "../../../assets/about.png";
+import image1 from "../../../assets/images/women/image1.jpg";
 
 function Section2() {
   return (
@@ -7,7 +7,7 @@ function Section2() {
       <h1>ABOUT</h1>
       <div className="row w-100 ">
         <div className="col-md-4 d-flex justify-content-center align-items-center">
-          <img src={aboutImg} alt="Model" className="img-fluid about-image" />
+          <img src={image1} alt="Model" className="img-fluid about-image" />
         </div>
         <div className="col-md-5">
           <h3 className="our-story-title">Our Story</h3>

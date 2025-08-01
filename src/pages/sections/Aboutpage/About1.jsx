@@ -1,7 +1,6 @@
 import React from "react";
 import "../../../styling/About1.css";
-import aboutImage from "../../../assets/aboutsection.png";
-import aboutImage2 from "../../../assets/aboutsection2.png";
+import aboutImage from "../../../assets/images/infants/image10.jpg";
 
 function About1() {
   return (
