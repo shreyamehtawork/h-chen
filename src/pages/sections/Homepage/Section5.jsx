@@ -25,28 +25,30 @@ function Section5() {
   };
 
   return (
-    <motion.div
-      className="section-5 text-center"
-      ref={sectionRef}
-      variants={fadeSlideVariant}
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
-    >
-      <div className="container section5-content">
-        <div className="mb-4 section5-headline">
-          <span>EXCLUSIVE OFFER</span>
+    <section>
+      <motion.div
+        className="section-5 text-center"
+        ref={sectionRef}
+        variants={fadeSlideVariant}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+      >
+        <div className="container section5-content">
+          <div className="mb-4 section5-headline">
+            <span>EXCLUSIVE OFFER</span>
+          </div>
+          <h4 className="section5-title">Limited Time Deal</h4>
+          <p className="section5-description">
+            Elevate your style with our premium collection at special prices.
+            <br />
+            Don’t miss out on our exclusive hat promotion.
+            <br />
+            Explore now before the offer ends!
+          </p>
+          <button className="btn btn-outline-dark mt-3">Shop Now</button>
         </div>
-        <h4 className="section5-title">Limited Time Deal</h4>
-        <p className="section5-description">
-          Elevate your style with our premium collection at special prices.
-          <br />
-          Don’t miss out on our exclusive hat promotion.
-          <br />
-          Explore now before the offer ends!
-        </p>
-        <button className="btn btn-outline-dark mt-3">Shop Now</button>
-      </div>
-    </motion.div>
+      </motion.div>
+    </section>
   );
 }
 
