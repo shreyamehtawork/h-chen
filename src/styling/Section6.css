@@ -24,6 +24,6 @@
 /* Optional for mobile */
 @media (max-width: 768px) {
   .hero-container {
-    height: 80vh;
+    height: 50vh;
   }
 }
