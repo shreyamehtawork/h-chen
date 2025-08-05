@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import "../../../styling/ReviewSection.css";
 
 const reviews = [
@@ -35,22 +36,60 @@ const reviews = [
 ];
 
 function TestimonialCarousel() {
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { margin: "-100px" });
+
   const [index, setIndex] = useState(0);
+  const [direction, setDirection] = useState(1); // 1 = next, -1 = prev
 
   const totalSlides = Math.ceil(reviews.length / 2);
+  const currentReviews = reviews.slice(index * 2, index * 2 + 2);
 
   const next = () => {
+    setDirection(1);
     setIndex((prev) => (prev + 1) % totalSlides);
   };
 
   const prev = () => {
+    setDirection(-1);
     setIndex((prev) => (prev - 1 + totalSlides) % totalSlides);
   };
 
-  const currentReviews = reviews.slice(index * 2, index * 2 + 2);
+  const fadeSection = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 1, type: "spring", stiffness: 70 },
+    },
+  };
+
+  const slideCard = {
+    initial: (dir) => ({
+      opacity: 0,
+      x: dir > 0 ? 100 : -100,
+    }),
+    animate: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.5, ease: "easeOut" },
+    },
+    exit: (dir) => ({
+      opacity: 0,
+      x: dir > 0 ? -100 : 100,
+      transition: { duration: 0.4, ease: "easeIn" },
+    }),
+  };
 
   return (
-    <section className="testimonial-section container-fluid d-flex">
+    <motion.section
+      className="testimonial-section container-fluid d-flex flex-wrap flex-md-nowrap"
+      ref={sectionRef}
+      variants={fadeSection}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+    >
+      {/* LEFT TEXT */}
       <div className="testimonial-left d-flex flex-column justify-content-between">
         <div>
           <p className="section-subtitle">WHAT CLIENTS ARE SAYING</p>
@@ -65,18 +104,30 @@ function TestimonialCarousel() {
         </div>
       </div>
 
-      <div className="testimonial-carousel d-flex">
-        {currentReviews.map((review, idx) => (
-          <div className="testimonial-card" key={idx}>
-            <p className="testimonial-text">"{review.text}"</p>
-            <div className="stars">★★★★★</div>
-            <p className="author">
-              <strong>{review.author}</strong> / {review.location}
-            </p>
-          </div>
-        ))}
+      {/* RIGHT CAROUSEL */}
+      <div className="testimonial-carousel d-flex position-relative overflow-hidden">
+        <AnimatePresence mode="wait" custom={direction}>
+          {currentReviews.map((review, idx) => (
+            <motion.div
+              key={`${index}-${idx}`} // unique per slide index
+              className="testimonial-card"
+              variants={slideCard}
+              custom={direction}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              layout
+            >
+              <p className="testimonial-text">"{review.text}"</p>
+              <div className="stars">★★★★★</div>
+              <p className="author">
+                <strong>{review.author}</strong> / {review.location}
+              </p>
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </div>
-    </section>
+    </motion.section>
   );
 }
 

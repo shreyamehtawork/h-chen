@@ -8,3 +8,22 @@
 .section5-headline {
   font-size: 3.5rem;
 }
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .section5-title {
+    font-size: 1.6rem;
+  }
+
+  .section5-description {
+    font-size: 0.95rem;
+  }
+
+  .section5-headline span {
+    font-size: 1rem;
+  }
+
+  .section-5 {
+    padding: 3rem 1rem;
+  }
+}

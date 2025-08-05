@@ -20,7 +20,7 @@ function Home() {
         direction="left"
         bgcolor="black"
         height="50"
-        scrollamount="5"
+        scrollamount="infinite"
         style={{
           color: "white",
         }}

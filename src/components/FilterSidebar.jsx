@@ -42,7 +42,7 @@ function FilterSidebar({ filters, handleFilterChange, resetFilters }) {
 
   return (
     <div className="filter-sidebar">
-      <h5 className="section-title">Browse By</h5>
+      <h6 className="section-title">Browse By</h6>
 
       <div className="filter-group">
         <label className="filter-subtitle">COLOR</label>

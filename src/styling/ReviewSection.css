@@ -70,3 +70,90 @@
 .author {
   color: #333;
 }
+
+.testimonial-carousel {
+  flex: 3;
+  display: flex;
+  gap: 24px;
+  transition: all 0.4s ease;
+  position: relative; /* Required for AnimatePresence transitions */
+  overflow: hidden; /* Prevent overflow on slide-out */
+}
+
+.testimonial-carousel {
+  position: relative;
+  overflow: hidden;
+}
+
+.testimonial-card {
+  min-width: 280px; /* Ensures animation works on smaller screens too */
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+/* Mobile & Tablet Responsiveness */
+@media (max-width: 992px) {
+  .testimonial-section {
+    flex-direction: column;
+    padding: 40px 30px;
+    gap: 40px;
+  }
+
+  .testimonial-left {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .section-title {
+    font-size: 28px;
+  }
+
+  .carousel-controls {
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .testimonial-carousel {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .testimonial-card {
+    flex: 1 1 100%;
+    max-width: 100%;
+    padding: 24px;
+  }
+
+  .testimonial-text {
+    font-size: 18px;
+  }
+
+  .stars {
+    font-size: 16px;
+  }
+
+  .author {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 576px) {
+  .testimonial-section {
+    padding: 30px 20px;
+  }
+
+  .section-title {
+    font-size: 24px;
+  }
+
+  .testimonial-text {
+    font-size: 16px;
+  }
+
+  .testimonial-card {
+    padding: 20px;
+  }
+
+  .carousel-controls span {
+    font-size: 14px;
+  }
+}

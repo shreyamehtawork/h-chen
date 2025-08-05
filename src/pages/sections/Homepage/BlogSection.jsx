@@ -1,52 +1,71 @@
-// src/components/ArticlesSection.jsx
-import React from "react";
+import React, { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import "../../../styling/BlogSection.css";
+import { Link } from "react-router-dom";
 
 import article from "../../../assets/images/article.avif";
-import article1 from "../../../assets/images/article1.avif";
+import articles from "../../BlogData";
 
-import article2 from "../../../assets/images/article2.avif";
+const fadeInVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { duration: 0.8, ease: "easeOut" },
+  },
+};
 
-const articles = [
-  {
-    title: "Find your perfect fit today – comfort",
-    category: "CONFIDENCE",
-    date: "Jun 18, 2024",
-    image: article1,
-    darkOverlay: false,
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.2,
+    },
   },
-  {
-    title: "Shop timeless pieces for every occasion",
-    category: "ESSENTIALS",
-    date: "May 5, 2024",
-    image: article2,
-    darkOverlay: false,
-  },
-];
+};
 
 const BlogSection = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { margin: "-100px", once: true });
+
   return (
-    <div className="container my-5">
-      <h2 className="text-center mb-5 fw-light">Read our articles</h2>
-      <div className="row g-4">
-        <div className="col-md-6">
-          <div className="article-wrapper with-overlay">
-            <img src={article} alt="innovatiove" className="img-fluid" />
+    <motion.div
+      className="container my-5"
+      ref={ref}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+      variants={containerVariants}
+    >
+      <motion.h2
+        className="text-center mb-5 fw-light"
+        variants={fadeInVariants}
+      >
+        Read our articles
+      </motion.h2>
+
+      <motion.div className="row g-4" variants={containerVariants}>
+        <motion.div className="col-md-6" variants={fadeInVariants}>
+          <div className="article-wrapper with-overlay zoom-hover">
+            <img src={article} alt="innovative" className="img-fluid" />
             <div className="article-content overlay-text">
               <p className="article-category mb-1">INNOVATIVE</p>
               <h5 className="article-title mb-2">
-                Discover our latest fashion trends excluisivelwy
+                Discover our latest fashion trends exclusively
               </h5>
-              <p className="article-date"> 12 July 2024</p>
-            </div>{" "}
+              <p className="article-date">12 July 2024</p>
+            </div>
           </div>
-        </div>
+        </motion.div>
+
         {articles.map((item, index) => (
-          <div className="col-md-3" key={index}>
+          <motion.div
+            className="col-md-3"
+            key={index}
+            variants={fadeInVariants}
+          >
             <div
               className={`article-wrapper ${
                 item.darkOverlay ? "with-overlay" : ""
-              }`}
+              } zoom-hover`}
             >
               <img src={item.image} alt={item.title} className="img-fluid" />
               <div
@@ -59,13 +78,18 @@ const BlogSection = () => {
                 <p className="article-date">{item.date}</p>
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
-      <div className="text-center mt-5">
-        <button className="read-more-btn">READ MORE</button>
-      </div>
-    </div>
+      </motion.div>
+
+      <motion.div className="text-center mt-5" variants={fadeInVariants}>
+        <button className="read-more-btn">
+          <Link to="/blog" style={{ textDecoration: "none" }}>
+            READ MORE
+          </Link>
+        </button>
+      </motion.div>
+    </motion.div>
   );
 };
 

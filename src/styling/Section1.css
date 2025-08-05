@@ -79,3 +79,21 @@
   max-width: 80%;
   margin-top: 20px;
 }
+
+.hero-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.left-side-text {
+  margin-right: -80px;
+}
+
+.right-side-text {
+  margin-left: -80px;
+}
