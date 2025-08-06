@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import aboutImage2 from "../../../assets/aboutsection2.png";
+// import aboutImage2 from "../../../assets/aboutsection2.png";
+import aboutImage2 from "../../../assets/images/about.jpg";
 import "../../../styling/About2.css";
 
 function About2() {
