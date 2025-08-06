@@ -27,13 +27,13 @@ function Section5() {
   return (
     <section>
       <motion.div
-        className="section-5 text-center"
+        className="section-5 text-center text-white"
         ref={sectionRef}
         variants={fadeSlideVariant}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
       >
-        <div className="container section5-content">
+        <div className="container section5-content ">
           <div className="mb-4 section5-headline">
             <span>EXCLUSIVE OFFER</span>
           </div>
@@ -45,7 +45,7 @@ function Section5() {
             <br />
             Explore now before the offer ends!
           </p>
-          <button className="btn btn-outline-dark mt-3">Shop Now</button>
+          <button className="btn btn-outline-light mt-3">Shop Now</button>
         </div>
       </motion.div>
     </section>
