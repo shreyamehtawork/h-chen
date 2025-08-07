@@ -10,7 +10,7 @@
   /* max-width: 100%; */
   display: block;
   margin: 0 auto;
-}
+} 
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
