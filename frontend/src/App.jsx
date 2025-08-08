@@ -16,6 +16,7 @@ import Register from "./auth/Register";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RegisterComplete from "./auth/RegisterComplete";
+import AllProducts from "./pages/AllProducts";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/register/complete" element={<RegisterComplete />} />
+        <Route exact path="/shopall" element={<AllProducts />} />
       </Routes>
       <Footer />
     </div>

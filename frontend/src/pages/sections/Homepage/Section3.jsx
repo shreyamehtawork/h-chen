@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import "../../../styling/Section3.css";
 import allProducts from "../../ProductsData";
+import { Link } from "react-router-dom";
 
 function Section3() {
   const sectionRef = useRef(null);
@@ -125,7 +126,11 @@ function Section3() {
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
       >
-        <button className="btn btn-outline-dark mt-5">Shop Now</button>
+        <button className="btn btn-outline-dark mt-5">
+          <Link to={"/shopall"} className="text-decoration-none">
+            Show More
+          </Link>
+        </button>
       </motion.div>
     </section>
   );

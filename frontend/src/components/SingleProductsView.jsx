@@ -30,7 +30,7 @@ function SingleProductsView() {
   return (
     <div className="container py-5">
       <nav className="mb-4">
-        <Link to="/">Home</Link>
+        <Link to="/">Home</Link>/
         <Link to={`/shop/${category}`}>{category}</Link> / {product.name}
       </nav>
 
