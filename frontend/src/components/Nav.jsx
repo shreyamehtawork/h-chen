@@ -50,7 +50,6 @@ function Nav() {
                   Home
                 </a>
               </li>
-              <li className="nav-item">
                 <li className="nav-item dropdown hover-dropdown">
                   <a className="nav-link">Shop</a>
                   <ul className="dropdown-menu show-on-hover">
@@ -66,7 +65,6 @@ function Nav() {
                     })}
                   </ul>
                 </li>
-              </li>
               <li className="nav-item">
                 <a className="nav-link" href="/about">
                   About
@@ -85,18 +83,33 @@ function Nav() {
                 <FaSearch className="search-icon text-dark" />
                 <input type="search" placeholder="Search" className="search" />
               </div>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="25"
-                height="25"
-                fill="currentColor"
-                className="bi bi-cart-dash text-dark"
-                viewBox="0 0 16 16"
-                style={{ marginLeft: "5px" }}
+              <div style={{ marginLeft: "5px", marginRight: "10px" }}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="25"
+                  height="25"
+                  fill="currentColor"
+                  className="bi bi-cart-dash text-dark"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M6.5 7a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1z" />
+                  <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
+                </svg>
+                Mycart
+              </div>
+
+              <a
+                href="/login"
+                style={{ textDecoration: "none", marginRight: "10px" }}
               >
-                <path d="M6.5 7a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1z" />
-                <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
-              </svg>
+                Login
+              </a>
+              <a
+                href="/register"
+                style={{ textDecoration: "none", marginRight: "10px" }}
+              >
+                Register
+              </a>
             </div>
           </div>
         </nav>
