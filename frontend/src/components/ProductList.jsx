@@ -47,7 +47,7 @@ function ProductList({ products }) {
                     className="card-img-top img-fluid"
                   />
                   <div className="card-body text-center p-2">
-                    <h5 className="card-title mb-1">{product.name}</h5>
+                    <h3 className="card-title mb-1">{product.name}</h3>
                     <p className="card-text">${product.price.toFixed(2)}</p>
                   </div>
                 </a>

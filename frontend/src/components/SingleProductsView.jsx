@@ -30,8 +30,8 @@ function SingleProductsView() {
   return (
     <div className="container py-5">
       <nav className="mb-4">
-        <Link to="/">Home</Link> / <Link to={`/${category}`}>{category}</Link> /{" "}
-        {product.name}
+        <Link to="/">Home</Link>
+        <Link to={`/shop/${category}`}>{category}</Link> / {product.name}
       </nav>
 
       <div className="row align-items-start">
@@ -58,7 +58,8 @@ function SingleProductsView() {
           animate="visible"
           transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
         >
-          <h2 className="fw-bold">{product.name}</h2>
+          <h1 className="fw-bold">{product.name}</h1>
+          <h5>{product.description}</h5>
           <p className="fs-4">${product.price.toFixed(2)}</p>
 
           <div className="mb-3">

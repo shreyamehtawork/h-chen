@@ -16,6 +16,7 @@ const allProducts = [
     category: "clo-bear",
     size: ["M"],
     color: ["Grey"],
+    description: "Luxury , cute and fasionalble",
   },
   {
     id: 2,
@@ -25,6 +26,7 @@ const allProducts = [
     category: "clo-bear",
     size: ["L"],
     color: ["Grey"],
+    description: "Luxury , cute and fasionalble",
   },
   {
     id: 3,
@@ -34,6 +36,7 @@ const allProducts = [
     category: "clo-bear",
     size: ["S"],
     color: ["Grey"],
+    description: "Luxury , cute and fasionalble",
   },
   {
     id: 4,
@@ -43,6 +46,7 @@ const allProducts = [
     category: "clo-prime",
     size: ["L"],
     color: ["Navy"],
+    description: "Luxury , cute and fasionalble",
   },
   {
     id: 5,
@@ -52,6 +56,7 @@ const allProducts = [
     category: "clo-prime",
     size: ["L"],
     color: ["Black"],
+    description: "Luxury , cute and fasionalble",
   },
   {
     id: 6,
@@ -61,6 +66,7 @@ const allProducts = [
     category: "clo-aura",
     size: ["S"],
     color: ["Beige"],
+    description: "Luxury , cute and fasionalble",
   },
   {
     id: 7,
@@ -70,6 +76,7 @@ const allProducts = [
     category: "clo-zion",
     size: ["M"],
     color: ["Blue"],
+    description: "Luxury , cute and fasionalble",
   },
   {
     id: 8,
@@ -79,6 +86,7 @@ const allProducts = [
     category: "clo-aura",
     size: ["L"],
     color: ["Grey"],
+    description: "Luxury , cute and fasionalble",
   },
 ];
 
