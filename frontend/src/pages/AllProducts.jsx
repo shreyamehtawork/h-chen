@@ -1,14 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FilterSidebar from "../components/FilterSidebar";
 import ProductList from "../components/ProductList";
 import allProducts from "../pages/ProductsData";
+import { getProducts } from "../services/productService";
 
 function AllProducts() {
   const [filters, setFilters] = useState({
     category: [],
     color: [],
-    price: { min: 50, max: 175 },
+    price: { min: 100, max: 10000 },
   });
+
+    const [products, setProducts] = useState([]);
+    const [loadingProducts, setLoadingProducts] = useState(true);
+  
+    const fetchProducts = async () => {
+      const res = await getProducts({});
+      console.log("Products:", res);
+      if (res) setProducts(res);
+      setLoadingProducts(false);
+    };
+  
+    useEffect(() => {
+      fetchProducts();
+    }, []);
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
@@ -19,13 +34,13 @@ function AllProducts() {
   };
 
   const resetFilters = () => {
-    setFilters({ category: [], color: [], price: { min: 50, max: 175 } });
+    setFilters({ category: [], color: [], price: { min: 100, max: 10000 } });
   };
 
-  const filteredProducts = allProducts.filter((product) => {
+  const filteredProducts = products.length ? products.filter((product) => {
     const inCategory =
       filters.category.length === 0 ||
-      filters.category.includes(product.category);
+      filters.category.includes(product.category.toLowerCase());
 
     const inColor =
       filters.color.length === 0 || filters.color.includes(product.color);
@@ -34,7 +49,7 @@ function AllProducts() {
       product.price >= filters.price.min && product.price <= filters.price.max;
 
     return inCategory && inColor && inPriceRange;
-  });
+  }) : [];
 
   return (
     <div className="container mt-5">
