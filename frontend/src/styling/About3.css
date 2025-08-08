@@ -22,12 +22,6 @@
   }
 }
 
-/* Section height adapts on small screens */
-section {
-  background-color: black;
-  min-height: 80vh; /* use min-height instead of fixed height for better flexibility */
-}
-
 /* Make content flexible and wrap if needed */
 .about3content {
   font-size: 20px;

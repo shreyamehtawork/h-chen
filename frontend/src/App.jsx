@@ -11,11 +11,18 @@ import CategoryPage from "./pages/CategoryPage";
 import BlogPage from "./pages/BlogPage";
 import SingleBlogPage from "./components/SingleBlogPage";
 import slugify from "slugify";
+import Login from "./auth/Login";
+import Register from "./auth/Register";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import RegisterComplete from "./auth/RegisterComplete";
 
 function App() {
   return (
     <div>
       <Nav />
+
+      <ToastContainer />
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/shop/:category" element={<CategoryPage />} />
@@ -28,7 +35,10 @@ function App() {
           path="/singleproductview"
           element={<SingleProductsView />}
         />
-        <Route exact path="/singleblogview" element={<SingleBlogPage />} />
+        <Route exact path="/:slug" element={<SingleBlogPage />} />
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/register" element={<Register />} />
+        <Route exact path="/register/complete" element={<RegisterComplete />} />
       </Routes>
       <Footer />
     </div>
