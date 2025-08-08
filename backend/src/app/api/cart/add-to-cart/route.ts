@@ -32,6 +32,8 @@ export async function POST(req: NextRequest) {
       cart.products.push({
         product: product.id,
         quantity: product.quantity || 1,
+        color: product.color,
+        size: product.size
       });
     }
 

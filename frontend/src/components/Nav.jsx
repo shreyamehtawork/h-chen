@@ -50,7 +50,6 @@ function Nav() {
                   Home
                 </a>
               </li>
-              <li className="nav-item">
                 <li className="nav-item dropdown hover-dropdown">
                   <a className="nav-link">Shop</a>
                   <ul className="dropdown-menu show-on-hover">
@@ -66,7 +65,6 @@ function Nav() {
                     })}
                   </ul>
                 </li>
-              </li>
               <li className="nav-item">
                 <a className="nav-link" href="/about">
                   About

@@ -44,7 +44,7 @@ export async function PUT(req: NextRequest) {
     }
 
     await cart.save();
-    // const populatedCart = await cart
+    // const populatedCart = await Cart.find({user})
     const updatedCart = await Cart.aggregate([
       {
         $match: { user: new Types.ObjectId(user) },
@@ -79,6 +79,8 @@ export async function PUT(req: NextRequest) {
 
     return NextResponse.json(updatedCart[0], { status: 201 });
   } catch (error) {
+    console.log(error);
+    
     return NextResponse.json(
       {
         error: "Failed to add to cart",

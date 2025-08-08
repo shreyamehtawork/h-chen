@@ -63,6 +63,7 @@
 
 .actions {
   display: flex;
+  height: 100%;
   gap: 8px;
 }
 

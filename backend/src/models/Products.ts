@@ -80,33 +80,27 @@ import { Schema, model, models } from "mongoose";
 
 const ProductSchema = new Schema(
   {
-    sku: { type: String, required: true },
-    slug: { type: String, required: true },
+    // sku: { type: String, required: true },
+    // slug: { type: String, required: true },
+    // new: { type: Boolean, default: false },
     title: { type: String, required: true },
-    images: { type: [String], required: true },
-    new: { type: Boolean, default: false },
     description: { type: String, required: true },
-    category: {
-      type: String,
-      required: true,
-    },
-    tags: {
-      type: [String],
-      required: true,
-    },
-    colors: {
-      type: [String],
-    },
-    sizes: {
-      type: [String],
-    },
-    brand: { type: String, required: true },
+    images: { type: [String], required: true },
+    category: { type: String },
+    colors: { type: [String] },
+    sizes: { type: [String] },
     price: { type: Number, required: true },
-    salePrice: { type: Number, required: true },
-    discount: { type: Number, required: false },
-    ratings: { type: Number, default: 0 },
-    reviews_number: { type: Number, default: 0 },
-    bestBefore: { type: Date, required: false },
+    stock: { type: Number, default: 0}
+    // tags: {
+    //   type: [String],
+    //   required: true,
+    // },
+    // brand: { type: String, required: true },
+    // salePrice: { type: Number, required: true },
+    // discount: { type: Number, required: false },
+    // ratings: { type: Number, default: 0 },
+    // reviews_number: { type: Number, default: 0 },
+    // bestBefore: { type: Date, required: false },
   },
   { timestamps: true }
 );

@@ -13,6 +13,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: "Missing user ID" }, { status: 400 });
     }
 
+    // const cart = await Cart.find({user: userId})
     const cart = await Cart.aggregate([
       {
         $match: {

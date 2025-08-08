@@ -6,6 +6,7 @@ import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { useDropzone } from "react-dropzone";
 import styles from "./ProductForm.module.css";
 import { fetchCategories } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 // Assuming your Category interface is defined here or imported
 interface Category {
@@ -18,14 +19,14 @@ interface ProductFormData {
   title: string;
   description: string;
   category: string; // This will hold the _id or slug of the selected category
-  brand: string;
+  stock: number;
   price: number;
   // bestBefore: string;
-  discount: number;
+  // discount: number;
   // isNew: boolean;
   colors: string[];
   sizes: string[];
-  tags: string[];
+  // tags: string[];
 }
 
 export default function ProductForm({ productId }: { productId?: string }) {
@@ -40,14 +41,15 @@ export default function ProductForm({ productId }: { productId?: string }) {
       title: "",
       description: "",
       category: "",
-      brand: "",
+      // brand: "",
       price: 0,
+      stock: 0,
       // bestBefore: new Date().toISOString().split("T")[0],
-      discount: 0,
+      // discount: 0,
       // isNew: false,
       colors: [],
       sizes: [],
-      tags: [],
+      // tags: [],
     },
   });
 
@@ -56,10 +58,18 @@ export default function ProductForm({ productId }: { productId?: string }) {
 
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
   // --- NEW: Category State and Fetching ---
-  const [categories, setCategories] = useState<Category[]>([]);
+  // const [categories, setCategories] = useState<Category[]>([]);
   const [loadingCategories, setLoadingCategories] = useState<boolean>(true);
   const [categoriesError, setCategoriesError] = useState<string | null>(null);
   const [imagePreview, setImagePreview] = useState([]);
+const router = useRouter();
+  const categories = [
+    "Clo-Aura",
+    "Clo-Prime",
+    "Clo-Pixie",
+    "Clo-Zion",
+    "Clo-Bear",
+  ];
 
   useEffect(() => {
     const fetchCategoriesData = async () => {
@@ -67,7 +77,7 @@ export default function ProductForm({ productId }: { productId?: string }) {
         const fetchedCategories = await fetchCategories();
         // console.log("fetchedCategories", fetchedCategories);
 
-        setCategories(fetchedCategories);
+        // setCategories(fetchedCategories);
         setLoadingCategories(false);
       } catch (error) {
         console.error("Error fetching categories:", error);
@@ -86,14 +96,15 @@ export default function ProductForm({ productId }: { productId?: string }) {
             title: productData.title,
             description: productData.description,
             category: productData.category,
-            brand: productData.brand,
+            // brand: productData.brand,
             price: productData.price,
             // bestBefore: productData.bestBefore,
-            discount: productData.discount,
+            // discount: productData.discount,
             // isNew: productData.isNew,
+            stock: productData.stock,
             colors: productData.colors || [],
             sizes: productData.sizes || [],
-            tags: productData.tags || [],
+            // tags: productData.tags || [],
           });
           setImagePreview(productData.images || []);
         } catch (error) {
@@ -102,7 +113,7 @@ export default function ProductForm({ productId }: { productId?: string }) {
       }
     };
 
-    fetchCategoriesData();
+    // fetchCategoriesData();
     fetchProductData();
   }, []);
 
@@ -142,22 +153,23 @@ export default function ProductForm({ productId }: { productId?: string }) {
     formData.append("description", data.description);
     // Use the selected category (which will be the category's _id or slug)
     formData.append("category", data.category);
-    formData.append("brand", data.brand);
+    // formData.append("brand", data.brand);
     formData.append("price", data.price.toString());
-    formData.append("discount", data.discount.toString());
+    formData.append("stock", data.stock.toString());
+    // formData.append("discount", data.discount.toString());
     // formData.append("isNew", data.isNew.toString());
     // formData.append("bestBefore", data.bestBefore);
 
     formData.append("colors", data.colors.join(","));
     formData.append("sizes", data.sizes.join(","));
-    formData.append("tags", data.tags.join(","));
+    // formData.append("tags", data.tags.join(","));
 
     if (files.length > 0) {
       files.forEach((file) => {
         formData.append("images", file);
       });
     } else {
-      if(!productId) {
+      if (!productId) {
         setFormMessage("Error: Please select at least one image.");
         return;
       }
@@ -184,7 +196,10 @@ export default function ProductForm({ productId }: { productId?: string }) {
             productId ? "updated" : "created"
           } successfully! Product ID: ${result.product._id}`
         );
+
+        // Use Next.js router for redirect
         
+        router.push("/en/products/digital/digital-product-list");
         reset();
         setFiles([]);
         setPreviewUrls([]);
@@ -209,7 +224,7 @@ export default function ProductForm({ productId }: { productId?: string }) {
       {/* Title */}
       <div>
         <label htmlFor="title" className={styles.label}>
-          Title
+          Title <span>*</span>
         </label>
         <input
           type="text"
@@ -225,7 +240,7 @@ export default function ProductForm({ productId }: { productId?: string }) {
       {/* Description */}
       <div>
         <label htmlFor="description" className={styles.label}>
-          Description
+          Description <span>*</span>
         </label>
         <textarea
           id="description"
@@ -241,28 +256,21 @@ export default function ProductForm({ productId }: { productId?: string }) {
       {/* --- NEW: Category Select --- */}
       <div>
         <label htmlFor="category" className={styles.label}>
-          <span>*</span> Category
+          Category <span>*</span>
         </label>
-        {loadingCategories ? (
-          <p className={styles.loadingText}>Loading categories...</p>
-        ) : categoriesError ? (
-          <p className={styles.errorText}>{categoriesError}</p>
-        ) : (
-          <select
-            id="category"
-            {...register("category", { required: "Category is required" })}
-            className={styles.select}
-          >
-            <option value="">--Select--</option>
-            {categories?.map((cat) => (
-              <option key={cat._id} value={cat.title}>
-                {" "}
-                {/* Use _id as the value */}
-                {cat.title}
-              </option>
-            ))}
-          </select>
-        )}
+
+        <select
+          id="category"
+          {...register("category", { required: "Category is required" })}
+          className={styles.select}
+        >
+          <option value="">--Select--</option>
+          {categories?.map((cat) => (
+            <option key={cat} value={cat}>
+              {cat}
+            </option>
+          ))}
+        </select>
         {errors.category && (
           <p className={styles.errorText}>{errors.category.message}</p>
         )}
@@ -270,7 +278,7 @@ export default function ProductForm({ productId }: { productId?: string }) {
       {/* --- END NEW --- */}
 
       {/* Brand */}
-      <div>
+      {/* <div>
         <label htmlFor="brand" className={styles.label}>
           Brand
         </label>
@@ -283,12 +291,12 @@ export default function ProductForm({ productId }: { productId?: string }) {
         {errors.brand && (
           <p className={styles.errorText}>{errors.brand.message}</p>
         )}
-      </div>
+      </div> */}
 
       {/* Price */}
       <div>
         <label htmlFor="price" className={styles.label}>
-          Price
+          Price <span>*</span>
         </label>
         <input
           type="number"
@@ -296,12 +304,35 @@ export default function ProductForm({ productId }: { productId?: string }) {
           {...register("price", {
             required: "Price is required",
             valueAsNumber: true,
-            min: { value: 0.01, message: "Price must be positive" },
+            min: { value: 0, message: "Price must be positive" },
           })}
+          placeholder="0"
           className={styles.input}
         />
         {errors.price && (
           <p className={styles.errorText}>{errors.price.message}</p>
+        )}
+      </div>
+
+      {/* Stock */}
+      <div>
+        <label htmlFor="stock" className={styles.label}>
+          
+          Stock <span>*</span>
+        </label>
+        <input
+          type="number"
+          id="stock"
+          {...register("stock", {
+            required: "stock is required",
+            valueAsNumber: true,
+            min: { value: 0, message: "Stock must be positive" },
+          })}
+          placeholder="0"
+          className={styles.input}
+        />
+        {errors.stock && (
+          <p className={styles.errorText}>{errors.stock.message}</p>
         )}
       </div>
 
@@ -324,7 +355,7 @@ export default function ProductForm({ productId }: { productId?: string }) {
       </div> */}
 
       {/* Discount */}
-      <div>
+      {/* <div>
         <label htmlFor="discount" className={styles.label}>
           Discount (%)
         </label>
@@ -341,7 +372,7 @@ export default function ProductForm({ productId }: { productId?: string }) {
         {errors.discount && (
           <p className={styles.errorText}>{errors.discount.message}</p>
         )}
-      </div>
+      </div> */}
 
       {/* Is New Checkbox */}
       {/* <div className={styles.checkboxContainer}>
@@ -359,7 +390,7 @@ export default function ProductForm({ productId }: { productId?: string }) {
       {/* Colors (using Controller for array input) */}
       <div>
         <label htmlFor="colors" className={styles.label}>
-          Colors (comma-separated)
+          Colors (comma-separated) <span>*</span>
         </label>
         <Controller
           name="colors"
@@ -388,7 +419,7 @@ export default function ProductForm({ productId }: { productId?: string }) {
       {/* Sizes (using Controller for array input) */}
       <div>
         <label htmlFor="sizes" className={styles.label}>
-          Sizes (comma-separated)
+          Sizes (comma-separated) <span>*</span>
         </label>
         <Controller
           name="sizes"
@@ -415,7 +446,7 @@ export default function ProductForm({ productId }: { productId?: string }) {
       </div>
 
       {/* Tags (using Controller for array input) */}
-      <div>
+      {/* <div>
         <label htmlFor="tags" className={styles.label}>
           Tags (comma-separated)
         </label>
@@ -437,7 +468,7 @@ export default function ProductForm({ productId }: { productId?: string }) {
             />
           )}
         />
-      </div>
+      </div> */}
 
       {/* Image Upload Section */}
       <div
