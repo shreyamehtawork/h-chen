@@ -89,7 +89,16 @@ function FilterSidebar({ filters, handleFilterChange, resetFilters }) {
       {/* Color Filter */}
       <div className="filter-group">
         <label className="filter-subtitle">COLOR</label>
-        {["Grey", "Navy", "Black", "Beige", "Blue", "White", "Yellow", "Purple"].map((color) => (
+        {[
+          "Grey",
+          "Navy",
+          "Black",
+          "Beige",
+          "Blue",
+          "White",
+          "Yellow",
+          "Purple",
+        ].map((color) => (
           <div className="form-check checkbox-list" key={color}>
             <input
               className="form-check-input"
@@ -104,6 +113,7 @@ function FilterSidebar({ filters, handleFilterChange, resetFilters }) {
         ))}
       </div>
 
+      {/* Price Range Filter */}
       {/* Price Range Filter */}
       <div className="filter-group">
         <label className="filter-subtitle">PRICE RANGE</label>
@@ -135,6 +145,17 @@ function FilterSidebar({ filters, handleFilterChange, resetFilters }) {
           <span>${filters.price.min}</span>
           <span>${filters.price.max}</span>
         </div>
+      </div>
+
+      {/* ✅ Reset Filters Button */}
+      <div className="filter-group mt-3">
+        <button
+          type="button"
+          className="btn btn-outline-secondary w-100"
+          onClick={resetFilters}
+        >
+          Reset Filters
+        </button>
       </div>
     </div>
   );
