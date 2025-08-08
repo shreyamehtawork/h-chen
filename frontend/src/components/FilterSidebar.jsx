@@ -4,7 +4,7 @@ import "../styling/FilterSidebar.css";
 
 function FilterSidebar({ filters, handleFilterChange, resetFilters }) {
   const location = useLocation(); // ✅ 2. Get current path
-  const showCategories = location.pathname === "/shopall"; // ✅ 3. Check route
+  const showCategories = location.pathname === "/shop"; // ✅ 3. Check route
 
   const categories = [
     "clo-zion",
@@ -66,7 +66,7 @@ function FilterSidebar({ filters, handleFilterChange, resetFilters }) {
     <div className="filter-sidebar">
       <h6 className="section-title">Browse By</h6>
 
-      {/* ✅ Only show category section on /shopall */}
+      {/* ✅ Only show category section on /shop */}
       {showCategories && (
         <div className="filter-group">
           <label className="filter-subtitle">CATEGORIES</label>

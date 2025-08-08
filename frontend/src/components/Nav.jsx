@@ -51,7 +51,7 @@ function Nav() {
                 </a>
               </li>
               <li className="nav-item dropdown hover-dropdown">
-                <a className="nav-link" href="/shopall">
+                <a className="nav-link" href="/shop">
                   Shop
                 </a>
                 <ul className="dropdown-menu show-on-hover">
