@@ -53,6 +53,7 @@ function SingleProductsView() {
             <Link to="/">Home</Link> /{" "}
             <Link to={`/${category}`}>{category}</Link> / {product.title}
           </nav>
+      
 
           <div className="row align-items-start">
             {/* Image */}

@@ -50,21 +50,23 @@ function Nav() {
                   Home
                 </a>
               </li>
-                <li className="nav-item dropdown hover-dropdown">
-                  <a className="nav-link">Shop</a>
-                  <ul className="dropdown-menu show-on-hover">
-                    {categories.map((category, index) => {
-                      const slug = slugify(category, { lower: true });
-                      return (
-                        <li key={index}>
-                          <a className="dropdown-item" href={`/shop/${slug}`}>
-                            {category}
-                          </a>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </li>
+              <li className="nav-item dropdown hover-dropdown">
+                <a className="nav-link" href="/shopall">
+                  Shop
+                </a>
+                <ul className="dropdown-menu show-on-hover">
+                  {categories.map((category, index) => {
+                    const slug = slugify(category, { lower: true });
+                    return (
+                      <li key={index}>
+                        <a className="dropdown-item" href={`/shop/${slug}`}>
+                          {category}
+                        </a>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </li>
               <li className="nav-item">
                 <a className="nav-link" href="/about">
                   About

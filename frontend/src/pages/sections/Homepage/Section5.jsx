@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import "../../../styling/Section5.css";
+import { Link } from "react-router-dom";
 
 function Section5() {
   const sectionRef = useRef(null);
@@ -25,7 +26,7 @@ function Section5() {
   };
 
   return (
-    <section>
+    <section className="bg-black">
       <motion.div
         className="section-5 text-center text-white"
         ref={sectionRef}
@@ -45,7 +46,11 @@ function Section5() {
             <br />
             Explore now before the offer ends!
           </p>
-          <button className="btn btn-outline-light mt-3">Shop Now</button>
+          <button className="btn btn-outline-light mt-3">
+            <Link to={"/shopall"} className="text-decoration-none">
+              Show More
+            </Link>
+          </button>
         </div>
       </motion.div>
     </section>

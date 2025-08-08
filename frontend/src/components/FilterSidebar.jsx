@@ -1,7 +1,18 @@
 import React, { useRef, useEffect } from "react";
+import { useLocation } from "react-router-dom"; // ✅ 1. Import this
 import "../styling/FilterSidebar.css";
 
 function FilterSidebar({ filters, handleFilterChange, resetFilters }) {
+  const location = useLocation(); // ✅ 2. Get current path
+  const showCategories = location.pathname === "/shopall"; // ✅ 3. Check route
+
+  const categories = [
+    "clo-zion",
+    "clo-prime",
+    "clo-aura",
+    "clo-pixie",
+    "clo-bear",
+  ];
   const minRange = 100;
   const maxRange = 10000;
 
@@ -40,10 +51,42 @@ function FilterSidebar({ filters, handleFilterChange, resetFilters }) {
     }
   };
 
+  const handleCategoryChange = (e) => {
+    const { value, checked } = e.target;
+    const updatedCategories = checked
+      ? [...filters.category, value]
+      : filters.category.filter((item) => item !== value);
+
+    handleFilterChange({
+      target: { name: "category", value: updatedCategories },
+    });
+  };
+
   return (
     <div className="filter-sidebar">
       <h6 className="section-title">Browse By</h6>
 
+      {/* ✅ Only show category section on /shopall */}
+      {showCategories && (
+        <div className="filter-group">
+          <label className="filter-subtitle">CATEGORIES</label>
+          {categories.map((c) => (
+            <div className="form-check checkbox-list" key={c}>
+              <input
+                className="form-check-input"
+                type="checkbox"
+                name="category"
+                value={c}
+                checked={filters.category.includes(c)}
+                onChange={handleCategoryChange}
+              />
+              <label className="form-check-label">{c}</label>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Color Filter */}
       <div className="filter-group">
         <label className="filter-subtitle">COLOR</label>
         {["Grey", "Navy", "Black", "Beige", "Blue", "White", "Yellow", "Purple"].map((color) => (
@@ -61,6 +104,7 @@ function FilterSidebar({ filters, handleFilterChange, resetFilters }) {
         ))}
       </div>
 
+      {/* Price Range Filter */}
       <div className="filter-group">
         <label className="filter-subtitle">PRICE RANGE</label>
         <div className="range-slider-wrapper">
