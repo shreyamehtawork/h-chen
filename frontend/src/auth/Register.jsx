@@ -10,7 +10,7 @@ function Register() {
     e.preventDefault();
 
     const config = {
-      url: "http://localhost:5173/register/complete",
+      url: import.meta.env.VITE_REGISTER_REDIRECT_URL,
       handleCodeInApp: true,
     };
 
