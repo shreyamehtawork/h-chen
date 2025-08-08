@@ -127,7 +127,7 @@ function Section3() {
         animate={isInView ? "visible" : "hidden"}
       >
         <button className="btn btn-outline-dark mt-5">
-          <Link to={"/shopall"} className="text-decoration-none">
+          <Link to={"/shop"} className="text-decoration-none">
             Show More
           </Link>
         </button>

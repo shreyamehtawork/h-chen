@@ -47,7 +47,7 @@ function Section5() {
             Explore now before the offer ends!
           </p>
           <button className="btn btn-outline-light mt-3">
-            <Link to={"/shopall"} className="text-decoration-none">
+            <Link to={"/shop"} className="text-decoration-none">
               Show More
             </Link>
           </button>
