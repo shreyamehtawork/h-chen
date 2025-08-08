@@ -2,8 +2,8 @@ import React, { useRef, useEffect } from "react";
 import "../styling/FilterSidebar.css";
 
 function FilterSidebar({ filters, handleFilterChange, resetFilters }) {
-  const minRange = 50;
-  const maxRange = 175;
+  const minRange = 100;
+  const maxRange = 10000;
 
   const rangeTrackRef = useRef(null);
 
@@ -46,7 +46,7 @@ function FilterSidebar({ filters, handleFilterChange, resetFilters }) {
 
       <div className="filter-group">
         <label className="filter-subtitle">COLOR</label>
-        {["Grey", "Navy", "Black", "Beige", "Blue"].map((color) => (
+        {["Grey", "Navy", "Black", "Beige", "Blue", "White", "Yellow", "Purple"].map((color) => (
           <div className="form-check checkbox-list" key={color}>
             <input
               className="form-check-input"

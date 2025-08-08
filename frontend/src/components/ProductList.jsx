@@ -30,31 +30,31 @@ function ProductList({ products }) {
       animate="visible"
     >
       <div className="row">
-        {products.map((product) => {
-          const slug = slugify(product.name, { lower: true });
-
-          return (
+        {products.length ? products.map((product) => 
+           (
             <motion.div
               className="col-md-3 mb-4"
-              key={product.id}
+              key={product._id}
               variants={cardVariants}
             >
               <div className="card product-card border-0">
-                <a href={`/${category}/${slug}`}>
+                <a href={`/${category}/${product._id}`}>
                   <img
-                    src={product.image}
+                    src={product.images[0]}
                     alt={product.name}
                     className="card-img-top img-fluid"
                   />
                   <div className="card-body text-center p-2">
-                    <h5 className="card-title mb-1">{product.name}</h5>
-                    <p className="card-text">${product.price.toFixed(2)}</p>
+                    <h5 className="card-title mb-1">{product.title}</h5>
+                    <p className="card-text">₹{product.price.toFixed(2)}</p>
                   </div>
                 </a>
               </div>
             </motion.div>
-          );
-        })}
+          )
+        ) : (
+          <p>No Products to Show</p>
+        )}
       </div>
     </motion.div>
   );

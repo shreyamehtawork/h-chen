@@ -33,7 +33,7 @@ export const getProducts = async (query) => {
     query.limit && (filter.limit = query.limit)
 
     
-    const response = await api.get("/api/products/get/get-all-products",{
+    const response = await api.get("/api/products/get",{
       params: filter
     });
     // console.log("response products: ", response.data);

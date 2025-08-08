@@ -1,7 +1,8 @@
-import React, { useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import React, { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion, useInView } from "framer-motion";
 import "../../../styling/Section3.css";
 import allProducts from "../../ProductsData";
+import { getProducts } from "../../../services/productService";
 
 function Section3() {
   const sectionRef = useRef(null);
@@ -9,6 +10,20 @@ function Section3() {
 
   const [startIndex, setStartIndex] = useState(0);
   const visibleCount = 4;
+  
+  const [products, setProducts] = useState([]);
+  const [loadingProducts, setLoadingProducts] = useState(true);
+
+  const fetchProducts = async () => {
+    const res = await getProducts({});
+    console.log("Products:", res);
+    if (res) setProducts(res);
+    setLoadingProducts(false);
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
   const handlePrev = () => {
     setStartIndex((prev) => Math.max(prev - visibleCount, 0));
@@ -19,10 +34,10 @@ function Section3() {
     setStartIndex((prev) => Math.min(prev + visibleCount, maxStart));
   };
 
-  const visibleProducts = allProducts.slice(
+  const visibleProducts = products.length ? products.slice(
     startIndex,
     startIndex + visibleCount
-  );
+  ) : []
 
   // Variants
   const fadeInOutContainer = {
@@ -89,24 +104,29 @@ function Section3() {
           animate={isInView ? "visible" : "hidden"}
         >
           <div className="section3-carousel-track">
-            {visibleProducts.map((product) => (
-              <motion.div
-                className="section3-card"
-                key={product.id}
-                variants={cardVariant}
-              >
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="section3-img"
-                />
-                <div className="section3-info">
-                  <h5 className="product-title">{product.name}</h5>
-                  <p className="product-price">${product.price}</p>
-                  <small className="product-category">{product.category}</small>
-                </div>
-              </motion.div>
-            ))}
+            <AnimatePresence>
+              {visibleProducts.length &&
+                visibleProducts.map((product) => (
+                  <motion.div
+                    className="section3-card"
+                    key={product._id}
+                    variants={cardVariant}
+                  >
+                    <img
+                      src={product.images[0]}
+                      alt={product.name}
+                      className="section3-img"
+                    />
+                    <div className="section3-info">
+                      <h5 className="product-title">{product.title}</h5>
+                      <p className="product-price">₹{product.price}</p>
+                      <small className="product-category">
+                        {product.category}
+                      </small>
+                    </div>
+                  </motion.div>
+                ))}
+            </AnimatePresence>
           </div>
         </motion.div>
 
