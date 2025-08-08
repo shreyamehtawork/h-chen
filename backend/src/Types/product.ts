@@ -44,6 +44,7 @@ export interface Product {
   bestBefore: string; // Will likely be a Date object from DB, but string for display initially
   createdAt: string;
   updatedAt: string;
+  stock: number;
 }
 
 export const MAX_INGREDIENTS = 3;

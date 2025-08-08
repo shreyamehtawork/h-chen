@@ -8,7 +8,8 @@ import { toast } from "react-toastify";
 // import { useRouter } from "next/router";
 
 interface ProductRowProps {
-  product: Product;
+  product: Product,
+  
 }
 type Tresponse = {
   status: number,
@@ -55,29 +56,18 @@ const ProductRow: React.FC<ProductRowProps> = ({ product }) => {
         />
         {product.title}
       </td>
-      <td>{product.sku}</td>
-      <td>{product.brand}</td>
+      {/* <td>{product.sku}</td> */}
+      {/* <td>{product.brand}</td> */}
       <td>{product.category}</td>{" "}
       {/* In a real app, you'd fetch category name */}
       <td className={styles.priceDisplay}>
-        {product.discount ? (
-          <>
-            <span className={styles.originalPrice}>
-              Rs. {product.price.toFixed(2)}
-            </span>
-            <span className={styles.salePrice}>
-              Rs. {product.salePrice.toFixed(2)}
-            </span>
-          </>
-        ) : (
-          `$${product.price.toFixed(2)}`
-        )}
+          Rs. {product.price.toFixed(2)}
       </td>
       <td>
-        {product.ratings.toFixed(1)} ({product.reviews_number})
+        {product.stock == 0 ? <span>Out Of Stock</span> : product.stock} 
       </td>
-      <td>{formattedBestBefore}</td>
-      <td>{product.new && <span className={styles.newBadge}>New</span>}</td>
+      {/* <td>{formattedBestBefore}</td> */}
+      {/* <td>{product.new && <span className={styles.newBadge}>New</span>}</td> */}
       <td className={styles.actions}>
         <Link
           href={`/en/products/digital/digital-edit-product/${product._id}`}

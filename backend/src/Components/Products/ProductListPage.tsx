@@ -12,7 +12,7 @@ const ProductListPage: React.FC = () => {
 
 
   const fetchProducts = async () => {
-    fetch('/api/products/get/get-all-products')
+    fetch('/api/products/get/')
       .then(response => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);

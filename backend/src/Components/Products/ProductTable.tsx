@@ -18,13 +18,13 @@ const ProductTable: React.FC<ProductTableProps> = ({ products, onEdit, onDelete 
         <thead>
           <tr>
             <th>Product Name</th>
-            <th>SKU</th>
-            <th>Brand</th>
+            {/* <th>SKU</th>
+            <th>Brand</th> */}
             <th>Category</th>
             <th>Price</th>
-            <th>Ratings</th>
-            <th>Best Before</th>
-            <th>New</th>
+            <th>Stock</th>
+            {/* <th>Best Before</th> */}
+            {/* <th>New</th> */}
             <th>Actions</th>
           </tr>
         </thead>
