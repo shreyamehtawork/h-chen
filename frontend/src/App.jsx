@@ -15,9 +15,10 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RegisterComplete from "./auth/RegisterComplete";
 import AllProducts from "./pages/AllProducts";
+import { useDispatch, useSelector } from "react-redux";
+import UserRoute from "./routes/UserRoutes";
 import Login from "./pages/Login";
 import AuthCallback from "./pages/AuthCallback";
-import { useDispatch, useSelector } from "react-redux";
 import { jwtDecode } from "jwt-decode";
 import { loginUser } from "./store/authSlice";
 
@@ -65,6 +66,8 @@ function App() {
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/register/complete" element={<RegisterComplete />} />
         <Route exact path="/shop" element={<AllProducts />} />
+
+        <Route path="/user/*" element={<UserRoute />}></Route>
       </Routes>
       <Footer />
     </div>

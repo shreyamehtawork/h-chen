@@ -6,12 +6,13 @@ import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 // import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
-// import { createOrUpdateUser } from "../../functions/createorupdate";
+import { useDispatch } from "react-redux";
+import { getTokenData, setToken } from "../store/authSlice.js";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   // const { user } = useSelector((state) => ({ ...state }));
   // const location = useLocation();
@@ -24,36 +25,19 @@ function Login() {
   //   }
   // }, [user]);
 
-  // const roleBasedRedirect = (res) => {
-  //   const intended = location.state;
-  //   if (intended) {
-  //     navigate(intended.from);
-  //   } else {
-  //     res.data.role === "admin" ? navigate("/admin/dashboard") : navigate("/");
-  //   }
-  // };
-
   const handleSubmit = async () => {
     try {
       const result = await signInWithEmailAndPassword(auth, email, password);
       const { user } = result;
+      console.log("USER", user);
+      // Get Firebase token
       const idTokenResult = await user.getIdTokenResult();
 
-      // createOrUpdateUser(idTokenResult.token)
-      //   .then((res) => {
-      //     dispatch({
-      //       type: "LOGGED_IN_USER",
-      //       payload: {
-      //         name: res.data.name,
-      //         email: res.data.email,
-      //         token: idTokenResult.token,
-      //         _id: res.data._id,
-      //         role: res.data.role,
-      //       },
-      //     });
-      //     roleBasedRedirect(res);
-      //   })
-      //   .catch((err) => console.log(err));
+      // Save token in Redux
+      dispatch(setToken(idTokenResult.token));
+
+      // Optional: immediately fetch user details from backend
+      dispatch(getTokenData(idTokenResult.token));
 
       navigate("/");
     } catch (error) {
@@ -66,22 +50,6 @@ function Login() {
       const result = await signInWithPopup(auth, googleAuthProvider);
       const { user } = result;
       const idTokenResult = await user.getIdTokenResult();
-
-      // createOrUpdateUser(idTokenResult.token)
-      //   .then((res) => {
-      //     dispatch({
-      //       type: "LOGGED_IN_USER",
-      //       payload: {
-      //         name: res.data.name,
-      //         email: res.data.email,
-      //         token: idTokenResult.token,
-      //         _id: res.data._id,
-      //         role: res.data.role,
-      //       },
-      //     });
-      //     roleBasedRedirect(res);
-      //   })
-      //   .catch((err) => console.log(err));
       navigate("/");
     } catch (error) {
       toast.error(error.message);
