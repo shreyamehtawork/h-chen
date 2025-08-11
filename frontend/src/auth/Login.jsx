@@ -29,7 +29,7 @@ function Login() {
     try {
       const result = await signInWithEmailAndPassword(auth, email, password);
       const { user } = result;
-
+      console.log("USER", user);
       // Get Firebase token
       const idTokenResult = await user.getIdTokenResult();
 

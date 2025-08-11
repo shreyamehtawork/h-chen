@@ -19,6 +19,7 @@ import RegisterComplete from "./auth/RegisterComplete";
 import AllProducts from "./pages/AllProducts";
 import { useDispatch, useSelector } from "react-redux";
 import { getTokenData } from "./store/authSlice";
+import UserRoute from "./routes/UserRoutes";
 
 function App() {
   const dispatch = useDispatch();
@@ -52,6 +53,8 @@ function App() {
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/register/complete" element={<RegisterComplete />} />
         <Route exact path="/shop" element={<AllProducts />} />
+
+        <Route path="/user/*" element={<UserRoute />}></Route>
       </Routes>
       <Footer />
     </div>

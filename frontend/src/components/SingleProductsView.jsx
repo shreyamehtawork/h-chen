@@ -1,24 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import slugify from "slugify";
-import allProducts from "../pages/ProductsData";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import "../styling/SingleProductView.css";
-import { getProductDetails, getProducts } from "../services/productService";
+import { getProductDetails } from "../services/productService";
 import Loader from "./Loader";
+import { addProductToCart, fetchCartItems } from "../store/cartSlice";
 
 function SingleProductsView() {
   const { id, category } = useParams();
-  // const product = allProducts.find(
-  //   (p) => slugify(p.name, { lower: true }) === slug
-  // );
+  const dispatch = useDispatch();
+  const { loading } = useSelector((state) => state.cart);
 
   const [product, setProduct] = useState(null);
   const [loadingProduct, setLoadingProduct] = useState(true);
+  const [quantity, setQuantity] = useState(1);
+  const [selectedColor, setSelectedColor] = useState("");
+  const [selectedSize, setSelectedSize] = useState("");
 
   const fetchProduct = async () => {
     const res = await getProductDetails(id);
-    console.log("Category Product:", res);
     if (res) setProduct(res);
     setLoadingProduct(false);
   };
@@ -27,11 +29,26 @@ function SingleProductsView() {
     fetchProduct();
   }, [category]);
 
-  const [quantity, setQuantity] = useState(1);
-  const [selectedColor, setSelectedColor] = useState("");
-  const [selectedSize, setSelectedSize] = useState("");
+  const handleAddtoCart = () => {
+    if (!selectedColor || selectedColor === "Select") {
+      toast.error("Please select a color");
+      return;
+    }
+    if (!selectedSize || selectedSize === "Select") {
+      toast.error("Please select a size");
+      return;
+    }
 
-  // if (!product) return <div>Product not found</div>;
+    dispatch(addProductToCart({ productId: product._id, quantity }))
+      .unwrap()
+      .then(() => {
+        toast.success("Product added to cart!");
+        dispatch(fetchCartItems()); // ✅ Refresh cart items right away
+      })
+      .catch((err) =>
+        toast.error(err?.message || "Error adding product to cart")
+      );
+  };
 
   const imageVariant = {
     hidden: { opacity: 0, x: -100, scale: 0.95 },
@@ -53,7 +70,6 @@ function SingleProductsView() {
             <Link to="/">Home</Link> /{" "}
             <Link to={`/${category}`}>{category}</Link> / {product.title}
           </nav>
-      
 
           <div className="row align-items-start">
             {/* Image */}
@@ -72,7 +88,6 @@ function SingleProductsView() {
             </motion.div>
 
             {/* Product Info */}
-
             <motion.div
               className="col-md-6 mt-4 mt-md-0"
               variants={infoVariant}
@@ -83,6 +98,7 @@ function SingleProductsView() {
               <h2 className="fw-bold">{product.title}</h2>
               <p className="fs-4">${product.price.toFixed(2)}</p>
 
+              {/* Color */}
               <div className="mb-3">
                 <label className="form-label">Color *</label>
                 <select
@@ -92,11 +108,14 @@ function SingleProductsView() {
                 >
                   <option>Select</option>
                   {product.colors.map((color, index) => (
-                    <option style={{textTransform: "capitalize"}} key={index}>{color}</option>
+                    <option style={{ textTransform: "capitalize" }} key={index}>
+                      {color}
+                    </option>
                   ))}
                 </select>
               </div>
 
+              {/* Size */}
               <div className="mb-3">
                 <label className="form-label">Size *</label>
                 <select
@@ -106,11 +125,14 @@ function SingleProductsView() {
                 >
                   <option>Select</option>
                   {product.sizes.map((size, index) => (
-                    <option style={{textTransform: "capitalize"}} key={index}>{size}</option>
+                    <option style={{ textTransform: "capitalize" }} key={index}>
+                      {size}
+                    </option>
                   ))}
                 </select>
               </div>
 
+              {/* Quantity */}
               <div className="mb-3 d-flex align-items-center">
                 <label className="form-label me-3 mb-0">Quantity *</label>
                 <button
@@ -128,12 +150,18 @@ function SingleProductsView() {
                 </button>
               </div>
 
-              <button className="btn btn-dark w-100 mt-3">Add to Cart</button>
+              {/* Add to Cart */}
+              {/* <button
+                className="btn btn-dark w-100 mt-3"
+                onClick={handleAddtoCart}
+                disabled={loading}
+              >
+                {loading ? "Adding..." : "Add to Cart"}
+              </button> */}
 
-              <div style={{
-                margin: "30px 0 0 0"
-              }} className="">
-                <p>{product.description} Lorem ipsum dolor sit amet, consectetur adipisicing elit. A doloremque animi aliquid cumque id. Facilis quibusdam inventore fugiat? Molestias odit aspernatur blanditiis temporibus molestiae eligendi perferendis possimus minus dolorum voluptates.</p>
+              {/* Description */}
+              <div style={{ margin: "30px 0 0 0" }}>
+                <p>{product.description}</p>
               </div>
 
               {/* Social Icons */}
