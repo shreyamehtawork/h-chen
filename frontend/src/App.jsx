@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
@@ -17,8 +17,19 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RegisterComplete from "./auth/RegisterComplete";
 import AllProducts from "./pages/AllProducts";
+import { useDispatch, useSelector } from "react-redux";
+import { getTokenData } from "./store/authSlice";
 
 function App() {
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.token);
+
+  useEffect(() => {
+    if (token) {
+      dispatch(getTokenData(token));
+    }
+  }, [token, dispatch]);
+
   return (
     <div>
       <Nav />
