@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { Truck } from "lucide-react";
 import {toast} from "react-toastify";
 
 const api = axios.create({
@@ -111,13 +110,19 @@ const authSlice = createSlice({
     isAuthenticated: false,
     userData: null,
     loading: false,
-    token: localStorage.getItem("token"),
+    token: localStorage.getItem("h-chen-auth-token"),
   },
   reducers: {
-    logout: (state) => {
+    loginUser: (state, action) => {
+      state.isAuthenticated = true;
+      state.userData = action.payload;
+      // state.token = action.payload.token;
+      // localStorage.setItem("h-chen-auth-token", action.payload.token);
+    },
+    logoutUser: (state) => {
       state.isAuthenticated = false;
       state.userData = null;
-      localStorage.removeItem("token");
+      localStorage.removeItem("h-chen-auth-token");
       state.token = null;
     },
     validateToken: (state, action) => {
@@ -189,5 +194,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { validateToken, setToken, logout } = authSlice.actions;
+export const { validateToken, setToken, logoutUser, loginUser } = authSlice.actions;
 export default authSlice.reducer;
