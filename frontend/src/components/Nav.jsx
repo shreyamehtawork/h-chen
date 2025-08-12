@@ -4,7 +4,7 @@ import { FaSearch } from "react-icons/fa";
 import logo from "../assets/logofinal.png";
 import slugify from "slugify";
 import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../store/authSlice";
+import { logoutUser } from "../store/authSlice";
 import { Link } from "react-router-dom";
 
 function Nav() {
@@ -20,7 +20,7 @@ function Nav() {
   const { isAuthenticated, userData } = useSelector((state) => state.auth);
 
   const handleLogout = () => {
-    dispatch(logout());
+    dispatch(logoutUser());
   };
 
   return (
@@ -142,12 +142,12 @@ function Nav() {
                   >
                     Login
                   </a>
-                  <a
+                  {/* <a
                     href="/register"
                     style={{ textDecoration: "none", marginRight: "10px" }}
                   >
                     Register
-                  </a>
+                  </a> */}
                 </>
               )}
             </div>
