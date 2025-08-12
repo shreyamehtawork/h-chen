@@ -42,11 +42,18 @@ function SingleProductsView() {
       return;
     }
 
-    dispatch(addProductToCart({ productId: product._id, quantity }))
+    dispatch(
+      addProductToCart({
+        productId: product._id,
+        quantity,
+        color: selectedColor,
+        size: selectedSize,
+      })
+    )
       .unwrap()
       .then(() => {
         toast.success("Product added to cart!");
-        dispatch(fetchCartItems()); // ✅ Refresh cart items right away
+        dispatch(fetchCartItems()); // refresh cart
       })
       .catch((err) =>
         toast.error(err?.message || "Error adding product to cart")

@@ -37,7 +37,6 @@ function Nav() {
             </div>
             <span className="brand-text">CHLOE'S VENTURE</span>
           </a>
-
           <button
             className="navbar-toggler"
             type="button"

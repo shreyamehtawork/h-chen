@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import {toast} from "react-toastify";
+import { toast } from "react-toastify";
 
 const api = axios.create({
   baseURL: `${import.meta.env.VITE_SERVER_BASE_URL}/api`,
@@ -19,6 +19,8 @@ export const addProductToCart = createAsyncThunk(
         product: {
           id: productId,
           quantity: quantity,
+          color: color,
+          size: size,
         },
       });
       return response.data;
@@ -125,7 +127,7 @@ const cartSlice = createSlice({
           ? (coupon?.discountValue / 100) * state.totalPrice
           : coupon?.discountValue
         : 0;
-        state.discount = discount.toFixed(2)
+      state.discount = discount.toFixed(2);
     },
   },
   extraReducers: (builder) => {
