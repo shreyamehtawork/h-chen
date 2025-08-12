@@ -10,6 +10,9 @@ import { addProductToCart, fetchCartItems } from "../store/cartSlice";
 
 function SingleProductsView() {
   const { id, category } = useParams();
+
+  const { user } = useSelector((state) => state.auth);
+
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.cart);
 
@@ -89,15 +92,17 @@ function SingleProductsView() {
 
             {/* Product Info */}
             <motion.div
-              className="col-md-6 mt-4 mt-md-0"
+              className="col-md-5 mt-4 mt-md-0"
               variants={infoVariant}
               initial="hidden"
               animate="visible"
               transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
             >
               <h2 className="fw-bold">{product.title}</h2>
-              <p className="fs-4">${product.price.toFixed(2)}</p>
-
+              <div style={{ margin: "30px 0" }}>
+                <p>{product.description}</p>
+              </div>
+              <p className="fs-2">${product.price.toFixed(2)}</p>
               {/* Color */}
               <div className="mb-3">
                 <label className="form-label">Color *</label>
@@ -114,7 +119,6 @@ function SingleProductsView() {
                   ))}
                 </select>
               </div>
-
               {/* Size */}
               <div className="mb-3">
                 <label className="form-label">Size *</label>
@@ -131,7 +135,6 @@ function SingleProductsView() {
                   ))}
                 </select>
               </div>
-
               {/* Quantity */}
               <div className="mb-3 d-flex align-items-center">
                 <label className="form-label me-3 mb-0">Quantity *</label>
@@ -150,20 +153,13 @@ function SingleProductsView() {
                 </button>
               </div>
 
-              {/* Add to Cart */}
-              {/* <button
+              <button
                 className="btn btn-dark w-100 mt-3"
                 onClick={handleAddtoCart}
                 disabled={loading}
               >
                 {loading ? "Adding..." : "Add to Cart"}
-              </button> */}
-
-              {/* Description */}
-              <div style={{ margin: "30px 0 0 0" }}>
-                <p>{product.description}</p>
-              </div>
-
+              </button>
               {/* Social Icons */}
               <div className="d-flex gap-3 mt-4">
                 <i className="bi bi-facebook fs-5"></i>

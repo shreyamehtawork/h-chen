@@ -19,24 +19,22 @@ export const getCategories = async () => {
   }
 };
 
-
 export const getProducts = async (query) => {
   try {
     // console.log("fetching products ... : ", query);
 
-    let filter = {}
-    query.color && (filter.color = query.color)
-    query.tag && (filter.tag = query.tag)
-    query.size && (filter.size = query.size)
-    query.category && (filter.category = query.category)
-    query.sortBy && (filter.sortBy = query.sortBy)
-    query.limit && (filter.limit = query.limit)
+    let filter = {};
+    query.color && (filter.color = query.color);
+    query.tag && (filter.tag = query.tag);
+    query.size && (filter.size = query.size);
+    query.category && (filter.category = query.category);
+    query.sortBy && (filter.sortBy = query.sortBy);
+    query.limit && (filter.limit = query.limit);
 
-    
-    const response = await api.get("/api/products/get",{
-      params: filter
+    const response = await api.get("/api/products/get", {
+      params: filter,
     });
-    // console.log("response products: ", response.data);
+    console.log("response products: ", response.data);
 
     return response.data.data;
   } catch (error) {
@@ -75,7 +73,9 @@ export const getProductDetails = async (id) => {
 
 export const getBlockbusterDeals = async () => {
   try {
-    const response = await api.get("/api/products/get/get-all-products?tag=Blockbuster");
+    const response = await api.get(
+      "/api/products/get/get-all-products?tag=Blockbuster"
+    );
     // console.log("response Blockcuster: ", response.data.data);
 
     return response.data.data;
@@ -85,10 +85,11 @@ export const getBlockbusterDeals = async () => {
   }
 };
 
-
 export const getHomeBanners = async () => {
   try {
-    const response = await api.get("/api/products/get/get-all-products?tag=banner");
+    const response = await api.get(
+      "/api/products/get/get-all-products?tag=banner"
+    );
     // console.log("response Home Banners: ", response.data.data);
 
     return response.data.data;
@@ -96,4 +97,4 @@ export const getHomeBanners = async () => {
     console.log(error);
     return null;
   }
-}
+};
