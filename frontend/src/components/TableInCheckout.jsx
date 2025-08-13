@@ -27,12 +27,12 @@ function TableInCheckout({ item }) {
       <tr>
         <td>
           <div>
-            <p className="checkout-img-wrapper">
+            <div className="checkout-img-wrapper">
               <ModalImage
                 small={item.product.images[0]}
                 large={item.product.images[0]}
               />
-            </p>
+            </div>
           </div>
         </td>
         <td>

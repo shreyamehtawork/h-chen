@@ -7,7 +7,7 @@ import Cart from "../pages/user/Cart";
 
 const UserRoute = () => {
   const { userData } = useSelector((state) => state.auth); //fore checking user
-  console.log("USER..", userData);
+  // console.log("USER..", userData);
 
   return userData ? (
     <div>
