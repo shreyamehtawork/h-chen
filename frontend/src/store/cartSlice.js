@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import {toast} from "react-toastify";
+import { toast } from "react-toastify";
 
 const api = axios.create({
   baseURL: `${import.meta.env.VITE_SERVER_BASE_URL}/api`,
@@ -11,14 +11,37 @@ const api = axios.create({
 
 export const addProductToCart = createAsyncThunk(
   "cart/addToCart",
-  async ({ productId, quantity }, { rejectWithValue, getState }) => {
+  async (
+    { productId, quantity, color, size },
+    { rejectWithValue, getState }
+  ) => {
     try {
       const { userData } = getState().auth;
-      const response = await api.post("/cart/add-to-cart", {
-        user: userData._id,
+      console.log(
+        "ProductId , quantity , color , size",
+        productId,
+        quantity,
+        color,
+        size
+      );
+
+      console.log("USER data", {
+        user: userData.id,
         product: {
           id: productId,
           quantity: quantity,
+          color: color,
+          size: size,
+        },
+      });
+      console.log("USER DATA FROM CART SLICE: ", userData);
+      const response = await api.post("/cart/add-to-cart", {
+        user: userData.id,
+        product: {
+          id: productId,
+          quantity: quantity,
+          color: color,
+          size: size,
         },
       });
       return response.data;
@@ -36,11 +59,14 @@ export const fetchCartItems = createAsyncThunk(
   async (_, { rejectWithValue, getState }) => {
     try {
       const { userData } = getState().auth;
-      const response = await api.get(`/cart?user=${userData._id}`);
+      const response = await api.get(`/cart?user=${userData.id}`);
+      console.log("cart data", response.data);
       return response.data;
     } catch (error) {
       return rejectWithValue(
-        error.response?.data || { message: "Failed to fetch cart items" }
+        error.response?.data || {
+          message: "Failed to fetch cart items or cart is empty",
+        }
       );
     }
   }
@@ -52,7 +78,7 @@ export const updateQuantity = createAsyncThunk(
     try {
       const { userData } = getState().auth;
       const response = await api.put(`/cart/update-quantity`, {
-        user: userData._id,
+        user: userData.id,
         product: productId,
         quantity: quantity,
       });
@@ -72,8 +98,9 @@ export const deleteCartItem = createAsyncThunk(
     try {
       const { userData } = getState().auth;
       const response = await api.delete(
-        `/cart/delete-item/${userData._id}/${productId}`
+        `/cart/delete-item/${userData.id}/${productId}`
       );
+      console.log("RES DATA: ", response.data);
       return response.data;
     } catch (error) {
       console.error("Error deleting cart item:", error);
@@ -89,7 +116,7 @@ export const clearCart = createAsyncThunk(
   async (_, { rejectWithValue, getState }) => {
     try {
       const { userData } = getState().auth;
-      const response = await api.delete(`/cart/delete-all/${userData._id}`);
+      const response = await api.delete(`/cart/delete-all/${userData.id}`);
       return response.data;
     } catch (error) {
       console.log("Error clearing Cart!", error);
@@ -125,7 +152,7 @@ const cartSlice = createSlice({
           ? (coupon?.discountValue / 100) * state.totalPrice
           : coupon?.discountValue
         : 0;
-        state.discount = discount.toFixed(2)
+      state.discount = discount.toFixed(2);
     },
   },
   extraReducers: (builder) => {

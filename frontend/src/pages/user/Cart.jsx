@@ -1,149 +1,178 @@
-// import React, { useEffect } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import {
-//   fetchCartItems,
-//   updateQuantity,
-//   deleteCartItem,
-//   clearCart,
-// } from "../../store/cartSlice";
-// import { toast } from "react-toastify";
+// src/pages/Cart.jsx
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCartItems } from "../../store/cartSlice";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import TableInCheckout from "../../components/TableInCheckout";
 
-// function CartPage() {
-//   const dispatch = useDispatch();
-//   const { items, totalPrice, totalQuantity, loading } = useSelector(
-//     (state) => state.cart
-//   );
+export default function Cart() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-//   useEffect(() => {
-//     dispatch(fetchCartItems());
-//   }, [dispatch]);
+  const { userData } = useSelector((state) => state.auth); // Auth user
+  const { items, loading } = useSelector((state) => state.cart);
+  console.log("Mien items hu", items);
+  // 🔹 Redirect if not logged in
+  useEffect(() => {
+    if (!userData) {
+      navigate("/login");
+      toast.info("Please sign up or log in to view your cart");
+    }
+  }, [userData, navigate]);
 
-//   const handleQuantityChange = (productId, quantity) => {
-//     if (quantity < 1) return;
-//     dispatch(updateQuantity({ productId, quantity }))
-//       .unwrap()
-//       .catch(() => toast.error("Error updating quantity"));
-//   };
+  // 🔹 Fetch cart items
+  useEffect(() => {
+    if (userData) {
+      dispatch(fetchCartItems());
+    }
+  }, [dispatch, userData]);
 
-//   const handleDelete = (productId) => {
-//     dispatch(deleteCartItem(productId))
-//       .unwrap()
-//       .then(() => toast.success("Item removed"))
-//       .catch(() => toast.error("Error removing item"));
-//   };
+  // 🔹 Remove item from cart
+  const handleRemove = (id) => {
+    dispatch(removeFromCart(id))
+      .unwrap()
+      .then(() => toast.success("Item removed from cart"))
+      .catch(() => toast.error("Error removing item"));
+  };
 
-//   const handleClearCart = () => {
-//     dispatch(clearCart())
-//       .unwrap()
-//       .then(() => toast.success("Cart cleared"))
-//       .catch(() => toast.error("Error clearing cart"));
-//   };
+  function showCartItems() {
+    return (
+      <table
+        className="table table-bordered"
+        style={{
+          textAlign: "center",
 
-//   // if (loading) return <div className="container py-5">Loading...</div>;
+          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.05)",
+          borderRadius: "5px",
+          overflow: "hidden",
+        }}
+      >
+        <thead>
+          <tr>
+            {[
+              "Image",
+              "Title",
+              "Price",
+              "Color",
+              "Size",
+              "Quantity",
+              "Remove",
+            ].map((header) => (
+              <th
+                key={header}
+                scope="col"
+                style={{
+                  backgroundColor: "black",
+                  color: "white",
+                  fontSize: "16px",
+                }}
+              >
+                {header}
+              </th>
+            ))}
+          </tr>
+        </thead>
 
-//   return (
-//     <div className="container py-5">
-//       <h2 className="mb-4">Your Cart</h2>
+        {items.map((item) => (
+          <TableInCheckout key={item.product._id} item={item} />
+        ))}
+      </table>
+    );
+  }
 
-//       {items.length === 0 ? (
-//         <p>Your cart is empty</p>
-//       ) : (
-//         <>
-//           <table className="table table-bordered align-middle">
-//             <thead className="table-light">
-//               <tr>
-//                 <th>Product</th>
-//                 <th>Price</th>
-//                 <th style={{ width: "150px" }}>Quantity</th>
-//                 <th>Total</th>
-//                 <th></th>
-//               </tr>
-//             </thead>
-//             <tbody>
-//               {items.map((item) => (
-//                 <tr key={item.product._id}>
-//                   <td>
-//                     <div className="d-flex align-items-center">
-//                       <img
-//                         src={item.product.images[0]}
-//                         alt={item.product.title}
-//                         style={{
-//                           width: "60px",
-//                           height: "60px",
-//                           objectFit: "cover",
-//                         }}
-//                         className="me-3 rounded"
-//                       />
-//                       {item.product.title}
-//                     </div>
-//                   </td>
-//                   <td>${item.product.salePrice.toFixed(2)}</td>
-//                   <td>
-//                     <div className="d-flex align-items-center">
-//                       <button
-//                         className="btn btn-sm btn-outline-secondary"
-//                         onClick={() =>
-//                           handleQuantityChange(
-//                             item.product._id,
-//                             item.quantity - 1
-//                           )
-//                         }
-//                       >
-//                         −
-//                       </button>
-//                       <span className="px-2">{item.quantity}</span>
-//                       <button
-//                         className="btn btn-sm btn-outline-secondary"
-//                         onClick={() =>
-//                           handleQuantityChange(
-//                             item.product._id,
-//                             item.quantity + 1
-//                           )
-//                         }
-//                       >
-//                         +
-//                       </button>
-//                     </div>
-//                   </td>
-//                   <td>
-//                     ${(item.product.salePrice * item.quantity).toFixed(2)}
-//                   </td>
-//                   <td>
-//                     <button
-//                       className="btn btn-sm btn-danger"
-//                       onClick={() => handleDelete(item.product._id)}
-//                     >
-//                       Remove
-//                     </button>
-//                   </td>
-//                 </tr>
-//               ))}
-//             </tbody>
-//           </table>
+  if (loading) return <div className="p-6 text-center">Loading...</div>;
 
-//           <div className="d-flex justify-content-between align-items-center mt-4">
-//             <button
-//               className="btn btn-outline-danger"
-//               onClick={handleClearCart}
-//             >
-//               Clear Cart
-//             </button>
-//             <h4>
-//               Total ({totalQuantity} items): ${totalPrice}
-//             </h4>
-//           </div>
-//         </>
-//       )}
-//     </div>
-//   );
-// }
+  if (!items || items.length === 0) {
+    return (
+      <div className="p-6 text-center">
+        <h2 className="text-lg font-semibold">Your cart is empty</h2>
+        <button
+          className="mt-4 px-4 py-2 bg-black text-white rounded"
+          onClick={() => navigate("/shop")}
+        >
+          Continue Shopping
+        </button>
+      </div>
+    );
+  }
 
-// export default CartPage;
+  return (
+    <div className="container-fluid">
+      <div className="row">
+        <div className="col-md-8 pt-2">
+          <h4>Your Cart / {items.length} Products</h4>
+          <hr></hr>
+          {showCartItems()}
+        </div>
+        <div className="col-md-4 pt-2">
+          <h4>Order Summary</h4>
+          <hr></hr>
+          <p style={{ fontSize: "15px" }}>Products</p>
+          {items.map((item, i) => (
+            <div key={i}>
+              <p style={{ fontSize: "15px" }}>
+                {item.product.title} x {item.quantity} = ₹{" "}
+                {item.product.price * item.quantity}
+              </p>
+            </div>
+          ))}
 
-import react from "react";
-
-function Cart() {
-  return <h1>Cart</h1>;
+          <div className="border-t flex justify-between items-center">
+            <hr></hr>
+            <h4 className="font-bold">
+              Total: ₹
+              {items.reduce(
+                (acc, item) => acc + item.product.price * item.quantity,
+                0
+              )}
+            </h4>
+            <hr></hr>
+            <br></br>
+            <button className="btn btn-dark px-4 py-2 rounded">
+              {" "}
+              Proceed To Checkout
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
+// {items.map((product, i) => (
+//           <div
+//             key={item._id}
+//             className="flex items-center justify-between border-b pb-4"
+//           >
+//             {/* Product Info */}
+//             <div className="flex items-center space-x-4" key={i}>
+//               <img
+//                 src={item.i}
+//                 alt={item.name}
+//                 className="w-20 h-20 object-cover rounded"
+//               />
+//               <div>
+//                 <h2 className="font-semibold">{item.name}</h2>
+//                 <p className="text-gray-500 text-sm">₹{item.price}</p>
+//                 {item.color && (
+//                   <p className="text-sm text-gray-500">Color: {item.color}</p>
+//                 )}
+//                 {item.size && (
+//                   <p className="text-sm text-gray-500">Size: {item.size}</p>
+//                 )}
+//               </div>
+//             </div>
 
-export default Cart;
+//             {/* Actions */}
+//             <div className="flex flex-col items-end">
+//               <p className="font-semibold">₹{item.price * item.quantity}</p>
+//               <button
+//                 className="mt-2 px-3 py-1 text-sm bg-red-500 text-white rounded"
+//                 onClick={() => handleRemove(item._id)}
+//               >
+//                 Remove
+//               </button>
+//             </div>
+//           </div>
+//         ))}
+//       </div>

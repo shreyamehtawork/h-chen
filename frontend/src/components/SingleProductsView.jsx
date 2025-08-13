@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,7 +11,8 @@ import { addProductToCart, fetchCartItems } from "../store/cartSlice";
 function SingleProductsView() {
   const { id, category } = useParams();
 
-  const { user } = useSelector((state) => state.auth);
+  const { userData } = useSelector((state) => state.auth);
+  // console.log("IAM THE USER:", userData.id);
 
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.cart);
@@ -25,6 +26,7 @@ function SingleProductsView() {
   const fetchProduct = async () => {
     const res = await getProductDetails(id);
     if (res) setProduct(res);
+    // console.log("PRODUCT ID: ", product._id);
     setLoadingProduct(false);
   };
 
@@ -42,14 +44,22 @@ function SingleProductsView() {
       return;
     }
 
-    dispatch(addProductToCart({ productId: product._id, quantity }))
+    dispatch(
+      addProductToCart({
+        productId: product._id,
+        quantity,
+        color: selectedColor,
+        size: selectedSize,
+      })
+    )
       .unwrap()
       .then(() => {
         toast.success("Product added to cart!");
-        dispatch(fetchCartItems()); // ✅ Refresh cart items right away
+        dispatch(fetchCartItems()); // ✅ Refresh cart items
       })
       .catch((err) =>
-        toast.error(err?.message || "Error adding product to cart")
+        // toast.error(err?.message || "Error adding product to cart")
+        console.log("ERRORR THIS IUS", err)
       );
   };
 

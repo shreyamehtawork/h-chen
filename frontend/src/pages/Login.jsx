@@ -5,58 +5,50 @@ export default function Login() {
     window.location.href = "http://localhost:3000/api/auth/google";
   };
 
-  //   return <button onClick={handleLogin}>Login with Google</button>;
-
   return (
-    <div className="w-full h-[90vh] flex items-center justify-center  bg-gray-100">
-      <div className="bg-white rounded-lg shadow-xl flex flex-col md:flex-row w-full max-w-4xl overflow-hidden min-h-[500px]">
-        {/* Left Section (Image/Marketing Text) */}
-        <div className="md:w-1/2 p-8 flex flex-col justify-center items-start border-r border-gray-200">
-          <h2 className="text-4xl font-serif-custom text-gray-800 leading-tight mb-4">
-            CHLOE'S VENTURE
-          </h2>
-          <p className="text-xl font-serif-custom text-gray-700 leading-relaxed">
+    <div className="container-fluid min-vh-100 d-flex align-items-center justify-content-center bg-light">
+      <div
+        className="row bg-white rounded shadow-lg overflow-hidden"
+        style={{ maxWidth: "1000px", minHeight: "500px" }}
+      >
+        {/* Left Section */}
+        <div className="col-md-6 p-4 border-end d-flex flex-column justify-content-center">
+          <h2 className="display-5 fw-bold text-dark mb-3">CHLOE'S VENTURE</h2>
+          <p className="fs-5 text-secondary mb-4">
             Where every identity is seen.
             <br />
             Where elegance feels like home.
           </p>
-          {/* Placeholder for the main image if it were dynamic */}
-          <div className="mt-8 w-full">
-            <img
-              src="https://placehold.co/400x300/e0e0e0/555555?text=Brand+Image"
-              alt="Brand Aesthetics"
-              className="rounded-md w-full h-auto object-cover"
-            />
-          </div>
+          <img
+            src="https://placehold.co/400x300/e0e0e0/555555?text=Brand+Image"
+            alt="Brand Aesthetics"
+            className="img-fluid rounded"
+          />
         </div>
 
-        {/* Right Section (Login Form) */}
-        <div className="md:w-1/2 p-8 flex flex-col justify-center items-center relative gap-5">
-          <div className="space-y-2">
-            <h2 className="text-3xl font-bold font-serif-custom text-gray-800 mb-6">
-            Welcome Back!
-          </h2>
-          <p className="text-gray-600 mb-20 text-center">
-            Sign in to your account to continue.
-          </p>
+        {/* Right Section */}
+        <div className="col-md-6 p-4 d-flex flex-column justify-content-center align-items-center gap-3">
+          <div className="text-center mb-4">
+            <h2 className="fw-bold mb-2">Welcome Back!</h2>
+            <p className="text-muted">Sign in to your account to continue.</p>
           </div>
 
           {/* Google Login Button */}
           <button
             onClick={handleLogin}
-            className="flex items-center justify-center gap-1 w-full max-w-xs px-6 py-3 border border-gray-300 rounded-lg shadow-sm text-lg font-medium text-gray-700 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out"
+            className="btn btn-outline-secondary w-100 d-flex align-items-center justify-content-center gap-2 py-2"
+            style={{ maxWidth: "300px" }}
           >
-            <FcGoogle size={28} />
-            Login with Google
+            <FcGoogle size={28} /> Login with Google
           </button>
 
-          <p className="text-sm text-gray-500 text-center">
+          <p className="small text-muted text-center mt-3">
             By logging in, you agree to our{" "}
-            <a href="#" className="text-blue-600 hover:underline">
+            <a href="#" className="text-decoration-none text-primary">
               Terms of Service
             </a>{" "}
             and{" "}
-            <a href="#" className="text-blue-600 hover:underline">
+            <a href="#" className="text-decoration-none text-primary">
               Privacy Policy
             </a>
             .
