@@ -55,7 +55,7 @@ function SingleProductsView() {
       .unwrap()
       .then(() => {
         toast.success("Product added to cart!");
-        dispatch(fetchCartItems()); // ✅ Refresh cart items
+        // dispatch(fetchCartItems()); // ✅ Refresh cart items
       })
       .catch((err) =>
         // toast.error(err?.message || "Error adding product to cart")
