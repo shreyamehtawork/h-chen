@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ant-design/icons": "^6.0.0",
     "@redux-devtools/extension": "^3.3.0",
     "@reduxjs/toolkit": "^2.8.2",
     "antd": "^5.26.6",
@@ -22,6 +23,7 @@
     "react-bootstrap": "^2.10.10",
     "react-dom": "^19.1.0",
     "react-icons": "^5.5.0",
+    "react-modal-image": "^2.6.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.7.1",
     "react-toastify": "^11.0.5",
