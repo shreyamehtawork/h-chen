@@ -107,7 +107,7 @@ function AllProducts() {
           <h2 className="mb-2 text-capitalize">
             {category ? category : "All Products"}
           </h2>
-          <p className="text-muted mb-4 col-md-6">tagline from backend</p>
+          {/* <p className="text-muted mb-4 col-md-6">tagline from backend</p> */}
           <div className="mb-2 fw-bold">{filteredProducts.length} Products</div>
           <ProductList products={filteredProducts} />
         </div>

@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCartItems } from "../../store/cartSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import TableInCheckout from "../../components/TableInCheckout";
 
@@ -101,7 +101,7 @@ export default function Cart() {
     <div className="container-fluid">
       <div className="row">
         <div className="col-md-8 pt-2">
-          <h4>Your Cart / {items.length} Products</h4>
+          <h4>Your Cart / {items.length} Product(s)</h4>
           <hr></hr>
           {showCartItems()}
         </div>
@@ -131,7 +131,13 @@ export default function Cart() {
             <br></br>
             <button className="btn btn-dark px-4 py-2 rounded">
               {" "}
-              Proceed To Checkout
+              {/* <Link to="/user/checkout">Proceed To Checkout</Link> */}
+              <Link
+                to={"/user/checkout"}
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                Proceed To Checkout
+              </Link>
             </button>
           </div>
         </div>

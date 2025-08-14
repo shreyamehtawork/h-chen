@@ -102,38 +102,53 @@ function Nav() {
                     />
                   </div>
 
-                  <div style={{ marginLeft: "5px", marginRight: "10px" }}>
+                  <div
+                    className="d-flex align-items-center"
+                    style={{ marginLeft: "5px", marginRight: "10px" }}
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="25"
                       height="25"
                       fill="currentColor"
-                      className="bi bi-cart-dash text-dark"
+                      className="bi bi-cart-dash text-dark me-1"
                       viewBox="0 0 16 16"
                     >
                       <path d="M6.5 7a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1z" />
                       <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
                     </svg>
-                    <Link to={"/user/cart"} className="text-decoration-none">
+                    <Link
+                      to={"/user/cart"}
+                      className="text-decoration-none text-dark"
+                    >
                       My Cart
                     </Link>
                   </div>
-                  <span style={{ marginRight: "10px" }}>
-                    Hi, {userData?.name || "User"}
-                  </span>
-                  <button
-                    onClick={handleLogout}
-                    style={{
-                      textDecoration: "none",
-                      marginRight: "10px",
-                      background: "none",
-                      border: "none",
-                      cursor: "pointer",
-                      color: "#000",
-                    }}
-                  >
-                    Logout
-                  </button>
+
+                  <div className="dropdown" style={{ marginRight: "10px" }}>
+                    <button
+                      className=" dropdown-toggle"
+                      type="button"
+                      id="userDropdown"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      Hi, {userData?.name || "User"}
+                    </button>
+                    <ul
+                      className="dropdown-menu dropdown-menu-end"
+                      aria-labelledby="userDropdown"
+                    >
+                      <li>
+                        <button
+                          className="dropdown-item"
+                          onClick={handleLogout}
+                        >
+                          Logout
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
                 </>
               ) : (
                 <>
