@@ -12,7 +12,7 @@ export default function Cart() {
 
   const { userData } = useSelector((state) => state.auth); // Auth user
   const { items, loading } = useSelector((state) => state.cart);
-  console.log("Mien items hu", items);
+  // console.log("Mien items hu", items);
   // 🔹 Redirect if not logged in
   useEffect(() => {
     if (!userData) {

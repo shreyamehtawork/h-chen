@@ -54,7 +54,7 @@ function SingleProductsView() {
     )
       .unwrap()
       .then(() => {
-        // toast.success("Product added to cart!");
+        toast.success("Product added to cart!");
         dispatch(fetchCartItems()); // ✅ Refresh cart items
       })
       .catch((err) =>

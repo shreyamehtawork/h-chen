@@ -17,24 +17,6 @@ export const addProductToCart = createAsyncThunk(
   ) => {
     try {
       const { userData } = getState().auth;
-      console.log(
-        "ProductId , quantity , color , size",
-        productId,
-        quantity,
-        color,
-        size
-      );
-
-      console.log("USER data", {
-        user: userData.id,
-        product: {
-          id: productId,
-          quantity: quantity,
-          color: color,
-          size: size,
-        },
-      });
-      console.log("USER DATA FROM CART SLICE: ", userData);
       const response = await api.post("/cart/add-to-cart", {
         user: userData.id,
         product: {
@@ -60,7 +42,7 @@ export const fetchCartItems = createAsyncThunk(
     try {
       const { userData } = getState().auth;
       const response = await api.get(`/cart?user=${userData.id}`);
-      console.log("cart data", response.data);
+      // console.log("cart data", response.data);
       return response.data;
     } catch (error) {
       return rejectWithValue(
@@ -94,13 +76,13 @@ export const updateQuantity = createAsyncThunk(
 
 export const deleteCartItem = createAsyncThunk(
   "cart/deleteCartItem",
-  async (productId, { rejectWithValue, getState }) => {
+  async ({productId, color, size}, { rejectWithValue, getState }) => {
     try {
       const { userData } = getState().auth;
       const response = await api.delete(
-        `/cart/delete-item/${userData.id}/${productId}`
+        `/cart/delete-item/${userData.id}/${productId}/${color}/${size}`,
       );
-      console.log("RES DATA: ", response.data);
+      // console.log("RES DATA: ", response.data);
       return response.data;
     } catch (error) {
       console.error("Error deleting cart item:", error);
@@ -119,7 +101,7 @@ export const clearCart = createAsyncThunk(
       const response = await api.delete(`/cart/delete-all/${userData.id}`);
       return response.data;
     } catch (error) {
-      console.log("Error clearing Cart!", error);
+      // console.log("Error clearing Cart!", error);
       return rejectWithValue(
         error.response?.data || { message: "Failed to clear cart" }
       );
@@ -158,21 +140,19 @@ const cartSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(addProductToCart.pending, (state) => {
-        // Optionally handle pending state
         state.loading = true;
       })
       .addCase(addProductToCart.fulfilled, (state, action) => {
         const { products } = action.payload;
+        state.items = products;
         state.totalQuantity = products.length;
         state.loading = false;
         state.appliedCoupon = null;
         state.discount = 0;
-        toast.success("Product added to cart successfully!");
       })
       .addCase(addProductToCart.rejected, (state, action) => {
         state.loading = false;
         console.error("Failed to add product to cart:", action.payload);
-        // toast.error(action.payload.message || "Failed to add product to cart");
       })
       .addCase(fetchCartItems.pending, (state) => {
         state.loading = true;
@@ -184,7 +164,7 @@ const cartSlice = createSlice({
         state.totalQuantity = products.length;
 
         const totalPrice = products.reduce((acc, item) => {
-          return acc + item.product.salePrice * item.quantity;
+          return acc + item.product.price * item.quantity;
         }, 0);
 
         state.totalPrice = totalPrice.toFixed(2);
@@ -193,7 +173,6 @@ const cartSlice = createSlice({
       .addCase(fetchCartItems.rejected, (state, action) => {
         state.loading = false;
         console.error("Failed to fetch cart items:", action.payload);
-        // toast.error(action.payload.message || "Failed to fetch cart items");
       })
       .addCase(updateQuantity.pending, () => {
         // state.loading = true;
@@ -205,14 +184,13 @@ const cartSlice = createSlice({
         state.totalQuantity = products.length;
 
         const totalPrice = products.reduce((acc, item) => {
-          return acc + item.product.salePrice * item.quantity;
+          return acc + item.product.price * item.quantity;
         }, 0);
 
         state.totalPrice = totalPrice.toFixed(2);
       })
       .addCase(updateQuantity.rejected, (state, action) => {
         console.error("Failed to update quantity:", action.payload);
-        // toast.error(action.payload.message || "Failed to update quantity");
       })
       .addCase(deleteCartItem.pending, () => {
         // state.loading = true;
@@ -220,18 +198,17 @@ const cartSlice = createSlice({
       .addCase(deleteCartItem.fulfilled, (state, action) => {
         const { products } = action.payload;
 
-        state.items = products || [];
+        state.items = products;
         state.totalQuantity = products?.length;
 
         const totalPrice = products?.reduce((acc, item) => {
-          return acc + item.product.salePrice * item.quantity;
+          return acc + item.product.price * item.quantity;
         }, 0);
 
         state.totalPrice = totalPrice.toFixed(2);
       })
       .addCase(deleteCartItem.rejected, (state, action) => {
         console.error("Failed to delete cart item:", action.payload);
-        // toast.error(action.payload.message || "Failed to delete cart item");
       })
       .addCase(clearCart.pending, () => {
         // state.loading = true;
@@ -243,7 +220,6 @@ const cartSlice = createSlice({
       })
       .addCase(clearCart.rejected, (state, action) => {
         console.error("Failed to delete cart item:", action.payload);
-        // toast.error(action.payload.message || "Failed to delete cart item");
       });
   },
 });

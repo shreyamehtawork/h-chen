@@ -142,8 +142,8 @@ function FilterSidebar({ filters, handleFilterChange, resetFilters }) {
         </div>
 
         <div className="price-labels d-flex justify-content-between mt-2">
-          <span>${filters.price.min}</span>
-          <span>${filters.price.max}</span>
+          <span>₹{filters.price.min}</span>
+          <span>₹{filters.price.max}</span>
         </div>
       </div>
 
