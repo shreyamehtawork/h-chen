@@ -54,7 +54,7 @@ function SingleProductsView() {
     )
       .unwrap()
       .then(() => {
-        toast.success("Product added to cart!");
+        // toast.success("Product added to cart!");
         dispatch(fetchCartItems()); // ✅ Refresh cart items
       })
       .catch((err) =>
@@ -81,7 +81,7 @@ function SingleProductsView() {
         <>
           <nav className="mb-4">
             <Link to="/">Home</Link> /{" "}
-            <Link to={`/${category}`}>{category}</Link> / {product.title}
+            <Link to={`/shop/${category}`}>{category}</Link> / {product.title}
           </nav>
 
           <div className="row align-items-start">
