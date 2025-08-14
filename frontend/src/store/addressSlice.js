@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import {toast} from "react-toastify";
+import { toast } from "react-toastify";
 
 const api = axios.create({
   baseURL: `${import.meta.env.VITE_SERVER_BASE_URL}/api`,
@@ -49,7 +49,9 @@ export const getAddress = createAsyncThunk(
   async (addressId, { rejectWithValue, getState }) => {
     try {
       const { userData } = getState().auth;
-      const response = await api.get(`/address/get/${userData._id}/${addressId}`);
+      const response = await api.get(
+        `/address/get/${userData._id}/${addressId}`
+      );
       return response.data;
     } catch (error) {
       console.error("Error fetching address:", error);
@@ -129,7 +131,7 @@ const addressSlice = createSlice({
         console.error("Failed to add address:", action.payload);
         toast.error(action.payload.message || "Failed to add address");
       })
-      
+
       // Get All Addresses
       .addCase(getAllAddresses.pending, (state) => {
         // state.loading = true;
@@ -145,7 +147,7 @@ const addressSlice = createSlice({
         console.error("Failed to fetch addresses:", action.payload);
         toast.error(action.payload.message || "Failed to fetch addresses");
       })
-      
+
       // Get Single Address
       .addCase(getAddress.pending, (state) => {
         state.loading = true;
@@ -161,7 +163,7 @@ const addressSlice = createSlice({
         console.error("Failed to fetch address:", action.payload);
         toast.error(action.payload.message || "Failed to fetch address");
       })
-      
+
       // Update Address
       .addCase(updateAddress.pending, (state) => {
         state.loading = true;
@@ -170,11 +172,16 @@ const addressSlice = createSlice({
       .addCase(updateAddress.fulfilled, (state, action) => {
         state.loading = false;
         const updatedAddress = action.payload.data;
-        const index = state.addresses.findIndex(addr => addr._id === updatedAddress._id);
+        const index = state.addresses.findIndex(
+          (addr) => addr._id === updatedAddress._id
+        );
         if (index !== -1) {
           state.addresses[index] = updatedAddress;
         }
-        if (state.selectedAddress && state.selectedAddress._id === updatedAddress._id) {
+        if (
+          state.selectedAddress &&
+          state.selectedAddress._id === updatedAddress._id
+        ) {
           state.selectedAddress = updatedAddress;
         }
         toast.success("Address updated successfully!");
@@ -185,7 +192,7 @@ const addressSlice = createSlice({
         console.error("Failed to update address:", action.payload);
         toast.error(action.payload.message || "Failed to update address");
       })
-      
+
       // Delete Address
       .addCase(deleteAddress.pending, (state) => {
         state.loading = true;
@@ -194,8 +201,13 @@ const addressSlice = createSlice({
       .addCase(deleteAddress.fulfilled, (state, action) => {
         state.loading = false;
         const deletedAddressId = action.payload.deletedAddressId;
-        state.addresses = state.addresses.filter(addr => addr._id !== deletedAddressId);
-        if (state.selectedAddress && state.selectedAddress._id === deletedAddressId) {
+        state.addresses = state.addresses.filter(
+          (addr) => addr._id !== deletedAddressId
+        );
+        if (
+          state.selectedAddress &&
+          state.selectedAddress._id === deletedAddressId
+        ) {
           state.selectedAddress = null;
         }
         toast.success("Address deleted successfully!");
@@ -209,5 +221,6 @@ const addressSlice = createSlice({
   },
 });
 
-export const { clearSelectedAddress, setSelectedAddress, clearError } = addressSlice.actions;
+export const { clearSelectedAddress, setSelectedAddress, clearError } =
+  addressSlice.actions;
 export default addressSlice.reducer;

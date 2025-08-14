@@ -21,6 +21,7 @@ import Login from "./pages/Login";
 import AuthCallback from "./pages/AuthCallback";
 import { jwtDecode } from "jwt-decode";
 import { loginUser } from "./store/authSlice";
+import { fetchCartItems } from "./store/cartSlice";
 
 function App() {
   const { isAuthenticated, token } = useSelector((state) => state.auth);
@@ -41,6 +42,7 @@ function App() {
     }
   }, [token, dispatch])
 
+  
 
   return (
     <div>

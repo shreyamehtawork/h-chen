@@ -1,14 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createOrder } from "../store/orderSlice";
-import { clearCart } from "../store/cartSlice";
+import { clearCart, fetchCartItems } from "../store/cartSlice";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
 const CheckoutPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { isAuthenticated, token } = useSelector((state) => state.auth);
 
+  useEffect(() => {
+    if (token) {
+      const user = jwtDecode(token);
+      dispatch(fetchCartItems(user));
+    }
+  }, [token, dispatch]);
+
+  
   const {
     items,
     totalPrice,
@@ -24,7 +34,9 @@ const CheckoutPage = () => {
     zip: "",
   });
 
- 
+  const handleAddresses = () => {
+    console.log("handleAddress");
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
