@@ -15,12 +15,12 @@ export const addAddress = createAsyncThunk(
     try {
       const { userData } = getState().auth;
       const response = await api.post("/address/create", {
-        userId: userData._id,
+        userId: userData.id,
         address: addressData,
       });
       return response.data;
     } catch (error) {
-      console.error("Error adding address:", error);
+      console.log("Error adding address:", error);
       return rejectWithValue(
         error.response?.data || { message: "Failed to add address" }
       );
@@ -33,7 +33,7 @@ export const getAllAddresses = createAsyncThunk(
   async (_, { rejectWithValue, getState }) => {
     try {
       const { userData } = getState().auth;
-      const response = await api.get(`/address/get/${userData._id}`);
+      const response = await api.get(`/address/get/${userData.id}`);
       return response.data;
     } catch (error) {
       console.error("Error fetching addresses:", error);
@@ -50,7 +50,7 @@ export const getAddress = createAsyncThunk(
     try {
       const { userData } = getState().auth;
       const response = await api.get(
-        `/address/get/${userData._id}/${addressId}`
+        `/address/get/${userData.id}/${addressId}`
       );
       return response.data;
     } catch (error) {
@@ -173,14 +173,14 @@ const addressSlice = createSlice({
         state.loading = false;
         const updatedAddress = action.payload.data;
         const index = state.addresses.findIndex(
-          (addr) => addr._id === updatedAddress._id
+          (addr) => addr.id === updatedAddress.id
         );
         if (index !== -1) {
           state.addresses[index] = updatedAddress;
         }
         if (
           state.selectedAddress &&
-          state.selectedAddress._id === updatedAddress._id
+          state.selectedAddress.id === updatedAddress.id
         ) {
           state.selectedAddress = updatedAddress;
         }
@@ -202,11 +202,11 @@ const addressSlice = createSlice({
         state.loading = false;
         const deletedAddressId = action.payload.deletedAddressId;
         state.addresses = state.addresses.filter(
-          (addr) => addr._id !== deletedAddressId
+          (addr) => addr.id !== deletedAddressId
         );
         if (
           state.selectedAddress &&
-          state.selectedAddress._id === deletedAddressId
+          state.selectedAddress.id === deletedAddressId
         ) {
           state.selectedAddress = null;
         }

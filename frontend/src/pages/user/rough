@@ -1,0 +1,138 @@
+import React from "react";
+import ShowPaymentInfo from "./ShowPaymentInfo";
+
+
+
+function Orders({ orders, handleStatusChange }) {
+  const showOrderInTable = (order) => (
+    <div
+      style={{
+        border: "1px solid #ecdcd1",
+        borderRadius: "12px",
+        overflow: "hidden",
+        marginTop: "16px",
+        backgroundColor: "#fff",
+        boxShadow: "0 3px 10px rgba(174, 91, 53, 0.08)",
+      }}
+    >
+      <table
+        className="table mb-0"
+        style={{
+          fontFamily: "'Poppins', sans-serif",
+          fontSize: "0.95rem",
+        }}
+      >
+        <thead
+          style={{ backgroundColor: "rgb(174, 91, 53)", color: "#fffaf0" }}
+        >
+          <tr>
+            <th>🎂 Title</th>
+            <th>💵 Price</th>
+            <th>📦 Count</th>
+          </tr>
+        </thead>
+        <tbody>
+          {order.products
+            .filter((p) => p.product)
+            .map((p, i) => (
+              <tr key={i}>
+                <td>
+                  <b>{p.product.title}</b>
+                </td>
+                <td>Rs. {p.product.price}</td>
+                <td>{p.count} pcs</td>
+              </tr>
+            ))}
+        </tbody>
+      </table>
+    </div>
+  );
+
+  return (
+    <div style={{ fontFamily: "'Poppins', sans-serif" }}>
+      {orders.map((order) => {
+        const bgColor = statusColors[order.orderStatus] || statusColors.default;
+
+        return (
+          <div
+            key={order._id}
+            style={{
+              backgroundColor: bgColor,
+              borderRadius: "20px",
+              padding: "24px",
+              marginBottom: "30px",
+              boxShadow: "0 8px 20px rgba(174, 91, 53, 0.12)",
+              border: "1px solid #efd8cc",
+              transition: "background-color 0.3s ease-in-out",
+            }}
+          >
+            {/* Payment Info */}
+            <ShowPaymentInfo order={order} showStatus={false} />
+
+            {/* Status Controls */}
+            <div
+              style={{
+                marginTop: "16px",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                flexWrap: "wrap",
+                gap: "10px",
+              }}
+            >
+              <div>
+                <span style={{ fontWeight: "600", marginRight: "8px" }}>
+                  🚚 Delivery Status:
+                </span>
+                <span
+                  style={{
+                    padding: "6px 12px",
+                    borderRadius: "12px",
+                    fontWeight: "bold",
+                    fontSize: "0.8rem",
+                    backgroundColor: "#fff",
+                    border: "1px solid #dcb9ab",
+                    color: "#5c4033",
+                  }}
+                >
+                  {order.orderStatus}
+                </span>
+              </div>
+
+              <div>
+                <select
+                  onChange={(e) =>
+                    handleStatusChange(order._id, e.target.value)
+                  }
+                  defaultValue={order.orderStatus}
+                  className="form-select"
+                  style={{
+                    width: "180px",
+                    padding: "8px",
+                    borderRadius: "8px",
+                    border: "1px solid #dcb9ab",
+                    backgroundColor: "#fffdf9",
+                    color: "#5c4033",
+                    fontWeight: "500",
+                  }}
+                >
+                  <option value="Not Processed">Not Processed</option>
+                  <option value="Processing">Processing</option>
+                  <option value="Dispatched">Dispatched</option>
+                  <option value="Cancelled">Cancelled</option>
+                  <option value="Completed">Completed</option>
+                  <option value="Delivered">Delivered</option>
+                </select>
+              </div>
+            </div>
+
+            {/* Table */}
+            {showOrderInTable(order)}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+export default Orders;

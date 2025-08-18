@@ -136,9 +136,19 @@ function Nav() {
                       Hi, {userData?.name || "User"}
                     </button>
                     <ul
-                      className="dropdown-menu dropdown-menu-end"
+                      className="dropdown-menu dropdown-menu-end "
                       aria-labelledby="userDropdown"
                     >
+                      <li>
+                        <button className="dropdown-item">
+                          <a
+                            href="/user/order"
+                            style={{ textDecoration: "none" }}
+                          >
+                            My Orders
+                          </a>
+                        </button>
+                      </li>
                       <li>
                         <button
                           className="dropdown-item"
