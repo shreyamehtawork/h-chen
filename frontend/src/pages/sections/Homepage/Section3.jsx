@@ -11,7 +11,7 @@ function Section3() {
 
   const [startIndex, setStartIndex] = useState(0);
   const visibleCount = 4;
-  
+
   const [products, setProducts] = useState([]);
   const [loadingProducts, setLoadingProducts] = useState(true);
 
@@ -35,10 +35,9 @@ function Section3() {
     setStartIndex((prev) => Math.min(prev + visibleCount, maxStart));
   };
 
-  const visibleProducts = products.length ? products.slice(
-    startIndex,
-    startIndex + visibleCount
-  ) : []
+  const visibleProducts = products.length
+    ? products.slice(startIndex, startIndex + visibleCount)
+    : [];
 
   // Variants
   const fadeInOutContainer = {
@@ -113,11 +112,19 @@ function Section3() {
                     key={product._id}
                     variants={cardVariant}
                   >
-                    <img
-                      src={product.images[0]}
-                      alt={product.name}
-                      className="section3-img"
-                    />
+                    <div className="section3-img-wrapper">
+                      <img
+                        src={product.images[0]}
+                        alt={product.name}
+                        className="section3-img"
+                      />
+
+                      {/* Quick View Overlay */}
+                      <div className="quick-view-overlay">
+                        <button className="quick-view-btn">Quick View</button>
+                      </div>
+                    </div>
+
                     <div className="section3-info">
                       <h5 className="product-title">{product.title}</h5>
                       <p className="product-price">₹{product.price}</p>

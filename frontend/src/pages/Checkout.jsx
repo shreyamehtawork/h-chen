@@ -27,7 +27,7 @@ export default function CheckoutPage() {
   } = useSelector((state) => state.cart);
 
   const { userData } = useSelector((state) => state.auth);
-  // Form state for new address
+
   const [newAddress, setNewAddress] = useState({
     fullName: "",
     phone: "",
@@ -99,8 +99,6 @@ export default function CheckoutPage() {
       totalPrice: totalPrice,
     };
 
-    // toast.error("FAILD");
-    console.log("This is my order", orderDetails);
     dispatch(createOrder(orderDetails)).then((res) => {
       if (!res.error) {
         dispatch(clearCart());
@@ -110,154 +108,169 @@ export default function CheckoutPage() {
   };
 
   return (
-    <div className="checkout-page p-6 max-w-6xl mx-auto">
-      <h2 className="text-2xl font-bold mb-6">Checkout</h2>
+    <div className="container my-5">
+      <h2 className="fw-bold mb-4">Checkout</h2>
       <div className="row">
         {/* Address Section */}
-        <div className="mb-8 col-md-8">
-          {/* Address Section */}
-          <div className="mb-8">
-            <h3 className="text-xl font-semibold mb-4">
-              Select Delivery Address
-            </h3>
-            {addressLoading ? (
-              <p>Loading addresses...</p>
-            ) : addresses.length === 0 ? (
-              <p>No addresses found. Please add one.</p>
-            ) : (
-              <div className="space-y-3">
-                {addresses.map((addr) => (
-                  <label
-                    key={addr._id}
-                    className={`flex items-start gap-3 p-4 border rounded cursor-pointer ${
-                      selectedAddress?._id === addr._id
-                        ? "border-green-500 bg-green-50"
-                        : "border-gray-300"
-                    }`}
-                  >
-                    {/* Radio input ensures only ONE address can be selected */}
+        <div className="col-md-8 mb-4">
+          <h4 className="mb-3">Select Delivery Address</h4>
+          {addressLoading ? (
+            <p>Loading addresses...</p>
+          ) : addresses.length === 0 ? (
+            <p>No addresses found. Please add one.</p>
+          ) : (
+            <div className="mb-3">
+              {addresses.map((addr) => (
+                <div
+                  key={addr._id}
+                  className={`card mb-2 ${
+                    selectedAddress?._id === addr._id
+                      ? "border-success"
+                      : "border-secondary"
+                  }`}
+                >
+                  <div className="card-body d-flex align-items-start">
                     <input
                       type="radio"
+                      className="form-check-input me-3 mt-1"
                       name="selectedAddress"
                       checked={selectedAddress?._id === addr._id}
                       onChange={() => handleAddressSelect(addr)}
-                      className="mt-1"
                     />
                     <div>
-                      <p className="font-medium">{addr.fullName}</p>
-                      <p className="text-sm text-gray-600">{addr.phone}</p>
-                      <p className="text-sm">{`${addr.addressLine1}, ${addr.city}, ${addr.state} - ${addr.postalCode}`}</p>
+                      <h6 className="mb-1">{addr.fullName}</h6>
+                      <p className="mb-1 text-muted small">{addr.phone}</p>
+                      <p className="mb-0 small">
+                        {addr.addressLine1}, {addr.city}, {addr.state} -{" "}
+                        {addr.postalCode}
+                      </p>
                     </div>
-                  </label>
-                ))}
-              </div>
-            )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
 
-            <button
-              onClick={() => setShowAddressForm(!showAddressForm)}
-              className="mt-4 text-blue-500"
-            >
-              {showAddressForm ? "Cancel" : "+ Add New Address"}
-            </button>
-          </div>
+          <button
+            onClick={() => setShowAddressForm(!showAddressForm)}
+            className="btn btn-link p-0"
+          >
+            {showAddressForm ? "Cancel" : "+ Add New Address"}
+          </button>
 
           {showAddressForm && (
             <form
               onSubmit={handleAddressSubmit}
-              className="mt-4 p-4 border rounded space-y-3"
+              className="mt-3 border rounded p-3 bg-light"
             >
-              <input
-                type="text"
-                placeholder="Full Name"
-                value={newAddress.fullName}
-                onChange={(e) =>
-                  setNewAddress({ ...newAddress, fullName: e.target.value })
-                }
-                required
-                className="w-full p-2 border rounded"
-              />
-              <input
-                type="text"
-                placeholder="Phone"
-                value={newAddress.phone}
-                onChange={(e) =>
-                  setNewAddress({ ...newAddress, phone: e.target.value })
-                }
-                required
-                className="w-full p-2 border rounded"
-              />
-              <input
-                type="text"
-                placeholder="Alternate Phone"
-                value={newAddress.alternatePhone}
-                onChange={(e) =>
-                  setNewAddress({
-                    ...newAddress,
-                    alternatePhone: e.target.value,
-                  })
-                }
-                className="w-full p-2 border rounded"
-              />
-              <input
-                type="text"
-                placeholder="Address Line 1"
-                value={newAddress.addressLine1}
-                onChange={(e) =>
-                  setNewAddress({
-                    ...newAddress,
-                    addressLine1: e.target.value,
-                  })
-                }
-                required
-                className="w-full p-2 border rounded"
-              />
-              <input
-                type="text"
-                placeholder="Address Line 2"
-                value={newAddress.addressLine2}
-                onChange={(e) =>
-                  setNewAddress({
-                    ...newAddress,
-                    addressLine2: e.target.value,
-                  })
-                }
-                className="w-full p-2 border rounded"
-              />
-              <input
-                type="text"
-                placeholder="City"
-                value={newAddress.city}
-                onChange={(e) =>
-                  setNewAddress({ ...newAddress, city: e.target.value })
-                }
-                required
-                className="w-full p-2 border rounded"
-              />
-              <input
-                type="text"
-                placeholder="State"
-                value={newAddress.state}
-                onChange={(e) =>
-                  setNewAddress({ ...newAddress, state: e.target.value })
-                }
-                required
-                className="w-full p-2 border rounded"
-              />
-              <input
-                type="text"
-                placeholder="Postal Code"
-                value={newAddress.postalCode}
-                onChange={(e) =>
-                  setNewAddress({
-                    ...newAddress,
-                    postalCode: e.target.value,
-                  })
-                }
-                required
-                className="w-full p-2 border rounded"
-              />
+              <div className="mb-2">
+                <input
+                  type="text"
+                  placeholder="Full Name"
+                  value={newAddress.fullName}
+                  onChange={(e) =>
+                    setNewAddress({ ...newAddress, fullName: e.target.value })
+                  }
+                  required
+                  className="form-control"
+                />
+              </div>
+              <div className="mb-2">
+                <input
+                  type="text"
+                  placeholder="Phone"
+                  value={newAddress.phone}
+                  onChange={(e) =>
+                    setNewAddress({ ...newAddress, phone: e.target.value })
+                  }
+                  required
+                  className="form-control"
+                />
+              </div>
+              <div className="mb-2">
+                <input
+                  type="text"
+                  placeholder="Alternate Phone"
+                  value={newAddress.alternatePhone}
+                  onChange={(e) =>
+                    setNewAddress({
+                      ...newAddress,
+                      alternatePhone: e.target.value,
+                    })
+                  }
+                  className="form-control"
+                />
+              </div>
+              <div className="mb-2">
+                <input
+                  type="text"
+                  placeholder="Address Line 1"
+                  value={newAddress.addressLine1}
+                  onChange={(e) =>
+                    setNewAddress({
+                      ...newAddress,
+                      addressLine1: e.target.value,
+                    })
+                  }
+                  required
+                  className="form-control"
+                />
+              </div>
+              <div className="mb-2">
+                <input
+                  type="text"
+                  placeholder="Address Line 2"
+                  value={newAddress.addressLine2}
+                  onChange={(e) =>
+                    setNewAddress({
+                      ...newAddress,
+                      addressLine2: e.target.value,
+                    })
+                  }
+                  className="form-control"
+                />
+              </div>
+              <div className="mb-2">
+                <input
+                  type="text"
+                  placeholder="City"
+                  value={newAddress.city}
+                  onChange={(e) =>
+                    setNewAddress({ ...newAddress, city: e.target.value })
+                  }
+                  required
+                  className="form-control"
+                />
+              </div>
+              <div className="mb-2">
+                <input
+                  type="text"
+                  placeholder="State"
+                  value={newAddress.state}
+                  onChange={(e) =>
+                    setNewAddress({ ...newAddress, state: e.target.value })
+                  }
+                  required
+                  className="form-control"
+                />
+              </div>
+              <div className="mb-3">
+                <input
+                  type="text"
+                  placeholder="Postal Code"
+                  value={newAddress.postalCode}
+                  onChange={(e) =>
+                    setNewAddress({
+                      ...newAddress,
+                      postalCode: e.target.value,
+                    })
+                  }
+                  required
+                  className="form-control"
+                />
+              </div>
 
-              <button type="submit" className="btn btn-dark px-4 py-2 rounded">
+              <button type="submit" className="btn btn-dark">
                 Save Address
               </button>
             </form>
@@ -265,38 +278,34 @@ export default function CheckoutPage() {
         </div>
 
         {/* Order Summary */}
-        <div className="mb-8 col-md-4">
-          <h3 className="text-xl font-semibold mb-4">Order Summary</h3>
+        <div className="col-md-4 mb-4">
+          <h4 className="mb-3">Order Summary</h4>
           {cartLoading ? (
             <p>Loading cart...</p>
           ) : items.length === 0 ? (
             <p>Your cart is empty.</p>
           ) : (
-            <div className="space-y-3">
+            <div className="card p-3 shadow-sm">
               {items.map((item) => (
                 <div
                   key={`${item.product._id}-${item.color}-${item.size}`}
-                  className="flex justify-between border-b pb-2"
+                  className="d-flex justify-content-between border-bottom pb-2 mb-2"
                 >
                   <span>
-                    {item.product.title} ({item.size}/{item.color}) x{" "}
-                    {item.quantity} =
+                    {item.product.title} ({item.size}/{item.color}) ×{" "}
+                    {item.quantity}
                   </span>
                   <span>₹{item.product.price * item.quantity}</span>
                 </div>
               ))}
-              <div className="flex justify-between font-bold">
+              <div className="d-flex justify-content-between fw-bold mb-3">
                 <span>Total</span>
-                <span> ₹{totalPrice}</span>
+                <span>₹{totalPrice}</span>
               </div>
               <button
                 onClick={handlePlaceOrder}
                 disabled={items.length === 0 || !selectedAddress}
-                className={`w-full py-3 rounded btn btn-outline-dark font-semibold ${
-                  items.length === 0 || !selectedAddress
-                    ? "bg-gray-400 cursor-not-allowed"
-                    : "bg-blue-600 hover:bg-blue-700"
-                }`}
+                className="btn btn-outline-dark w-100"
               >
                 Place Order
               </button>
