@@ -1,1 +1,5 @@
 @import "tailwindcss";
+
+.blog-content img{
+    display: inline-block;
+}

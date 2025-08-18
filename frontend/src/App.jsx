@@ -8,7 +8,7 @@ import Contact from "./pages/Contact";
 import Footer from "./pages/sections/Footer";
 import SingleProductsView from "./components/SingleProductsView";
 import CategoryPage from "./pages/CategoryPage";
-import BlogPage from "./pages/BlogPage";
+import BlogPage from "./pages/BlogDetails";
 import SingleBlogPage from "./components/SingleBlogPage";
 import Register from "./auth/Register";
 import { ToastContainer } from "react-toastify";
@@ -22,6 +22,9 @@ import AuthCallback from "./pages/AuthCallback";
 import { jwtDecode } from "jwt-decode";
 import { loginUser } from "./store/authSlice";
 import { fetchCartItems } from "./store/cartSlice";
+import { getPosts } from "./services/sanityServices";
+import Blog from "./pages/Blog";
+import BlogDetails from "./pages/BlogDetails";
 
 function App() {
   const { isAuthenticated, token } = useSelector((state) => state.auth);
@@ -42,6 +45,8 @@ function App() {
     }
   }, [token, dispatch])
 
+
+  
   
 
   return (
@@ -54,14 +59,14 @@ function App() {
         <Route path="/shop/:category" element={<CategoryPage />} />
         <Route exact path="/about" element={<About />} />
         <Route exact path="/contact" element={<Contact />} />
-        <Route exact path="/blog" element={<BlogPage />} />
+        <Route exact path="/blog" element={<Blog />} />
+        <Route exact path="/blog/:slug" element={<BlogDetails />} />
         <Route exact path="/:category/:id" element={<SingleProductsView />} />
         <Route
           exact
           path="/singleproductview"
           element={<SingleProductsView />}
         />
-        <Route exact path="/:slug" element={<SingleBlogPage />} />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/auth/callback" element={<AuthCallback />} />
 
