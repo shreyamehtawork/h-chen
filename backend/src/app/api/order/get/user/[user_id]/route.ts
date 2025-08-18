@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { revalidatePath } from 'next/cache';
 import { connectToMongoDB } from "@/lib/db";
 import Order from "@/models/Order";
+import mongoose from "mongoose";
 
 export const GET = async (
   request: NextRequest,
@@ -12,7 +13,7 @@ export const GET = async (
 
     const userOrders = await Order.find({ user: user_id });
 
-    if (!userOrders) {
+    if (!userOrders || userOrders.length === 0) {
       revalidatePath(request.url);
       return NextResponse.json({
         status: 404,

@@ -27,6 +27,18 @@ const OrderSchema = new Schema(
           ref: "Product", // reference to the Product model
           required: true,
         },
+        title: {
+          type: String,
+          required: true,
+        },
+        color: {
+          type: String,
+          required: true,
+        },
+        size: {
+          type: String,
+          required: true,
+        },
         quantity: {
           type: Number,
           required: true,

@@ -92,7 +92,6 @@ export default function CheckoutPage() {
         product: item.product._id,
         title: item.product.title,
         quantity: item.quantity,
-
         color: item.color,
         size: item.size,
       })),
