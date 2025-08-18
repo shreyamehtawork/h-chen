@@ -104,3 +104,43 @@
     padding: 5px 10px;
   }
 }
+
+/* Wrap image to position overlay */
+.section3-img-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Overlay for Quick View */
+.quick-view-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Show overlay on hover */
+.section3-img-wrapper:hover .quick-view-overlay {
+  opacity: 1;
+}
+
+/* Quick View Button */
+.quick-view-btn {
+  background: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+}
+
+.quick-view-btn:hover {
+  background: #000;
+  color: #fff;
+}
