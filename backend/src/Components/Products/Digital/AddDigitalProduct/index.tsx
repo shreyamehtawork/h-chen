@@ -106,10 +106,10 @@ const AddDigitalProduct = () => {
   };
 
   const [additionalInfoStates, setAdditionalInfoStates] = useState({
-    manufacturedBy: "Ecowell",
+    manufacturedBy: "Chloe's venture",
     countryOfOrigin: "India",
     phone: "7065937377",
-    email: "contact@ecowellonline.com",
+    email: "contact@chloesventureonline.com",
   });
 
   const handleAdditionalChange = (field: string, value: any) => {

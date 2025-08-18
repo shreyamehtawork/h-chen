@@ -10,7 +10,7 @@ import "../index.scss";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "EcoWell - Admin",
+  title: "CHLOE'S VENTURE - Admin",
   description: "Get Yourself some protines",
   icons: { icon: "./favicon.ico" },
   keywords: "protine, protines, healthy protines, suppliments",
@@ -29,12 +29,12 @@ export default async function RootLayout({
       <head>
         <link
           rel="icon"
-          href={`../../assets/images/logo/favicon.png`}
+          href={`../../logofinal.png`}
           type="image/x-icon"
         />
         <link
           rel="shortcut icon"
-          href={`../../assets/images/dashboard/favicon.png`}
+          href={`../../logofinal.png`}
           type="image/x-icon"
         />
 

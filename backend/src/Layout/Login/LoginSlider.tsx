@@ -17,15 +17,15 @@ const LoginSlider = () => {
           <Image
             height={80}
             width={80}
-            alt="Ecowell Logo"
-            src="/logo.png"
+            alt="Chloe's venture Logo"
+            src="/logofinal.png"
             className="Img-fluid"
           />
         </div>
         <Slider className="single-item" {...settings}>
           {[
             {
-              title: "Welcome to Ecowell",
+              title: "Welcome to Chloe's venture",
               description:
                 "Manage your eco-friendly products, orders, and inventory all in one place.",
             },

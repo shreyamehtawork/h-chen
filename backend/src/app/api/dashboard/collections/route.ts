@@ -13,9 +13,8 @@ export const GET = async (request: NextRequest) => {
     const orders = await Order.find();
     const users = await User.find();
 
+    console.log(products, orders, users);
     if (!products || !orders || !users) {
-      // console.log(products, orders, users);
-
       return NextResponse.json(
         {
           error: !products
@@ -30,29 +29,24 @@ export const GET = async (request: NextRequest) => {
       );
     }
 
-    const totalSales = orders?.reduce(
-      (sum: number, order) =>
-        sum +
-        order.orders.reduce(
-          (orderSum: number, orderDetail: any) =>
-            orderDetail.order_info.status === "delivered"
-              ? orderSum + orderDetail.order_info.total_price
-              : orderSum,
-          0
-        ),
-      0
-    );
+    const totalSales = orders?.reduce((sum: number, order) => {
+      console.log("order --->>>", order);
+
+      return sum + (order.status === "delivered" ? order.totalPrice : 0);
+    }, 0);
 
     // Calculate total length of all user's orders
-    const totalUserOrdersLength = await Promise.all(
-      users.map(async (user) => {
-        const userOrders = await Order.find({ user_id: user._id });
-        return userOrders.reduce(
-          (total, order) => total + order.orders.length,
-          0
-        );
-      })
-    ).then((lengths) => lengths.reduce((a, b) => a + b, 0));
+    // const totalUserOrdersLength = await Promise.all(
+    //   users.map(async (user) => {
+    //     const userOrders = await Order.find({ user_id: user._id });
+    //     return userOrders.reduce(
+    //       (total, order) => total + order.orders.length,
+    //       0
+    //     );
+    //   })
+    // ).then((lengths) => lengths.reduce((a, b) => a + b, 0));
+
+    const totalUserOrdersLength = (await Order.find()).length
 
     const collectionsLength = {
       products: products.length,

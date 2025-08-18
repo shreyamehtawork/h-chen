@@ -4,6 +4,8 @@ export interface CommonBreadcrumbType {
   title: string;
   parent?: string;
   element?: JSX.Element;
+  fetchCollectionsLength?: any;
+  loading?: boolean;
 }
 export interface AdminValues {
   _id: string;

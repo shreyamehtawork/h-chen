@@ -213,8 +213,8 @@ const Sidebar = () => {
             <Link href={`/${i18LangStatus}/dashboard`}>
               <img
                 className="blur-up lazyloaded"
-                src={`/ecowell-full-logo.png`}
-                width={120}
+                src={`/Chloes-venture-backend-logo.png`}
+                width={200}
                 alt=""
               />
             </Link>

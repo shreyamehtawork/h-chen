@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import {
   ArcElement,
   BarController,
@@ -44,13 +44,54 @@ ChartJS.register(
   RadialLinearScale
 );
 
+interface CollectionsLengthValues {
+  products: number;
+  orders: number;
+  users: number;
+  totalSales: number;
+}
+
 const DashboardContainer = () => {
+  const [collectionsLength, setCollectionsLength] =
+      useState<CollectionsLengthValues | null>(null);
+      const [loading, setLoading] = useState(false)
+  
+      const fetchCollectionsLength = async () => {
+        setLoading(true)
+        try {
+          // setLoading(true);
+          const res = await fetch(`/api/dashboard/collections`, {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+          });
+  
+          if (!res.ok) {
+            throw new Error("Failed to fetch collections");
+          }
+  
+          const data = await res.json();
+          // console.log("myDatares:", data);
+          setCollectionsLength(data);
+        } catch (error) {
+          console.error("Error fetching collections:", error);
+        } finally {
+          setLoading(false);
+        }
+
+        // } finally {
+        //   // setLoading(false);
+        // }
+      };
+
+    useEffect(() => {
+       fetchCollectionsLength();
+    }, []);
   return (
     <Fragment>
-      <CommonBreadcrumb title="dashboard" />
+      <CommonBreadcrumb loading={loading} fetchCollectionsLength={fetchCollectionsLength} title="dashboard" />
       <Container fluid>
         <Row>
-          <TopDashboardCards />
+          <TopDashboardCards collectionsLength={collectionsLength} />
           {/* <MarketValue /> */}
           <LatestOrders />
           {/* <TotalSales /> */}

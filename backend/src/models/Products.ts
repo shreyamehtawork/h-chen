@@ -17,10 +17,10 @@ import { Schema, model, models } from "mongoose";
 // });
 
 // const AdditionalInfoSchema = new Schema({
-//   manufacturedBy: { type: String, required: true, default: "Ecowell" },
+//   manufacturedBy: { type: String, required: true, default: "Chloe's venture" },
 //   countryOfOrigin: { type: String, required: true, default: "India" },
 //   phone: { type: String, required: true, default: "7065937377" },
-//   email: { type: String, required: true, default: "contact@ecowellonline.com" },
+//   email: { type: String, required: true, default: "contact@chloe's-ventureonline.com" },
 // });
 
 // // new feilds schema
