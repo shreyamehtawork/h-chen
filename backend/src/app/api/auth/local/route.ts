@@ -5,14 +5,15 @@ import passport from "@/lib/passport";
 import { sessionMiddleware } from "@/lib/session";
 import { connectToMongoDB } from "@/lib/db";
 
-connectToMongoDB()
-
 interface RequestContext {}
 
 const router = createEdgeRouter<NextRequest, RequestContext>();
 
 router
   .use(async (req, event, next) => {
+    // ✅ Connect to DB at runtime, not during build
+    await connectToMongoDB();
+
     // Attach session + passport middleware
     // @ts-ignore
     await new Promise((resolve) => sessionMiddleware(req as any, {} as any, resolve));
@@ -20,6 +21,7 @@ router
     await new Promise((resolve) => passport.initialize()(req as any, {} as any, resolve));
     // @ts-ignore
     await new Promise((resolve) => passport.session()(req as any, {} as any, resolve));
+
     await next();
   })
   .post(async (req: any) => {
