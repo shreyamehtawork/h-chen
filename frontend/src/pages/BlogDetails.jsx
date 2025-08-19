@@ -51,7 +51,7 @@ function BlogDetails() {
 
       {/* Blog Content */}
       {blog?.content && (
-        <div className="container my-5">
+        <div className=" my-5" style={{ maxWidth: "70%", margin: "auto" }}>
           {blog?.content.map((block) => {
             if (block._type === "block") {
               if (block.style === "h4") {

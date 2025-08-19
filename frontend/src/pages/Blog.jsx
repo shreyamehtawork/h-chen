@@ -7,7 +7,7 @@ const BlogCard = ({ blog }) => {
       href={`/blog/${blog?.slug?.current}`}
       className="text-decoration-none text-dark"
     >
-      <div className="card shadow-sm h-100 border-0">
+      <div className=" " style={{breakInside: "avoid",  marginBottom: "40px"}}>
         <img
           src={blog?.coverImage?.asset?.url}
           alt={blog?.title}
@@ -48,11 +48,11 @@ const Blog = () => {
 
   return (
     <div className="container py-4">
-      <div className="row g-4">
+      <div className="" style={{ columnCount: 3, columnGap: "20px" }}>
         {blogs.map((blog, index) => (
-          <div className="col-md-4" key={index}>
-            <BlogCard blog={blog} />
-          </div>
+          // <div className="col-md-4" >
+            <BlogCard key={index} blog={blog} />
+          // </div>
         ))}
       </div>
     </div>
