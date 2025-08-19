@@ -48,11 +48,9 @@ const Blog = () => {
 
   return (
     <div className="container py-4">
-      <div className="" style={{ columnCount: 3, columnGap: "20px" }}>
+      <div className="blog-container">
         {blogs.map((blog, index) => (
-          // <div className="col-md-4" >
             <BlogCard key={index} blog={blog} />
-          // </div>
         ))}
       </div>
     </div>
