@@ -2,7 +2,7 @@ import { FcGoogle } from "react-icons/fc";
 
 export default function Login() {
   const handleLogin = () => {
-    window.location.href = "http://localhost:3000/api/auth/google";
+    window.location.href = `${import.meta.env.VITE_SERVER_BASE_URL}/api/auth/google`;
   };
 
   return (
