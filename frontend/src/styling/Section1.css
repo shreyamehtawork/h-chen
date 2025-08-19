@@ -23,7 +23,7 @@
   height: 120vh; /* Increased the image size */
   width: auto;
   object-fit: cover;
-  margin-left: -10px;
+  /* margin-left: -10px; */
 }
 
 .hero-text-left,

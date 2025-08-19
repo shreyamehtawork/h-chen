@@ -1,31 +1,42 @@
 .faq-section {
-  background-color: #000;
-  /* font-family: "Playfair Display", serif; */
+  background-color: black;
   text-align: left;
+}
+.section4 > h1 {
+  font-size: 4rem;
+}
+
+.common-questions {
+  margin: 50px 0px;
 }
 
 .faq-title {
   font-size: 2rem;
-  font-weight: 500;
 }
 
 .faq-description {
   font-size: 1rem;
   line-height: 1.7;
   max-width: 850px;
+  font-family: "Geo", sans-serif;
+  letter-spacing: 0.5px;
+  font-weight: 600;
 }
 
-.faq-question {
-  font-size: 1.25rem;
-  font-weight: 400;
+/* .faq-question {
+  font-size: 2rem;
+  font-weight: bold;
   margin-bottom: 0.75rem;
-}
+} */
 
 .faq-answer {
   font-size: 1rem;
   font-weight: 300;
   line-height: 1.7;
   max-width: 900px;
+  font-family: "Geo", sans-serif;
+  letter-spacing: 0.5px;
+  font-weight: 600;
 }
 
 .faq-section {
@@ -34,8 +45,8 @@
 }
 
 .faq-question {
-  font-weight: 600;
-  font-size: 1.2rem;
+  /* font-weight: 600; */
+  font-size: 1.5rem;
 }
 
 .faq-answer {

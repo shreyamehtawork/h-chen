@@ -30,36 +30,39 @@ const Section4 = () => {
         visible: { opacity: 1, y: 0, transition: { duration: 1 } },
       }}
     >
-      <div className="container">
-        <h1>HAT STORE FAQ</h1>
-        <h2 className="faq-title mb-4">Common Questions</h2>
+      <div className="container section4">
+        <h1>CHLOE'S FAQ</h1>
 
+        <div className="common-questions">
+          <h2 className="faq-title">Common Questions</h2>
+          <p className="faq-description ">
+            Explore our frequently asked questions to find answers to queries
+            about our hats, services, and <br />
+            more. If you have additional questions, feel free to reach out to
+            our team for assistance.
+          </p>
+        </div>
+
+        <br></br>
         <div className="row">
-          <div className="col-2"></div>
+          <div className="col-3"></div>
           <div className="col-6">
-            <p className="faq-description mb-5">
-              Explore our frequently asked questions to find answers to queries
-              about our hats, services, and <br />
-              more. If you have additional questions, feel free to reach out to
-              our team for assistance.
-            </p>
-
             {[
               // Use array to allow stagger
               {
-                question: "What materials are used in your hats?",
+                question: "What materials are used in your outfits?",
                 answer:
-                  "Our hats are crafted using a variety of premium materials such as wool, straw, and felt. Each material is carefully selected to ensure durability, comfort, and style.",
+                  "Our outfits are crafted using a variety of premium materials such as wool, straw, and felt. Each material is carefully selected to ensure durability, comfort, and style.",
               },
               {
-                question: "Do you offer custom hat fittings?",
+                question: "Do you offer custom fittings?",
                 answer:
-                  "Yes, we provide personalized hat fitting services to ensure you find the perfect hat that complements your style and fits you comfortably. Visit our store for a bespoke fitting experience.",
+                  "Yes, we provide personalized fitting services to ensure you find the perfect dress that complements your style and fits you comfortably. Visit our store for a bespoke fitting experience.",
               },
               {
-                question: "What styles of hats do you specialize in?",
+                question: "What styles of outfits do you specialize in?",
                 answer:
-                  "Our specialty lies in a wide range of hat styles including Panama hats, fedoras, bowlers, and straw hats. Whether you prefer classic designs or contemporary trends, we have a hat for every preference.",
+                  "Our specialty lies in a wide range of crochet styles including Panama , fedoras, bowlers, and straw . Whether you prefer classic designs or contemporary trends, we have a outfit for every preference.",
               },
             ].map((item, i) => (
               <motion.div
@@ -70,7 +73,7 @@ const Section4 = () => {
                 animate={isInView ? "visible" : "hidden"}
                 variants={faqVariants}
               >
-                <h5 className="faq-question">{item.question}</h5>
+                <p className="faq-question">{item.question}</p>
                 <p className="faq-answer">{item.answer}</p>
               </motion.div>
             ))}

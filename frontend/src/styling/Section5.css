@@ -6,9 +6,27 @@
 }
 
 .section5-headline {
-  font-size: 3.5rem;
+  font-size: 4rem;
+  margin-bottom: 50px;
 }
 
+.section5-title {
+  font-size: 1.75rem;
+}
+
+.section5-description {
+  font-family: Geo, sans-serif;
+  font-weight: 600;
+  margin-top: 30px;
+  font-size: 1.1rem;
+  letter-spacing: 2;
+}
+
+.section5-button {
+  font-family: Geo, sans-serif;
+  font-weight: 600;
+  padding: 10px 30px;
+}
 /* Responsive Styles */
 @media (max-width: 768px) {
   .section5-title {
