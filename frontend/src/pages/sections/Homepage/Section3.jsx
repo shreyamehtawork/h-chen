@@ -153,11 +153,9 @@ function Section3() {
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
       >
-        <button className="btn btn-outline-dark mt-5">
-          <Link to={"/shop"} className="text-decoration-none">
-            Show More
-          </Link>
-        </button>
+        <a href="/shop" className="btn btn-outline-dark mt-5 gallery-button">
+          <button>Show More</button>
+        </a>
       </motion.div>
     </section>
   );

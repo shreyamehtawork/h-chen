@@ -1,7 +1,19 @@
 @font-face {
   font-family: "PlayfairDisplay";
   src: url("/fonts/Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf")
-    format("opentype");
+    format("oChampagnepentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Champagne";
+  src: url("../public/fonts/champagne---limousines/Champagne\ &\ Limousines.ttf");
+}
+
+@font-face {
+  font-family: "Geo";
+  src: url("/fonts/geo-sans-light/GeosansLight.ttf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }

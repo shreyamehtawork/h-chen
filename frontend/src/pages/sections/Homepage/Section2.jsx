@@ -16,7 +16,7 @@ function Section2() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          ABOUT
+          WHY CHLOE?
         </motion.h1>
 
         <div className="row align-items-center justify-content-center gx-5">
@@ -48,7 +48,7 @@ function Section2() {
               <a href="/about">
                 <button
                   type="button"
-                  className="btn btn-outline-dark px-4 py-2"
+                  className="btn btn-outline-dark px-4 py-2 our-story-button"
                 >
                   Read More
                 </button>

@@ -35,7 +35,7 @@ function Section5() {
         animate={isInView ? "visible" : "hidden"}
       >
         <div className="container section5-content ">
-          <div className="mb-4 section5-headline">
+          <div className="section5-headline">
             <span>EXCLUSIVE OFFER</span>
           </div>
           <h4 className="section5-title">Limited Time Deal</h4>
@@ -46,7 +46,7 @@ function Section5() {
             <br />
             Explore now before the offer ends!
           </p>
-          <button className="btn btn-outline-light mt-3">
+          <button className="btn btn-outline-light mt-3 section5-button">
             <Link to={"/shop"} className="text-decoration-none">
               Show More
             </Link>

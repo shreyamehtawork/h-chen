@@ -4,19 +4,27 @@
 }
 
 .gallery-title {
-  font-weight: 600;
   letter-spacing: 1px;
 }
 
 .gallery-subtitle {
-  font-weight: 500;
-  font-size: 1.5rem;
+  /* font-weight: 500; */
+  font-size: 2rem;
 }
 
 .gallery-description {
-  max-width: 700px;
+  max-width: 60%;
   font-size: 1rem;
-  color: #666;
+  color: black;
+  font-family: "Geo", sans-serif;
+  font-weight: bold;
+  letter-spacing: 0.75px;
+  margin-top: 20px;
+}
+
+.gallery-button {
+  font-weight: 600;
+  font-family: "Geo", sans-serif;
 }
 
 /* Carousel Layout */
