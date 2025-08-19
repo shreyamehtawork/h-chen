@@ -1,14 +1,13 @@
-export const runtime = "nodejs";  // 👈 Add this
+export const runtime = "nodejs"; // 👈 Force Node.js runtime
 
-import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { sessionMiddleware } from "@/lib/session";
 
 export async function GET(req: any) {
-  // Run session middleware at runtime
-  await new Promise((resolve) => sessionMiddleware(req as any, {} as any, resolve));
+  // Run session middleware at runtime (Node.js only)
+  await new Promise((resolve) => sessionMiddleware(req, {} as any, resolve));
 
-  // Logout safely
+  // Handle logout if passport is attached
   if (typeof req.logout === "function") {
     req.logout(() => {
       if (req.session) {

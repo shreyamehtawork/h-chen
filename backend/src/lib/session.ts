@@ -5,6 +5,6 @@ export const sessionMiddleware = session({
   secret: process.env.SESSION_SECRET as string,
   resave: false,
   saveUninitialized: false,
-  store: MongoStore.create({ mongoUrl: process.env.MONGO_URI as string }),
+  store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI as string }),
   cookie: { secure: false, maxAge: 1000 * 60 * 60 * 24 },
 });
