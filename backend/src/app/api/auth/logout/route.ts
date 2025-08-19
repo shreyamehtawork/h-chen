@@ -1,3 +1,5 @@
+export const runtime = "nodejs";  // 👈 Add this
+
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { sessionMiddleware } from "@/lib/session";
