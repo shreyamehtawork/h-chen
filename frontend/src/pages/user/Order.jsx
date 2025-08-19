@@ -30,60 +30,87 @@ function Order() {
   }
 
   return (
-    <div className="container">
-      <h1 className="text-center mb-4">My Orders</h1>
+    <div className="container py-4">
+      <h1 className="text-center mb-4 fw-bold">🛒 My Orders</h1>
       <div className="row g-4">
         {orderList.map((order) => (
           <div className="col-12" key={order._id}>
-            <div className="card shadow-sm">
-              <div className="card-body">
+            <div className="card shadow-lg border-0 rounded-3 order-card h-100">
+              <div className="card-body p-4">
                 {/* Order Header */}
-                <div className="d-flex justify-content-between border-bottom pb-2 mb-3">
+                <div className="d-flex justify-content-between align-items-center border-bottom pb-3 mb-3">
                   <div>
-                    <h5 className="card-title mb-1">
+                    <h5 className="card-title mb-1 fw-bold">
                       Order ID:{" "}
                       <span className="text-primary">{order._id}</span>
                     </h5>
                     <small className="text-muted">
-                      Date: {new Date(order.createdAt).toLocaleDateString()}
+                      Placed on:{" "}
+                      {new Date(order.createdAt).toLocaleDateString()}
                     </small>
                   </div>
                   <div className="text-end">
                     <span
-                      className={`badge ${
+                      className={`badge px-3 py-2 fs-6 rounded-pill ${
                         order.status === "Delivered"
                           ? "bg-success"
                           : order.status === "Pending"
                           ? "bg-warning text-dark"
+                          : order.status === "Processing"
+                          ? "bg-info text-dark"
                           : "bg-secondary"
                       }`}
                     >
                       {order.status}
                     </span>
-                    <p className="fw-bold fs-3 mt-2 mb-0">
+                    <p className="fw-bold fs-4 mt-2 mb-0 text-success">
                       ₹{order.totalPrice}
                     </p>
                   </div>
                 </div>
 
                 {/* Items */}
-                <h6 className="fw-semibold">Items:</h6>
+                <h6 className="fw-semibold mb-2">Items in this order:</h6>
                 <ul className="list-group list-group-flush">
                   {order.items?.map((item, idx) => (
                     <li
                       key={idx}
-                      className="list-group-item d-flex justify-content-between"
+                      className="list-group-item d-flex justify-content-between align-items-center"
                     >
-                      <span>{item.product?.title}</span>
-                      <span className="text-muted">× {item.quantity}</span>
+                      <div>
+                        <span className="fw-medium">{item.product?.title}</span>
+                      </div>
+                      <span className="badge bg-light text-dark border">
+                        × {item.quantity}
+                      </span>
                     </li>
                   ))}
                 </ul>
+
+                {/* Footer */}
+                <div className="mt-3 text-end">
+                  <button className="btn btn-outline-primary btn-sm">
+                    View Details
+                  </button>
+                  <button className="btn btn-primary btn-sm ms-2">
+                    Track Order
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         ))}
       </div>
+
+      {/* Small CSS tweaks */}
+      <style>
+        {`
+          .order-card {
+            transition: transform 0.2s ease-in-out;
+          }
+         
+        `}
+      </style>
     </div>
   );
 }
