@@ -48,7 +48,7 @@ function RegistrationComplete() {
           window.location.href
         );
 
-        console.log("RESULT", result);
+        // console.log("RESULT", result);
         if (result.user.emailVerified) {
           window.localStorage.removeItem("emailForRegistration");
 
@@ -71,7 +71,7 @@ function RegistrationComplete() {
           //     roleBasedRedirect(res);
           //   })
           //   .catch((err) => console.log(err));
-          console.log("USER", user);
+          // console.log("USER", user);
           navigate("/");
         }
       } catch (err) {

@@ -13,7 +13,7 @@ export const GET = async (request: NextRequest) => {
     const orders = await Order.find();
     const users = await User.find();
 
-    console.log(products, orders, users);
+    // console.log(products, orders, users);
     if (!products || !orders || !users) {
       return NextResponse.json(
         {
@@ -30,7 +30,7 @@ export const GET = async (request: NextRequest) => {
     }
 
     const totalSales = orders?.reduce((sum: number, order) => {
-      console.log("order --->>>", order);
+      // console.log("order --->>>", order);
 
       return sum + (order.status === "delivered" ? order.totalPrice : 0);
     }, 0);

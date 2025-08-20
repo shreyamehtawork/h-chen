@@ -11,7 +11,7 @@ const api = axios.create({
 export const getCoupons = async () => {
   try {
     const response = await api.get("/coupons");
-    console.log("Coupon Response: ", response.data);
+    // console.log("Coupon Response: ", response.data);
 
     return response.data;
   } catch (error) {

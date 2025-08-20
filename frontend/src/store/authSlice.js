@@ -14,7 +14,7 @@ export const login = createAsyncThunk(
   async (credentials, { rejectWithValue }) => {
     try {
       const response = await api.post("/login", credentials);
-      console.log("login response:", response.data);
+      // console.log("login response:", response.data);
       
       return response.data;
     } catch (error) {
@@ -34,7 +34,7 @@ export const signUp = createAsyncThunk(
           "Content-Type": "application/json",
         },
       });
-      console.log(response.data);
+      // console.log(response.data);
       return response.data;
     } catch (error) {
       return rejectWithValue(

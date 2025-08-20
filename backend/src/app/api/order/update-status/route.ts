@@ -5,7 +5,7 @@ import Order from "@/models/Order";
 export const PATCH = async (request: NextRequest) => {
   const { orderId, updatedStatus } = await request.json();
 
-  console.log("update order status", orderId, updatedStatus);
+  // console.log("update order status", orderId, updatedStatus);
   
   const validStatuses = [
     "pending",

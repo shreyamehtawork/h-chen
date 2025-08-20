@@ -81,7 +81,7 @@ export const PUT = async (
       try {
         if (existingProduct.images.length > 0) {
           const deleteRes = await utapi.deleteFiles(existingProduct.images);
-          console.log("🧹 Old images deleted:", deleteRes);
+          // console.log("🧹 Old images deleted:", deleteRes);
         }
       } catch (deleteError) {
         console.warn("⚠️ Failed to delete old images:", deleteError);

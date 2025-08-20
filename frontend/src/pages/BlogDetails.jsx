@@ -9,7 +9,7 @@ function BlogDetails() {
   const fetchPosts = async () => {
     try {
       const response = await getPost(slug);
-      console.log("Sanity post:", response);
+      // console.log("Sanity post:", response);
       setBlog(response);
       return response;
     } catch (error) {

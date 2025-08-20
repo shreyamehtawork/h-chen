@@ -8,7 +8,7 @@ export const DELETE = async (
   { params }: { params: { userId: string; productId: string, color: string, size: string } }
 ) => {
   const { userId, productId, color, size } = params;
-  console.log("params", params);
+  // console.log("params", params);
 
   try {
     await connectToMongoDB();
