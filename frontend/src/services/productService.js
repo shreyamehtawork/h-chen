@@ -34,7 +34,7 @@ export const getProducts = async (query) => {
     const response = await api.get("/api/products/get", {
       params: filter,
     });
-    console.log("response products: ", response.data);
+    // console.log("response products: ", response.data);
 
     return response.data.data;
   } catch (error) {

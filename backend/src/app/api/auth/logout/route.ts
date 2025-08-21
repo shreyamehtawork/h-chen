@@ -1,24 +1,20 @@
-import type { NextRequest } from "next/server";
+export const runtime = "nodejs"; // 👈 Force Node.js runtime
+
 import { NextResponse } from "next/server";
-import { createEdgeRouter } from "next-connect";
 import { sessionMiddleware } from "@/lib/session";
 
-interface RequestContext {}
+export async function GET(req: any) {
+  // Run session middleware at runtime (Node.js only)
+  await new Promise((resolve) => sessionMiddleware(req, {} as any, resolve));
 
-const router = createEdgeRouter<NextRequest, RequestContext>();
-
-router
-  .use(async (req, event, next) => {
-    await new Promise((resolve) => sessionMiddleware(req as any, {} as any, resolve));
-    await next();
-  })
-  .get((req: any) => {
+  // Handle logout if passport is attached
+  if (typeof req.logout === "function") {
     req.logout(() => {
-      req.session.destroy(() => {});
+      if (req.session) {
+        req.session.destroy(() => {});
+      }
     });
-    return NextResponse.json({ message: "Logged out" });
-  });
+  }
 
-export async function GET(request: NextRequest, ctx: RequestContext) {
-  return router.run(request, ctx);
+  return NextResponse.json({ message: "Logged out" });
 }

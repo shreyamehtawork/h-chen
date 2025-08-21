@@ -16,7 +16,7 @@ export default function AuthCallback() {
   useEffect(() => {
     if (token) {
       const user = jwtDecode(token);
-      console.log("Logged in user:", user);
+      // console.log("Logged in user:", user);
       localStorage.setItem("h-chen-auth-token", token);
       dispatch(loginUser(user));
 

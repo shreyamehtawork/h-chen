@@ -70,14 +70,14 @@ export const POST = async (request: NextRequest) => {
 
     let uploadedImageUrls: string[] = [];
     try {
-      console.log("🖼️ Uploaded Image Files:", imageFiles);
+      // console.log("🖼️ Uploaded Image Files:", imageFiles);
       const uploadResult = await utapi.uploadFiles(imageFiles);
-      console.log("✅ Upload Result:", uploadResult);
+      // console.log("✅ Upload Result:", uploadResult);
       uploadedImageUrls = uploadResult
         .map((file) => file.data?.url)
         .filter((url): url is string => !!url);
 
-        console.log("uploadedImageUrls", uploadedImageUrls);
+        // console.log("uploadedImageUrls", uploadedImageUrls);
         
       if (uploadedImageUrls.length === 0) {
         return errorResponse(
@@ -96,16 +96,16 @@ export const POST = async (request: NextRequest) => {
         request
       );
     }
-    console.log("product:", {
-      title,
-      description,
-      colors,
-      sizes,
-      images: uploadedImageUrls,
-      category,
-      price,
-      stock
-    });
+    // console.log("product:", {
+    //   title,
+    //   description,
+    //   colors,
+    //   sizes,
+    //   images: uploadedImageUrls,
+    //   category,
+    //   price,
+    //   stock
+    // });
     
 
     const newProduct = new Products({

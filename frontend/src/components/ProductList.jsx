@@ -38,7 +38,7 @@ function ProductList({ products }) {
               variants={cardVariants}
             >
               <div className="card product-card border-0">
-                <a href={`/${category}/${product._id}`}>
+                <a href={`/${product.category.toLowerCase()}/${product._id}`}>
                   <img
                     src={product.images[0]}
                     alt={product.name}

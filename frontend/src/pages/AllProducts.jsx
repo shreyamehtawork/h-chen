@@ -18,7 +18,7 @@ function AllProducts() {
 
   const fetchProducts = async () => {
     const res = await getProducts({});
-    console.log("Products:", res);
+    // console.log("Products:", res);
     if (res) setProducts(res);
     setLoadingProducts(false);
   };

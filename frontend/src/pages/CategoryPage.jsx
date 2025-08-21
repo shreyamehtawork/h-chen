@@ -21,7 +21,7 @@ function CategoryPage() {
   const fetchProducts = async () => {
     setLoadingProducts(true);
     const res = await getProducts({ category });
-    console.log("Category Products:", res);
+    // console.log("Category Products:", res);
     if (res) setProducts(res);
     setLoadingProducts(false);
   };

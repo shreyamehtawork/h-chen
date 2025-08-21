@@ -14,10 +14,10 @@ export const createOrder = createAsyncThunk(
   async (orderDetails, { rejectWithValue, getState }) => {
     try {
       const { userData } = getState().auth;
-      console.log("Creating order with details:", {
-        ...orderDetails,
-        user: userData.id,
-      });
+      // console.log("Creating order with details:", {
+      //   ...orderDetails,
+      //   user: userData.id,
+      // });
 
       const response = await api.post("/order/create", {
         ...orderDetails,
@@ -84,7 +84,7 @@ const orderSlice = createSlice({
       })
       .addCase(createOrder.fulfilled, (state, action) => {
         state.loading = false;
-        console.log("Order created successfully:", action.payload);
+        // console.log("Order created successfully:", action.payload);
 
         state.orders = action.payload.orders;
         toast.success("Order created successfully!");
@@ -101,7 +101,7 @@ const orderSlice = createSlice({
       .addCase(getAllOrders.fulfilled, (state, action) => {
         state.loading = false;
         state.orders = action.payload;
-        console.log("Fetched orders successfully:", action.payload);
+        // console.log("Fetched orders successfully:", action.payload);
       })
       .addCase(getAllOrders.rejected, (state, action) => {
         state.loading = false;
