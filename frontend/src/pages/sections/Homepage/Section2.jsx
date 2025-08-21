@@ -45,10 +45,10 @@ function Section2() {
                 personal statement. We proudly collaborate with local artisans
                 and global creators to bring thoughtful, elegant pieces to life.
               </p>
-              <a href="/about">
+              <a href="/about" className="text-decoration-none">
                 <button
                   type="button"
-                  className="btn btn-outline-dark px-4 py-2 our-story-button"
+                  className="btn btn-outline-dark px-4 py-2 our-story-button "
                 >
                   Read More
                 </button>

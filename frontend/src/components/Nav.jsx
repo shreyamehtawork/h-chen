@@ -32,7 +32,7 @@ function Nav() {
       </div>
 
       <div className="container-fluid">
-        <nav className="navbar navbar-expand-lg">
+        <nav className="navbar navbar-expand-lg custom-navbar">
           <a className="navbar-brand d-flex align-items-center" href="/">
             <div className="logo-circle d-flex align-items-center justify-content-center">
               <img src={logo} alt="logo" className="oval-logo" />
@@ -55,7 +55,7 @@ function Nav() {
             className="collapse navbar-collapse d-lg-flex"
             id="navbarsExample11"
           >
-            <ul className="navbar-nav col-lg-6 justify-content-lg-center">
+            <ul className="navbar-nav col-lg-6 justify-content-lg-space">
               <li className="nav-item">
                 <a className="nav-link" href="/">
                   Home

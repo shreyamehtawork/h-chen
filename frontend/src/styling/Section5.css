@@ -43,5 +43,12 @@
 
   .section-5 {
     padding: 3rem 1rem;
+    height: 100vw;
+    padding: 10px;
+  }
+
+  .section5-headline {
+    font-size: 4rem;
+    margin-bottom: 20px;
   }
 }

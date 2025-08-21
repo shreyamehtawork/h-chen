@@ -121,7 +121,9 @@ function Section3() {
 
                       {/* Quick View Overlay */}
                       <div className="quick-view-overlay">
-                        <button className="quick-view-btn">Quick View</button>
+                        <a href={`${product.category}/${product._id}`}>
+                          <button className="quick-view-btn">Quick View</button>
+                        </a>
                       </div>
                     </div>
 
@@ -129,7 +131,9 @@ function Section3() {
                       <h5 className="product-title">{product.title}</h5>
                       <p className="product-price">₹{product.price}</p>
                       <small className="product-category">
-                        {product.category}
+                        <a href={`/shop/${product.category}`}>
+                          {product.category}
+                        </a>
                       </small>
                     </div>
                   </motion.div>
