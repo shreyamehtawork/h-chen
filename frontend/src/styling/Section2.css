@@ -41,8 +41,20 @@
 
 /* Responsive layout */
 @media (max-width: 768px) {
+  .section2 {
+    text-align: center;
+  }
   .section2-heading {
     font-size: 2rem;
+  }
+
+  .about-image {
+    max-height: 400px;
+    width: 100%;
+    object-fit: cover;
+    object-position: top center;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
   }
 
   .our-story-title,

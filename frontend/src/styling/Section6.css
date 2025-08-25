@@ -1,8 +1,7 @@
 .hero-container {
   width: 100%;
-  height: 100vh; /* Full screen */
+  height: 100%; /* Full screen */
   overflow: hidden;
-
 }
 
 /* Responsive video */

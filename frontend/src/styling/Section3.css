@@ -87,6 +87,11 @@
   cursor: not-allowed;
 }
 
+.quick-view-btn {
+  font-weight: 600;
+  font-family: "Geo", sans-serif;
+}
+
 /* Responsive Adjustments */
 @media (max-width: 992px) {
   .section3-card {
@@ -110,6 +115,27 @@
   .arrow-btn {
     font-size: 1.2rem;
     padding: 5px 10px;
+  }
+
+  .gallery-description {
+    max-width: 90%;
+    font-size: 1rem;
+    color: black;
+    font-family: "Geo", sans-serif;
+    font-weight: bold;
+    letter-spacing: 0.75px;
+    margin-top: 20px;
+  }
+
+  .gallery-subtitle {
+    /* font-weight: 500; */
+    font-size: 1.5rem;
+  }
+
+  .gallery-button {
+    font-weight: 600;
+    font-family: "Geo", sans-serif;
+    max-width: fit-content;
   }
 }
 
