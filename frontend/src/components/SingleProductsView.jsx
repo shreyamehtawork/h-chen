@@ -7,6 +7,10 @@ import "../styling/SingleProductView.css";
 import { getProductDetails } from "../services/productService";
 import Loader from "./Loader";
 import { addProductToCart, fetchCartItems } from "../store/cartSlice";
+import { createWhatsAppService } from "../services/whatsApp";
+import { FaWhatsapp } from "react-icons/fa";
+import { IoCartOutline } from "react-icons/io5";
+
 
 function SingleProductsView() {
   const { id, category } = useParams();
@@ -25,8 +29,13 @@ function SingleProductsView() {
 
   const fetchProduct = async () => {
     const res = await getProductDetails(id);
-    if (res) setProduct(res);
-    // console.log("PRODUCT ID: ", product._id);
+    if (res) {
+      // console.log("PRODUCT: ", res);
+      // console.log("Whatsapp link: ", createWhatsAppService(res));
+      res.whatsappLink = createWhatsAppService(res);
+      setProduct(res);
+    }
+
     setLoadingProduct(false);
   };
 
@@ -164,12 +173,20 @@ function SingleProductsView() {
               </div>
 
               <button
-                className="btn btn-dark w-100 mt-3"
+                className="btn btn-dark w-100 mt-3 d-flex align-items-center justify-content-center gap-1 "
                 onClick={handleAddtoCart}
                 disabled={loading}
               >
-                {loading ? "Adding..." : "Add to Cart"}
+                <IoCartOutline /> {loading ? "Adding..." : "Add to Cart"}
               </button>
+              <a
+                href={product.whatsappLink}
+                target="_blank"
+                className="btn btn-success d-flex align-items-center justify-content-center gap-1 mt-2"
+                style={{ backgroundColor: "#25D366", border: "none" }}
+              >
+                <FaWhatsapp /> Order on WhatsApp
+              </a>
               {/* Social Icons */}
               <div className="d-flex gap-3 mt-4">
                 <i className="bi bi-facebook fs-5"></i>
