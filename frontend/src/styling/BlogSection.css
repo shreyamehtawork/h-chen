@@ -1,6 +1,4 @@
-/* src/components/ArticlesSection.css */
-
-.article-wrapper {
+src/components/ArticlesSection.css .article-wrapper {
   position: relative;
   overflow: hidden;
   background-color: #fff;

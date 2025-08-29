@@ -7,6 +7,12 @@
   font-weight: bold;
 }
 
+/* .chloenav {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+} */
+
 .navbar {
   padding-top: 0px;
 }
@@ -22,12 +28,20 @@
   width: 70px;
 }
 
-.custom-navbar {
-  height: 50px;
+/* Make nav items center */
+.navbar-nav {
   display: flex;
+  justify-content: center; /* centers horizontally */
   align-items: center;
-  z-index: 10;
-  font-family: Geo, sans-serif;
+  flex: 1; /* take full available space */
+}
+
+/* Ensure brand logo stays on left, nav in center, user/cart on right */
+.custom-navbar {
+  display: flex;
+  justify-content: space-between; /* logo left, nav center, user section right */
+  align-items: center;
+  width: 100%;
 }
 
 /* Logo container */
@@ -77,4 +91,16 @@
   letter-spacing: 1px;
   font-size: 1rem;
   padding: 10px 20px;
+}
+.navbar-nav {
+  display: flex;
+  justify-content: center; /* center the nav links */
+  align-items: center;
+}
+
+.navbar-nav .nav-link {
+  font-size: 1rem;
+  font-weight: bold;
+
+  padding: 10px 15px;
 }

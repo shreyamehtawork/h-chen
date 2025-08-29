@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getPosts } from "../services/sanityServices";
+import "../styling/blog/BlogPage.css";
 
 const BlogCard = ({ blog }) => {
   return (
@@ -7,7 +8,7 @@ const BlogCard = ({ blog }) => {
       href={`/blog/${blog?.slug?.current}`}
       className="text-decoration-none text-dark"
     >
-      <div className=" " style={{breakInside: "avoid",  marginBottom: "40px"}}>
+      <div className=" " style={{ breakInside: "avoid", marginBottom: "40px" }}>
         <img
           src={blog?.coverImage?.asset?.url}
           alt={blog?.title}
@@ -50,7 +51,7 @@ const Blog = () => {
     <div className="container py-4">
       <div className="blog-container">
         {blogs.map((blog, index) => (
-            <BlogCard key={index} blog={blog} />
+          <BlogCard key={index} blog={blog} />
         ))}
       </div>
     </div>

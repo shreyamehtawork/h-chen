@@ -43,7 +43,7 @@ function About3() {
               transition={{ duration: 0.9 }}
             >
               <p>
-                At Chloé, we don’t dress bodies —
+                At Chloe, we don’t dress bodies —
                 <br />
                 We <strong>honor stories</strong>.
                 <br />

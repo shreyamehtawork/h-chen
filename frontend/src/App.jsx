@@ -9,7 +9,7 @@ import Footer from "./pages/sections/Footer";
 import SingleProductsView from "./components/SingleProductsView";
 import CategoryPage from "./pages/CategoryPage";
 import BlogPage from "./pages/BlogDetails";
-import SingleBlogPage from "./components/SingleBlogPage";
+
 import Register from "./auth/Register";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -30,7 +30,7 @@ function App() {
   const { isAuthenticated, token } = useSelector((state) => state.auth);
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (isAuthenticated && pathname.includes("/login")) {
@@ -38,16 +38,12 @@ function App() {
     }
   }, [isAuthenticated, pathname, navigate]);
 
-  useEffect(()=>{
-    if(token){
+  useEffect(() => {
+    if (token) {
       const user = jwtDecode(token);
-      dispatch(loginUser(user))
+      dispatch(loginUser(user));
     }
-  }, [token, dispatch])
-
-
-  
-  
+  }, [token, dispatch]);
 
   return (
     <div>

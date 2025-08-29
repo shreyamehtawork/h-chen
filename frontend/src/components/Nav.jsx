@@ -31,7 +31,7 @@ function Nav() {
         <span>Unique Design • Premium Quality • Unbeatable Prices</span>
       </div>
 
-      <div className="container-fluid">
+      <div className="container-fluid ">
         <nav className="navbar navbar-expand-lg custom-navbar">
           <a className="navbar-brand d-flex align-items-center" href="/">
             <div className="logo-circle d-flex align-items-center justify-content-center">
@@ -55,10 +55,15 @@ function Nav() {
             className="collapse navbar-collapse d-lg-flex"
             id="navbarsExample11"
           >
-            <ul className="navbar-nav col-lg-6 justify-content-lg-space">
+            <ul className="navbar-nav ">
               <li className="nav-item">
                 <a className="nav-link" href="/">
                   Home
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/about">
+                  About
                 </a>
               </li>
               <li className="nav-item dropdown hover-dropdown">
@@ -78,16 +83,13 @@ function Nav() {
                   })}
                 </ul>
               </li>
+
               <li className="nav-item">
                 <a className="nav-link" href="/blog">
                   Blog
                 </a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/about">
-                  About
-                </a>
-              </li>
+
               <li className="nav-item">
                 <a className="nav-link" href="/contact">
                   Contact
@@ -95,7 +97,7 @@ function Nav() {
               </li>
             </ul>
 
-            <div className="d-lg-flex col-lg-6 justify-content-lg-end align-items-center">
+            <div className="d-lg-flex justify-content-lg-end align-items-center">
               {isAuthenticated ? (
                 <>
                   <div className="d-flex align-items-center gap-2 search-wrapper">
@@ -130,7 +132,7 @@ function Nav() {
                     </Link>
                   </div>
 
-                  <div className="dropdown" style={{ marginRight: "10px" }}>
+                  <div className="dropdown">
                     <button
                       className=" dropdown-toggle"
                       type="button"
@@ -167,10 +169,7 @@ function Nav() {
                 </>
               ) : (
                 <>
-                  <a
-                    href="/login"
-                    style={{ textDecoration: "none", marginRight: "10px" }}
-                  >
+                  <a href="/login" style={{ textDecoration: "none" }}>
                     Login
                   </a>
                   {/* <a

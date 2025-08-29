@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getPost } from "../services/sanityServices";
 import { useParams } from "react-router-dom";
+import "../styling/blog/BlogDetails.css";
 
 function BlogDetails() {
   const slug = useParams().slug;
@@ -9,7 +10,6 @@ function BlogDetails() {
   const fetchPosts = async () => {
     try {
       const response = await getPost(slug);
-      // console.log("Sanity post:", response);
       setBlog(response);
       return response;
     } catch (error) {
@@ -26,16 +26,9 @@ function BlogDetails() {
     <div>
       {/* Hero Banner */}
       <div
-        className="d-flex flex-column justify-content-end text-white"
+        className="d-flex flex-column justify-content-end text-white blog-hero-banner"
         style={{
-          width: "100%",
-          height: "100vh",
           backgroundImage: `url(${blog?.coverImage?.asset?.url})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center 20%",
-          backgroundRepeat: "no-repeat",
-          padding: "100px",
-          textShadow: "2px 2px 10px black",
         }}
       >
         <div className="d-flex justify-content-between align-items-end w-100">
@@ -51,7 +44,7 @@ function BlogDetails() {
 
       {/* Blog Content */}
       {blog?.content && (
-        <div className=" my-5" style={{ maxWidth: "70%", margin: "auto" }}>
+        <div className="my-5 blog-content">
           {blog?.content.map((block) => {
             if (block._type === "block") {
               if (block.style === "h4") {

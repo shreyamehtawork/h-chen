@@ -18,7 +18,7 @@ function About1() {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
           transition={{ duration: 0.8 }}
         >
-          WHY CHLOÉ
+          WHY CHLOE
         </motion.h4>
         <motion.h5
           className="mt-5 aboutsubtitle"
@@ -26,7 +26,7 @@ function About1() {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 1, delay: 0.2 }}
         >
-          Chloé is more than just a name. It’s a <em>feeling</em>, a{" "}
+          Chloe is more than just a name. It’s a <em>feeling</em>, a{" "}
           <strong>statement</strong>, and <em>a soft rebellion</em> in a world
           that rushes past emotions.
         </motion.h5>
@@ -42,7 +42,7 @@ function About1() {
           transition={{ duration: 0.9 }}
         >
           <p>
-            We created Chloé for{" "}
+            We created Chloe for{" "}
             <strong>every soul who’s ever felt unseen</strong>.
             <br />
             For women who carry grace like fire,
@@ -63,7 +63,7 @@ function About1() {
           animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
           transition={{ duration: 0.9 }}
         >
-          <img src={aboutImage} alt="Chloé identity visual" />
+          <img src={aboutImage} alt="Chloe identity visual" />
         </motion.div>
       </div>
 
@@ -75,7 +75,7 @@ function About1() {
         transition={{ duration: 1, delay: 0.4 }}
       >
         <h5 className="p-3 border-bottom" style={{ color: "#fff" }}>
-          Chloé — Where every identity is seen. Where elegance feels like home.
+          Chloe — Where every identity is seen. Where elegance feels like home.
         </h5>
       </motion.div>
     </div>
