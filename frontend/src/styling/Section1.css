@@ -1,13 +1,11 @@
-.hero-section {
-  background-color: #fff;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  overflow: hidden;
+.hero-model-img {
+  /* height: 120vh; /* Remove or comment out this line */
+  max-height: 150vh; /* Limit the maximum height to the viewport height */
+  width: auto;
+  object-fit: contain; /* Use 'contain' to ensure the whole image is visible, or 'cover' if you want it to fill and crop */
+  display: block; /* Helps with centering */
+  margin: auto; /* Centers the image horizontally */
 }
-
 .hero-word {
   font-size: 9.8rem;
   text-transform: uppercase;
@@ -15,16 +13,9 @@
   line-height: 0.8;
 }
 
-.starts {
+/* .starts {
   padding-right: 30px;
-}
-
-.hero-model-img {
-  height: 120vh; /* Increased the image size */
-  width: auto;
-  object-fit: cover;
-  /* margin-left: -10px; */
-}
+} */
 
 .hero-text-left,
 .hero-text-right {
@@ -39,7 +30,6 @@
 }
 
 .hero-text-right {
-  text-align: left;
   color: #555;
 }
 
@@ -48,17 +38,19 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 2rem;
+  /* padding: 0 2rem; */
   overflow: hidden;
   position: relative;
 }
 
 .left-side-text {
-  margin-right: -80px;
+  margin-right: -120px;
+
+  text-align: right;
 }
 
 .right-side-text {
-  margin-left: -80px;
+  margin-left: -120px;
 }
 
 body,

@@ -13,16 +13,16 @@ function HeroSection() {
   });
 
   // Scroll movement - A-shape outward
-  const textY = useTransform(scrollYProgress, [0, 1], [-260, 200]);
-  const leftTextX1 = useTransform(scrollYProgress, [0, 1], [90, -70]);
-  const leftTextX2 = useTransform(scrollYProgress, [0, 1], [120, -150]);
-  const rightTextX1 = useTransform(scrollYProgress, [0, 1], [-40, 90]);
-  const rightTextX2 = useTransform(scrollYProgress, [0, 1], [-70, 300]);
+  const textY = useTransform(scrollYProgress, [0, 1], [-200, 200]);
+  const leftTextX1 = useTransform(scrollYProgress, [0, 1], [200, -60]);
+  const leftTextX2 = useTransform(scrollYProgress, [0, 1], [160, -140]);
+  const rightTextX1 = useTransform(scrollYProgress, [0, 1], [-100, 90]);
+  const rightTextX2 = useTransform(scrollYProgress, [0, 1], [-100, 250]);
 
   return (
     <section className="hero-section container-fluid" ref={sectionRef}>
       {/* Left Text */}
-      <div className="col-md-4 text-end hero-text-left position-relative z-1">
+      <div className="col-md-3 text-end hero-text-left ">
         <motion.h1
           className="hero-word left-side-text"
           style={{ y: textY, x: leftTextX1 }}
@@ -44,7 +44,7 @@ function HeroSection() {
       </div>
 
       {/* Center Image */}
-      <motion.div className="col-md-4 text-center mt-5 pt-3 position-relative z-2">
+      <motion.div className="col-md-6 text-center mt-5 pt-3 position-relative z-2">
         <img src={modelImage} alt="Model" className="hero-model-img" />
       </motion.div>
 

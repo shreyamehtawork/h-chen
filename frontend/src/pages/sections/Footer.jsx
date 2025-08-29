@@ -39,9 +39,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="small copyright">
-        © 2035 by H. Chen. Powered and secured by <a href="#">Wix</a>
-      </div>
+      <div className="small copyright">© 2035 by Chloe's Venture Pvt.Ltd</div>
     </div>
   );
 };
