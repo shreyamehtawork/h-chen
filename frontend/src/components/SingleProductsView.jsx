@@ -11,7 +11,6 @@ import { createWhatsAppService } from "../services/whatsApp";
 import { FaWhatsapp } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
 
-
 function SingleProductsView() {
   const { id, category } = useParams();
 
@@ -121,7 +120,7 @@ function SingleProductsView() {
               <div style={{ margin: "30px 0" }}>
                 <p>{product.description}</p>
               </div>
-              <p className="fs-2">${product.price.toFixed(2)}</p>
+              <p className="fs-2">Rs.{product.price}/-</p>
               {/* Color */}
               <div className="mb-3">
                 <label className="form-label">Color *</label>

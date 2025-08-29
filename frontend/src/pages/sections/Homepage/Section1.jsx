@@ -4,6 +4,9 @@ import "../../../styling/Section1.css";
 import modelImage from "../../../assets/images/heromain.avif";
 
 function HeroSection() {
+  const isMobile = window.innerWidth < 768;
+  const isTablet = window.innerWidth >= 768 && window.innerWidth < 1200;
+
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { threshold: 0.3 });
 
@@ -13,11 +16,36 @@ function HeroSection() {
   });
 
   // Scroll movement - A-shape outward
-  const textY = useTransform(scrollYProgress, [0, 1], [-200, 200]);
-  const leftTextX1 = useTransform(scrollYProgress, [0, 1], [200, -60]);
-  const leftTextX2 = useTransform(scrollYProgress, [0, 1], [160, -140]);
-  const rightTextX1 = useTransform(scrollYProgress, [0, 1], [-100, 90]);
-  const rightTextX2 = useTransform(scrollYProgress, [0, 1], [-100, 250]);
+  // Different scroll transform values per device
+  const textY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    isMobile ? [-100, 100] : [-200, 200]
+  );
+
+  const leftTextX1 = useTransform(
+    scrollYProgress,
+    [0, 1],
+    isMobile ? [100, -30] : isTablet ? [160, -80] : [200, -60]
+  );
+
+  const leftTextX2 = useTransform(
+    scrollYProgress,
+    [0, 1],
+    isMobile ? [80, -70] : isTablet ? [140, -100] : [160, -140]
+  );
+
+  const rightTextX1 = useTransform(
+    scrollYProgress,
+    [0, 1],
+    isMobile ? [-80, 60] : isTablet ? [-90, 70] : [-100, 90]
+  );
+
+  const rightTextX2 = useTransform(
+    scrollYProgress,
+    [0, 1],
+    isMobile ? [-80, 180] : isTablet ? [-90, 220] : [-100, 280]
+  );
 
   return (
     <section className="hero-section container-fluid" ref={sectionRef}>
