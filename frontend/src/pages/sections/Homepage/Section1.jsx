@@ -15,8 +15,6 @@ function HeroSection() {
     offset: ["start end", "end start"],
   });
 
-  // Scroll movement - A-shape outward
-  // Different scroll transform values per device
   const textY = useTransform(
     scrollYProgress,
     [0, 1],

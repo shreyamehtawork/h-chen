@@ -12,7 +12,7 @@ function Home() {
   return (
     <div>
       <Section1 />
-      <hr></hr>
+      {/* <hr></hr> */}
       <Section2 />
       <div
         style={{
@@ -23,6 +23,8 @@ function Home() {
           display: "flex",
           alignItems: "center",
           position: "relative",
+          fontFamily: "Geo",
+          fontWeight: "bold",
         }}
       >
         <div
@@ -30,16 +32,24 @@ function Home() {
             display: "inline-block",
             whiteSpace: "nowrap",
             paddingLeft: "100%",
-            animation: "scroll-left 40s linear infinite",
+            animation: "scroll-left 80s linear infinite",
           }}
         >
-          MEGA SALE! 50% OFF ON ALL HATS🔥 &nbsp; MEGA SALE! 50% OFF ON ALL
-          HATS🔥 &nbsp; MEGA SALE! 50% OFF ON ALL HATS🔥 &nbsp; MEGA SALE! 50%
-          OFF ON ALL HATS🔥 &nbsp; MEGA SALE! 50% OFF ON ALL HATS🔥 &nbsp;MEGA
-          SALE! 50% OFF ON ALL HATS🔥 &nbsp;MEGA SALE! 50% OFF ON ALL HATS🔥
-          &nbsp;MEGA SALE! 50% OFF ON ALL HATS🔥 &nbsp;MEGA SALE! 50% OFF ON ALL
-          HATS🔥 &nbsp;MEGA SALE! 50% OFF ON ALL HATS🔥 &nbsp;MEGA SALE! 50% OFF
-          ON ALL HATS🔥 &nbsp;MEGA SALE! 50% OFF ON ALL HATS🔥 &nbsp;
+          MEGA SALE ! 50% OFF ON ALL HATS &nbsp;🔥 &nbsp; MEGA SALE ! 50% OFF ON
+          ALL HATS &nbsp;🔥 &nbsp; MEGA SALE ! 50% OFF ON ALL HATS &nbsp;🔥
+          &nbsp; MEGA SALE ! 50% OFF ON ALL HATS &nbsp;🔥 &nbsp; MEGA SALE ! 50%
+          OFF ON ALL HATS &nbsp;🔥 &nbsp; MEGA SALE ! 50% OFF ON ALL HATS
+          &nbsp;🔥 &nbsp; MEGA SALE ! 50% OFF ON ALL HATS &nbsp;🔥 &nbsp; MEGA
+          SALE ! 50% OFF ON ALL HATS &nbsp;🔥 &nbsp; MEGA SALE ! 50% OFF ON ALL
+          HATS &nbsp;🔥 &nbsp; MEGA SALE ! 50% OFF ON ALL HATS &nbsp;🔥 &nbsp;{" "}
+          MEGA SALE ! 50% OFF ON ALL HATS &nbsp;🔥 &nbsp; MEGA SALE ! 50% OFF ON
+          ALL HATS &nbsp;🔥 &nbsp; MEGA SALE ! 50% OFF ON ALL HATS &nbsp;🔥
+          &nbsp; MEGA SALE ! 50% OFF ON ALL HATS &nbsp;🔥 &nbsp; MEGA SALE ! 50%
+          OFF ON ALL HATS &nbsp;🔥 &nbsp; MEGA SALE ! 50% OFF ON ALL HATS
+          &nbsp;🔥 &nbsp; MEGA SALE ! 50% OFF ON ALL HATS &nbsp;🔥 &nbsp; MEGA
+          SALE ! 50% OFF ON ALL HATS &nbsp;🔥 &nbsp; MEGA SALE ! 50% OFF ON ALL
+          HATS &nbsp;🔥 &nbsp; MEGA SALE ! 50% OFF ON ALL HATS &nbsp;🔥 &nbsp;{" "}
+          MEGA SALE ! 50% OFF ON ALL HATS &nbsp;🔥 &nbsp;{" "}
         </div>
 
         {/* Keyframes injected inline */}
