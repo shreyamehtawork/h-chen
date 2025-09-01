@@ -18,31 +18,31 @@ function HeroSection() {
   const textY = useTransform(
     scrollYProgress,
     [0, 1],
-    isMobile ? [-100, 100] : [-200, 200]
+    isMobile ? [-100, 100] : [-300, 200]
   );
 
   const leftTextX1 = useTransform(
     scrollYProgress,
     [0, 1],
-    isMobile ? [100, -30] : isTablet ? [160, -80] : [200, -60]
+    isMobile ? [100, -30] : isTablet ? [160, -80] : [200, -20]
   );
 
   const leftTextX2 = useTransform(
     scrollYProgress,
     [0, 1],
-    isMobile ? [80, -70] : isTablet ? [140, -100] : [160, -140]
+    isMobile ? [80, -70] : isTablet ? [140, -100] : [150, -50]
   );
 
   const rightTextX1 = useTransform(
     scrollYProgress,
     [0, 1],
-    isMobile ? [-80, 60] : isTablet ? [-90, 70] : [-100, 90]
+    isMobile ? [-80, 60] : isTablet ? [-90, 70] : [-140, 50]
   );
 
   const rightTextX2 = useTransform(
     scrollYProgress,
     [0, 1],
-    isMobile ? [-80, 180] : isTablet ? [-90, 220] : [-100, 280]
+    isMobile ? [-80, 180] : isTablet ? [-90, 220] : [-100, 130]
   );
 
   return (
@@ -56,6 +56,9 @@ function HeroSection() {
           animate={isInView ? { opacity: 1, x: leftTextX1.get() } : {}}
           transition={{ duration: 1, ease: "easeOut" }}
         >
+          <div className="vertical-text">
+            SUMMER IS HERE <br></br>GET READY!
+          </div>
           YOUR
         </motion.h1>
         <motion.h1
@@ -67,6 +70,9 @@ function HeroSection() {
         >
           STARTS
         </motion.h1>
+        <span>
+          Discover our new summer collection! Shop now and refresh wardrobe.
+        </span>
       </div>
 
       {/* Center Image */}
@@ -94,6 +100,7 @@ function HeroSection() {
         >
           HERE
         </motion.h1>
+        <div>hdbx</div>
       </div>
     </section>
   );

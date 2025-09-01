@@ -24,6 +24,19 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Oswald";
+  src: url("/fonts/Oswald/Oswald-VariableFont_wght.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+/* .oswald-font {
+  font-family: "Oswald", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+} */
+
 body {
   font-family: "Libertinus";
   overflow-x: hidden;

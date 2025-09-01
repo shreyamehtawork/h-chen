@@ -12,7 +12,7 @@ function Home() {
   return (
     <div>
       <Section1 />
-      {/* <hr></hr> */}
+      
       <Section2 />
       <div
         style={{
@@ -25,6 +25,7 @@ function Home() {
           position: "relative",
           fontFamily: "Geo",
           fontWeight: "bold",
+          padding: "35px",
         }}
       >
         <div

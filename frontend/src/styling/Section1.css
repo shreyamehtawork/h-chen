@@ -7,10 +7,32 @@
   margin: auto; /* Centers the image horizontally */
 }
 .hero-word {
-  font-size: 9.8rem;
+  font-size: 9.5rem;
   text-transform: uppercase;
-  font-family: "Rushford", serif;
-  line-height: 0.8;
+  letter-spacing: -0.05em;
+  font-family: "Oswald", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: bolder;
+  line-height: 0.9;
+}
+.vertical-text {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg); /* ✅ correct way */
+  text-orientation: mixed;
+  background-color: #f9e084; /* similar to yellow in image */
+  letter-spacing: normal;
+  padding: 12px;
+  border-radius: 10px; /* rounded corners */
+  width: 80px;
+  height: fit-content;
+  display: inline-block;
+  text-align: left;
+  font-size: 12px;
+  line-height: 1.5;
+  border: 0.5px solid black;
+  color: black;
+  font-family: Arial, sans-serif;
+  margin-right: 30px;
 }
 
 /* .starts {

@@ -31,7 +31,7 @@ function Nav() {
         <span>Unique Design • Premium Quality • Unbeatable Prices</span>
       </div>
 
-      <div className="container-fluid ">
+      <div className="container-fluid">
         <nav className="navbar navbar-expand-lg custom-navbar">
           <a className="navbar-brand d-flex align-items-center" href="/">
             <div className="logo-circle d-flex align-items-center justify-content-center">
@@ -133,7 +133,7 @@ function Nav() {
                   </div>
 
                   <div className="dropdown">
-                    <button
+                    <a
                       className=" dropdown-toggle"
                       type="button"
                       id="userDropdown"
@@ -141,7 +141,7 @@ function Nav() {
                       aria-expanded="false"
                     >
                       Hi, {userData?.name || "User"}
-                    </button>
+                    </a>
                     <ul
                       className="dropdown-menu dropdown-menu-end "
                       aria-labelledby="userDropdown"
