@@ -1,13 +1,13 @@
 .hero-model-img {
   /* height: 120vh; /* Remove or comment out this line */
   max-height: 150vh; /* Limit the maximum height to the viewport height */
-  width: auto;
+  width: 95%;
   object-fit: contain; /* Use 'contain' to ensure the whole image is visible, or 'cover' if you want it to fill and crop */
   display: block; /* Helps with centering */
   margin: auto; /* Centers the image horizontally */
 }
 .hero-word {
-  font-size: 9.5rem;
+  font-size: 9rem;
   text-transform: uppercase;
   letter-spacing: -0.05em;
   font-family: "Oswald", sans-serif;
@@ -17,27 +17,95 @@
 }
 .vertical-text {
   writing-mode: vertical-rl;
-  transform: rotate(180deg); /* ✅ correct way */
+  transform: rotate(180deg);
   text-orientation: mixed;
-  background-color: #f9e084; /* similar to yellow in image */
+  background-color: #f9e084;
   letter-spacing: normal;
   padding: 12px;
-  border-radius: 10px; /* rounded corners */
+  border-radius: 15px; /* More pronounced rounded corners */
   width: 80px;
   height: fit-content;
   display: inline-block;
   text-align: left;
   font-size: 12px;
   line-height: 1.5;
-  border: 0.5px solid black;
+  border: 1px solid rgba(0, 0, 0, 0.2); /* Softer border */
   color: black;
   font-family: Arial, sans-serif;
   margin-right: 30px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  font-weight: bold; /* Make the text bolder */
+  position: relative; /* Needed for positioning the asterisk */
 }
 
+.asterisk-icon {
+  position: absolute;
+  bottom: -10px; /* Adjust top and left to position it correctly */
+  right: -10px;
+  width: 30px;
+  height: 30px;
+  background-color: black;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.asterisk-icon::before {
+  content: " ";
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M12 2L9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2z"/></svg>');
+  background-size: cover;
+  width: 18px;
+  height: 18px;
+}
 /* .starts {
   padding-right: 30px;
 } */
+
+.sale-badge {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.inner-circle {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #ff9364; /* orange-peach */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.inner-circle .discount {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.inner-circle .text {
+  font-size: 0.8rem;
+}
+
+.circular-text {
+  width: 100%;
+  height: 100%;
+  fill: white;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  transform: rotate(-10deg); /* adjust rotation */
+}
 
 .hero-text-left,
 .hero-text-right {
@@ -60,24 +128,115 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* padding: 0 2rem; */
   overflow: hidden;
   position: relative;
+}
+.discover-text {
+  text-align: center;
 }
 
 .left-side-text {
   margin-right: -120px;
-
-  text-align: right;
 }
 
 .right-side-text {
   margin-left: -120px;
 }
-
+.discover-text {
+  width: fit-content;
+  margin-left: 100px;
+  margin-top: 20px;
+  text-align: start;
+}
 body,
 html {
   overflow-x: hidden;
+}
+
+.sale-badge {
+  position: absolute;
+  bottom: -200px; /* push it below the HERE text */
+  left: 20px; /* adjust horizontally */
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.sale-badge .inner-circle {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #ff9364;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.sale-badge .inner-circle .discount {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.sale-badge .inner-circle .text {
+  font-size: 0.8rem;
+}
+
+.sale-badge .circular-text {
+  width: 100%;
+  height: 100%;
+  fill: white;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  transform: rotate(-10deg);
+}
+.discover-text {
+  position: absolute;
+  top: 68%;
+  left: 7%;
+  margin-top: 10px; /* little spacing */
+  margin-left: 0; /* remove forced offset */
+  font-size: 20px;
+  line-height: 1.5;
+  max-width: 300px;
+}
+
+.circular-text {
+  width: 200px;
+  height: 200px;
+  transform: rotate(-90deg); /* Start from top */
+}
+
+.circle-marquee {
+  font-size: 14px;
+  text-transform: uppercase;
+  animation: textFlow 15s linear infinite;
+}
+
+@keyframes textFlow {
+  0% {
+    startoffset: 0%;
+  }
+  100% {
+    startoffset: 100%;
+  }
+}
+
+/* Mobile: reset so it flows normally */
+@media (max-width: 768px) {
+  .discover-text {
+    position: static; /* go back to normal flow */
+    margin: 1rem auto 0;
+    text-align: center;
+    max-width: 90%;
+  }
 }
 
 /* Responsive adjustments */
@@ -90,7 +249,7 @@ html {
   }
 
   .hero-word {
-    font-size: 2.8rem;
+    font-size: 4rem;
     line-height: 1.1;
     text-align: center;
     word-break: break-word;
@@ -124,13 +283,20 @@ html {
   }
 }
 
+@media (max-width: 768px) {
+  .sale-badge {
+    position: static; /* remove absolute positioning */
+    margin: 20px auto 0; /* center horizontally */
+    display: flex;
+  }
+}
 /* Tiny phones */
-@media (max-width: 480px) {
+/* @media (max-width: 480px) {
   .hero-word {
-    font-size: 2rem;
+    font-size: 5rem;
   }
 
   .hero-model-img {
     height: 200px;
   }
-}
+} */

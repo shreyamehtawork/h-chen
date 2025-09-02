@@ -35,12 +35,12 @@ const BlogSection = () => {
       animate={isInView ? "visible" : "hidden"}
       variants={containerVariants}
     >
-      <motion.h2
+      <motion.h1
         className="text-center mb-5 fw-light"
         variants={fadeInVariants}
       >
         Read our articles
-      </motion.h2>
+      </motion.h1>
 
       <motion.div className="row g-4" variants={containerVariants}>
         <motion.div className="col-md-6" variants={fadeInVariants}>
