@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
-import "../../../styling/Section1.css";
+import "../../../styling/HeroSection.css";
 import modelImage from "../../../assets/images/heromain.avif";
 
 function HeroSection() {
@@ -15,55 +15,57 @@ function HeroSection() {
     offset: ["start end", "end start"],
   });
 
+  // 🎯 Motion transforms (desktop only, mobile simplified)
   const textY = useTransform(
     scrollYProgress,
     [0, 1],
-    isMobile ? [-100, 100] : [-300, 200]
+    isMobile ? [0, 0] : [-300, 200]
   );
 
   const leftTextX1 = useTransform(
     scrollYProgress,
     [0, 1],
-    isMobile ? [100, -30] : isTablet ? [160, -80] : [200, -0]
+    isMobile ? [0, 0] : isTablet ? [160, -80] : [200, -0]
   );
 
   const leftTextX2 = useTransform(
     scrollYProgress,
     [0, 1],
-    isMobile ? [80, -70] : isTablet ? [140, -100] : [180, -80]
+    isMobile ? [0, 0] : isTablet ? [140, -100] : [180, -80]
   );
 
   const leftTextX3 = useTransform(
     scrollYProgress,
     [0, 1],
-    isMobile ? [80, -70] : isTablet ? [140, -100] : [180, -80]
+    isMobile ? [0, 0] : isTablet ? [140, -100] : [180, -80]
   );
 
   const rightTextX1 = useTransform(
     scrollYProgress,
     [0, 1],
-    isMobile ? [-80, 60] : isTablet ? [-90, 80] : [-120, 60]
+    isMobile ? [0, 0] : isTablet ? [-90, 80] : [-120, 60]
   );
 
   const rightTextX2 = useTransform(
     scrollYProgress,
     [0, 1],
-    isMobile ? [-80, 180] : isTablet ? [-90, 220] : [-100, 160]
+    isMobile ? [0, 0] : isTablet ? [-90, 220] : [-100, 160]
   );
+
   const rightTextX3 = useTransform(
     scrollYProgress,
     [0, 1],
-    isMobile ? [-80, 180] : isTablet ? [-90, 220] : [-90, 90]
+    isMobile ? [0, 0] : isTablet ? [-90, 220] : [-90, 90]
   );
 
   return (
     <section className="hero-section container-fluid" ref={sectionRef}>
       {/* Left Text */}
-      <div className="col-md-3 text-end hero-text-left ">
+      <div className="col-md-3 text-end hero-text-left">
         <motion.h1
           className="hero-word left-side-text"
           style={{ y: textY, x: leftTextX1 }}
-          initial={{ opacity: 0, x: -100 }}
+          initial={{ opacity: 0, x: isMobile ? 0 : -100 }}
           animate={isInView ? { opacity: 1, x: leftTextX1.get() } : {}}
           transition={{ duration: 1, ease: "easeOut" }}
         >
@@ -79,7 +81,7 @@ function HeroSection() {
         <motion.h1
           className="hero-word left-side-text starts"
           style={{ y: textY, x: leftTextX2 }}
-          initial={{ opacity: 0, x: -100 }}
+          initial={{ opacity: 0, x: isMobile ? 0 : -100 }}
           animate={isInView ? { opacity: 1, x: leftTextX2.get() } : {}}
           transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
         >
@@ -89,9 +91,9 @@ function HeroSection() {
         <motion.div
           className="left-side-text discover-text"
           style={{ y: textY, x: leftTextX3 }}
-          initial={{ opacity: 0, x: -100 }}
+          initial={{ opacity: 0, x: isMobile ? 0 : -100 }}
           animate={isInView ? { opacity: 1, x: leftTextX3.get() } : {}}
-          transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+          transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
         >
           Discover our new summer collection! <br /> Shop now and refresh
           wardrobe.
@@ -108,29 +110,30 @@ function HeroSection() {
         <motion.h1
           className="hero-word right-side-text"
           style={{ y: textY, x: rightTextX1 }}
-          initial={{ opacity: 0, x: 100 }}
+          initial={{ opacity: 0, x: isMobile ? 0 : 100 }}
           animate={isInView ? { opacity: 1, x: rightTextX1.get() } : {}}
           transition={{ duration: 1, ease: "easeOut" }}
         >
           STYLE
         </motion.h1>
+
         <motion.h1
           className="hero-word right-side-text"
           style={{ y: textY, x: rightTextX2 }}
-          initial={{ opacity: 0, x: 100 }}
+          initial={{ opacity: 0, x: isMobile ? 0 : 100 }}
           animate={isInView ? { opacity: 1, x: rightTextX2.get() } : {}}
           transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
         >
           HERE
         </motion.h1>
 
-        {/* 🔥 Sale Badge */}
+        {/* Sale Badge */}
         <motion.div
           className="sale-badge"
           style={{ y: textY, x: rightTextX3 }}
-          initial={{ opacity: 0, x: 100 }}
+          initial={{ opacity: 0, x: isMobile ? 0 : 100 }}
           animate={isInView ? { opacity: 1, x: rightTextX3.get() } : {}}
-          transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+          transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
         >
           <div className="inner-circle">
             <span className="discount">30%</span>
@@ -142,9 +145,9 @@ function HeroSection() {
               <path
                 id="circlePath"
                 d="M 100, 100
-           m -75, 0
-           a 75,75 0 1,1 150,0
-           a 75,75 0 1,1 -150,0"
+                 m -75, 0
+                 a 75,75 0 1,1 150,0
+                 a 75,75 0 1,1 -150,0"
               />
             </defs>
 
@@ -155,7 +158,7 @@ function HeroSection() {
                 animate={{ startOffset: ["0%", "100%"] }}
                 transition={{
                   repeat: Infinity,
-                  duration: 10, // speed (lower = faster)
+                  duration: 10,
                   ease: "linear",
                 }}
               >
