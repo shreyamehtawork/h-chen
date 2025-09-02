@@ -157,6 +157,16 @@ function Nav() {
                         </button>
                       </li>
                       <li>
+                        <button className="dropdown-item">
+                          <a
+                            href="/user/wishlist"
+                            style={{ textDecoration: "none" }}
+                          >
+                            Wishlist
+                          </a>
+                        </button>
+                      </li>
+                      <li>
                         <button
                           className="dropdown-item"
                           onClick={handleLogout}
@@ -175,8 +185,8 @@ function Nav() {
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
+                      width="22"
+                      height="22"
                       fill="currentColor"
                       className="bi bi-person"
                       viewBox="0 0 16 16"
@@ -186,9 +196,9 @@ function Nav() {
                     <Link
                       to={"/login"}
                       className="text-decoration-none text-dark"
-                      style={{ padding: " 0px 5px " }}
+                      style={{ padding: " 0px 7px " }}
                     >
-                      Login
+                      Login / Register
                     </Link>
                   </div>
                 </>

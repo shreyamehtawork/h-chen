@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
-import "../../../styling/HeroSection.css";
+import "../../../styling/Section1.css";
 import modelImage from "../../../assets/images/heromain.avif";
 
 function HeroSection() {

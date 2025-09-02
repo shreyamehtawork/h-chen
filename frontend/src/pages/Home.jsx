@@ -36,21 +36,22 @@ function Home() {
             animation: "scroll-left 80s linear infinite",
           }}
         >
-          MEGA SALE ! 50% OFF ON ALL HATS &nbsp;🔥 &nbsp; MEGA SALE ! 50% OFF ON
-          ALL HATS &nbsp;🔥 &nbsp; MEGA SALE ! 50% OFF ON ALL HATS &nbsp;🔥
-          &nbsp; MEGA SALE ! 50% OFF ON ALL HATS &nbsp;🔥 &nbsp; MEGA SALE ! 50%
-          OFF ON ALL HATS &nbsp;🔥 &nbsp; MEGA SALE ! 50% OFF ON ALL HATS
-          &nbsp;🔥 &nbsp; MEGA SALE ! 50% OFF ON ALL HATS &nbsp;🔥 &nbsp; MEGA
-          SALE ! 50% OFF ON ALL HATS &nbsp;🔥 &nbsp; MEGA SALE ! 50% OFF ON ALL
-          HATS &nbsp;🔥 &nbsp; MEGA SALE ! 50% OFF ON ALL HATS &nbsp;🔥 &nbsp;{" "}
-          MEGA SALE ! 50% OFF ON ALL HATS &nbsp;🔥 &nbsp; MEGA SALE ! 50% OFF ON
-          ALL HATS &nbsp;🔥 &nbsp; MEGA SALE ! 50% OFF ON ALL HATS &nbsp;🔥
-          &nbsp; MEGA SALE ! 50% OFF ON ALL HATS &nbsp;🔥 &nbsp; MEGA SALE ! 50%
-          OFF ON ALL HATS &nbsp;🔥 &nbsp; MEGA SALE ! 50% OFF ON ALL HATS
-          &nbsp;🔥 &nbsp; MEGA SALE ! 50% OFF ON ALL HATS &nbsp;🔥 &nbsp; MEGA
-          SALE ! 50% OFF ON ALL HATS &nbsp;🔥 &nbsp; MEGA SALE ! 50% OFF ON ALL
-          HATS &nbsp;🔥 &nbsp; MEGA SALE ! 50% OFF ON ALL HATS &nbsp;🔥 &nbsp;{" "}
-          MEGA SALE ! 50% OFF ON ALL HATS &nbsp;🔥 &nbsp;{" "}
+          MEGA SALE ! 50% OFF ON ALL PRODUCTS &nbsp;🔥 &nbsp; MEGA SALE ! 50%
+          OFF ON ALL PRODUCTS &nbsp;🔥 &nbsp; MEGA SALE ! 50% OFF ON ALL
+          PRODUCTS &nbsp;🔥 &nbsp; MEGA SALE ! 50% OFF ON ALL PRODUCTS &nbsp;🔥
+          &nbsp; MEGA SALE ! 50% OFF ON ALL PRODUCTS &nbsp;🔥 &nbsp; MEGA SALE !
+          50% OFF ON ALL PRODUCTS &nbsp;🔥 &nbsp; MEGA SALE ! 50% OFF ON ALL
+          PRODUCTS &nbsp;🔥 &nbsp; MEGA SALE ! 50% OFF ON ALL PRODUCTS &nbsp;🔥
+          &nbsp; MEGA SALE ! 50% OFF ON ALL PRODUCTS &nbsp;🔥 &nbsp; MEGA SALE !
+          50% OFF ON ALL PRODUCTS &nbsp;🔥 &nbsp; MEGA SALE ! 50% OFF ON ALL
+          PRODUCTS &nbsp;🔥 &nbsp; MEGA SALE ! 50% OFF ON ALL PRODUCTS &nbsp;🔥
+          &nbsp; MEGA SALE ! 50% OFF ON ALL PRODUCTS &nbsp;🔥 &nbsp; MEGA SALE !
+          50% OFF ON ALL PRODUCTS &nbsp;🔥 &nbsp; MEGA SALE ! 50% OFF ON ALL
+          PRODUCTS &nbsp;🔥 &nbsp; MEGA SALE ! 50% OFF ON ALL PRODUCTS &nbsp;🔥
+          &nbsp; MEGA SALE ! 50% OFF ON ALL PRODUCTS &nbsp;🔥 &nbsp; MEGA SALE !
+          50% OFF ON ALL PRODUCTS &nbsp;🔥 &nbsp; MEGA SALE ! 50% OFF ON ALL
+          PRODUCTS &nbsp;🔥 &nbsp; MEGA SALE ! 50% OFF ON ALL PRODUCTS &nbsp;🔥
+          &nbsp; MEGA SALE ! 50% OFF ON ALL PRODUCTS &nbsp;🔥 &nbsp;{" "}
         </div>
 
         {/* Keyframes injected inline */}
@@ -63,12 +64,10 @@ function Home() {
         `}
         </style>
       </div>
-
       <Section3 />
-
-      <Section6 />
-      <Section5 />
       <ReviewSection />
+      <Section5 />
+      <Section6 />
       <BlogSection />
       <Section4 />
     </div>

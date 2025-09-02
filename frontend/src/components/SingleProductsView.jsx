@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,7 +9,7 @@ import Loader from "./Loader";
 import { addProductToCart, fetchCartItems } from "../store/cartSlice";
 import { createWhatsAppService } from "../services/whatsApp";
 import { FaWhatsapp } from "react-icons/fa";
-import { IoCartOutline } from "react-icons/io5";
+import { IoCartOutline, IoHeartOutline } from "react-icons/io5";
 
 function SingleProductsView() {
   const { id, category } = useParams();
@@ -170,18 +170,27 @@ function SingleProductsView() {
                   +
                 </button>
               </div>
-
-              <button
-                className="btn btn-dark w-100 mt-3 d-flex align-items-center justify-content-center gap-1 "
-                onClick={handleAddtoCart}
-                disabled={loading}
-              >
-                <IoCartOutline /> {loading ? "Adding..." : "Add to Cart"}
-              </button>
+              <div className="gap-1 mt-5">
+                <button
+                  className="col-md-5 btn btn-outline-danger"
+                  style={{ marginRight: "40px", padding: "10px 20px" }}
+                >
+                  <IoHeartOutline />
+                  WishList
+                </button>
+                <button
+                  className="col-md-6 btn btn-outline-dark "
+                  onClick={handleAddtoCart}
+                  style={{ padding: "10px 20px" }}
+                  disabled={loading}
+                >
+                  <IoCartOutline /> {loading ? "Adding..." : "Add to Cart"}
+                </button>
+              </div>
               <a
                 href={product.whatsappLink}
                 target="_blank"
-                className="btn btn-success d-flex align-items-center justify-content-center gap-1 mt-2"
+                className="btn btn-success d-flex align-items-center justify-content-center gap-1 mt-3"
                 style={{ backgroundColor: "#25D366", border: "none" }}
               >
                 <FaWhatsapp /> Order on WhatsApp

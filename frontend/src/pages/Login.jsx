@@ -1,4 +1,5 @@
 import { FcGoogle } from "react-icons/fc";
+import logo from "../assets/logofinal.png";
 
 export default function Login() {
   const handleLogin = () => {
@@ -20,8 +21,9 @@ export default function Login() {
             Where elegance feels like home.
           </p>
           <img
-            src="https://placehold.co/400x300/e0e0e0/555555?text=Brand+Image"
+            src={logo}
             alt="Brand Aesthetics"
+            height="10"
             className="img-fluid rounded"
           />
         </div>
@@ -29,7 +31,7 @@ export default function Login() {
         {/* Right Section */}
         <div className="col-md-6 p-4 d-flex flex-column justify-content-center align-items-center gap-3">
           <div className="text-center mb-4">
-            <h2 className="fw-bold mb-2">Welcome Back!</h2>
+            <h2 className="fw-bold mb-2">Welcome!</h2>
             <p className="text-muted">Sign in to your account to continue.</p>
           </div>
 
