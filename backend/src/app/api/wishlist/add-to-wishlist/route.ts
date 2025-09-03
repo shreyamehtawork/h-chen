@@ -1,11 +1,15 @@
+import { connectToMongoDB } from "@/lib/db";
 import User from "@/models/User";
+import Wishlist from "@/models/Wishlist";
 import { Types } from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
 
-export const PUT = async (req: NextRequest) => {
+export const POST = async (req: NextRequest) => {
   try {
     const body = await req.json();
     const { userId, productId } = body;
+
+    connectToMongoDB()
 
     if (!userId || !productId) {
       return NextResponse.json("Invalid request", { status: 400 });
@@ -16,24 +20,43 @@ export const PUT = async (req: NextRequest) => {
       return NextResponse.json("User not found", { status: 404 });
     }
 
-    !user.wishlist_products.includes(productId) &&
-      user.wishlist_products.unshift(productId);
-    await user.save();
+    let wishlist = await Wishlist.findOne({user: userId});
+    if ( !wishlist ){
+      wishlist = new Wishlist({user: userId});
+    }
 
-    const userWithWishlist = await User.aggregate([
+    if (!wishlist.products.includes(productId)) {
+      wishlist.products.push(productId);
+    }
+    await wishlist.save();
+
+    const userWithWishlist = await Wishlist.aggregate([
       {
-        $match: { _id: new Types.ObjectId(userId) },
+        $match: { user: new Types.ObjectId(userId) },
+      },
+      {
+        $unwind: "$products"
       },
       {
         $lookup: {
           from: "products", // collection name in lowercase
-          localField: "wishlist_products",
+          localField: "products",
           foreignField: "_id",
           as: "wishlist_product_details",
         },
       },
+      { $unwind: "$wishlist_product_details" },
+      {
+        $group: {
+          _id: "$_id",
+          products: { $push: "$products" },
+          wishlist_product_details: { $push: "$wishlist_product_details" },
+        },
+      },
     ]);
+    // console.log(userWithWishlist);
     return NextResponse.json({user: userWithWishlist[0]}, { status: 200 });
+
   } catch (error) {
     console.error(error);
     return NextResponse.json(

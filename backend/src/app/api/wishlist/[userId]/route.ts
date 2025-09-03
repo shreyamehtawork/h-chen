@@ -1,38 +1,18 @@
 import { connectToMongoDB } from "@/lib/db";
-import User from "@/models/User";
 import Wishlist from "@/models/Wishlist";
 import { Types } from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
 
-export const PUT = async (req: NextRequest) => {
+export const GET = async (
+  req: NextRequest,
+  { params }: { params: { userId: string } }
+) => {
   try {
-    const body = await req.json();
-    const { userId, productId } = body;
-
     connectToMongoDB();
-
-    if (!userId || !productId) {
-      return NextResponse.json("Invalid request", { status: 400 });
-    }
-
-    const user = await User.findById(userId);
-    if (!user) {
-      return NextResponse.json("User not found", { status: 404 });
-    }
-
-    let wishlist = await Wishlist.findOne({ user: userId });
-    if (!wishlist) {
-      wishlist = new Wishlist({ user: userId });
-    }
-
-    wishlist.products = wishlist.products.filter(
-      (id: string) => id.toString() !== productId.toString()
-    );
-    await wishlist.save();
 
     let userWithWishlist = await Wishlist.aggregate([
       {
-        $match: { user: new Types.ObjectId(userId) },
+        $match: { user: new Types.ObjectId(params.userId) },
       },
       {
         $unwind: "$products",
@@ -55,14 +35,14 @@ export const PUT = async (req: NextRequest) => {
       },
     ]);
     // console.log(userWithWishlist);
-      if (!userWithWishlist[0]?.products) {
-      userWithWishlist = await Wishlist.find({ user: userId });
+    if (!userWithWishlist[0]?.products) {
+      userWithWishlist = await Wishlist.find({ user: params.userId });
     }
     return NextResponse.json({ user: userWithWishlist[0] }, { status: 200 });
   } catch (error) {
     console.error(error);
     return NextResponse.json(
-      { message: "Error in adding to wishlist" },
+      { message: "Error in fetching wishlist" },
       { status: 500 }
     );
   }
