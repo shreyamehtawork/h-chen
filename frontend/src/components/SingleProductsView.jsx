@@ -44,7 +44,7 @@ function SingleProductsView() {
 
   useEffect(() => {
     fetchProduct();
-  }, [category]);
+  }, [category, id]);
 
   const handleAddtoCart = () => {
     if (!selectedColor || selectedColor === "Select") {

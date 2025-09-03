@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../styling/Nav.css";
 import { FaSearch } from "react-icons/fa";
 import logo from "../assets/logofinal.png";
@@ -6,7 +6,8 @@ import slugify from "slugify";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "../store/authSlice";
 import { Link } from "react-router-dom";
-import { Badge } from "antd";
+import { Badge, Flex } from "antd";
+import { getProducts } from "../services/productService";
 
 function Nav() {
   const categories = [
@@ -17,12 +18,39 @@ function Nav() {
     "Clo-Bear",
   ];
 
+  const [products, setProducts] = useState([]);
+  const [loadingProducts, setLoadingProducts] = useState(true);
+
+  const fetchProducts = async () => {
+    const res = await getProducts({});
+    console.log("Products:", res);
+    if (res) setProducts(res);
+    setLoadingProducts(false);
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
   const dispatch = useDispatch();
   const { isAuthenticated, userData } = useSelector((state) => state.auth);
   const { items } = useSelector((state) => state.cart);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResult, setSearchResult] = useState([]);
 
   const handleLogout = () => {
     dispatch(logoutUser());
+  };
+
+  const handleSearch = (e) => {
+    let query = e.target.value;
+    setSearchQuery(query);
+
+    const results = products.filter((product) =>
+      product.title.toLowerCase().includes(query.toLowerCase())
+    );
+    setSearchResult(results);
+    console.log(query);
   };
 
   return (
@@ -100,13 +128,49 @@ function Nav() {
             <div className="d-lg-flex justify-content-lg-end align-items-center">
               {isAuthenticated ? (
                 <>
-                  <div className="d-flex align-items-center gap-2 search-wrapper">
-                    <FaSearch className="search-icon text-dark" />
+                  <div className="d-flex align-items-center position-relative search-wrapper">
+                    {/* Search Icon */}
+                    <FaSearch className="text-dark me-2" />
+
+                    {/* Search Input */}
                     <input
                       type="search"
+                      name="q"
+                      autoComplete="off"
                       placeholder="Search"
-                      className="search"
+                      style={{ minWidth: "250px", outline: "none", border: "1px solid #ccc" }}
+                      value={searchQuery}
+                      onChange={handleSearch}
                     />
+
+                    {/* Dropdown Results */}
+                    {searchQuery && (
+                      <ul
+                        className="list-group position-absolute w-100 mt-1 shadow-sm"
+                        style={{ top: "100%", zIndex: 1050 }}
+                      >
+                        {loadingProducts ? (
+                          <li className="list-group-item text-center">
+                            Loading...
+                          </li>
+                        ) : searchResult.length === 0 ? (
+                          <li className="list-group-item text-center text-muted">
+                            No results found
+                          </li>
+                        ) : (
+                          searchResult.map((product, index) => (
+                            <Link
+                              key={index}
+                              to={`/product/${product._id}`}
+                              className="list-group-item list-group-item-action"
+                              onClick={() => setSearchQuery("")}
+                            >
+                              {product.title}
+                            </Link>
+                          ))
+                        )}
+                      </ul>
+                    )}
                   </div>
 
                   <div
