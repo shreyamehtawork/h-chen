@@ -2,17 +2,22 @@
   padding-top: 100px;
   background-color: black;
   height: 85vh;
+  display: flex;
+  align-items: center;
 }
 
 .contact-heading {
   font-size: 50px;
+  font-weight: 700;
 }
 
-form > input {
+form > input,
+form > textarea {
   margin-bottom: 20px;
 }
+
 .contact-content {
-  margin-top: 100px;
+  margin-top: 80px;
 }
 
 .contact-paragraph {
@@ -22,17 +27,52 @@ form > input {
 }
 
 .contact-image {
-  width: 30%;
+  width: 100%;
+  max-width: 500px;
   height: 500px;
   object-fit: cover;
 }
 
 .contact-btn {
   margin-top: 1rem;
+  padding: 10px 0;
+  font-size: 1.1rem;
+  width: 100%;
 }
 
-/* Responsive adjustments */
+/* ---------------- RESPONSIVE ---------------- */
+@media (max-width: 1200px) {
+  .contact-heading {
+    font-size: 2.5rem;
+  }
+
+  .contact-image {
+    height: 400px;
+  }
+}
+
 @media (max-width: 991px) {
+  .contact-hero {
+    height: auto;
+    padding: 60px 20px;
+    text-align: center;
+  }
+
+  .contact-heading {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .contact-content {
+    margin-top: 40px;
+    text-align: center;
+  }
+
+  .contact-paragraph {
+    font-size: 1.1rem;
+    margin: 0 auto;
+  }
+
   #contact-section .row {
     flex-direction: column;
     align-items: center;
@@ -40,44 +80,41 @@ form > input {
 
   #contact-section .col-md-5,
   #contact-section .col-md-4 {
-    /* width: 100%; */
     max-width: 95%;
     margin-bottom: 2rem;
   }
 
   .contact-image {
     height: auto;
+    max-height: 300px;
   }
 
   form {
     width: 100%;
   }
+}
 
-  input,
-  textarea {
-    font-size: 1rem;
-  }
-  .contact-hero {
-    padding-top: 100px;
-    background-color: black;
-    height: 50vh;
-  }
-
-  .contact-btn {
-    width: 100%;
-  }
-
-  .contact-content {
-    margin-top: 60px;
-    text-align: center;
+@media (max-width: 576px) {
+  .contact-heading {
+    font-size: 1.8rem;
   }
 
   .contact-paragraph {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
 
-  .contact-heading {
-    font-size: 2rem !important;
-    text-align: center;
+  .contact-btn {
+    font-size: 1rem;
+    padding: 8px 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .contact-image {
+    width: 100%;
+    max-width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 0; /* remove curves for a banner look */
   }
 }

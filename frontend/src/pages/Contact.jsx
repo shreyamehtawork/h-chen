@@ -65,6 +65,7 @@ function Contact() {
             transition={{ duration: 0.8, delay: 0.3 }}
           >
             <form>
+              {/* <h2>Enter Your Details</h2> */}
               <label>First Name *</label>
               <input
                 className="form form-control"
@@ -76,21 +77,26 @@ function Contact() {
                 className="form form-control"
                 type="text"
                 placeholder="Enter your last name."
+                required
               />
               <label>Email *</label>
               <input
                 className="form form-control"
                 type="email"
                 placeholder="Enter your email id."
+                required
               />
               <label>Message</label>
-              <textarea className="form form-control"></textarea>
+              <textarea
+                className="form form-control"
+                placeholder="Enter your query."
+              ></textarea>
               <a
                 href="mailto:xyz@gmail.com?subject=Mail to H.CHEN&body=My email"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <button className="btn btn-outline-light contact-btn">
+                <button className="btn btn-outline-dark contact-btn">
                   Send
                 </button>
               </a>
