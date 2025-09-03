@@ -35,23 +35,23 @@ const BlogSection = () => {
       animate={isInView ? "visible" : "hidden"}
       variants={containerVariants}
     >
-      <motion.h2
+      <motion.h1
         className="text-center mb-5 fw-light"
         variants={fadeInVariants}
       >
         Read our articles
-      </motion.h2>
+      </motion.h1>
 
       <motion.div className="row g-4" variants={containerVariants}>
         <motion.div className="col-md-6" variants={fadeInVariants}>
-          <div className="article-wrapper with-overlay zoom-hover">
+          <div className="article-wrapper zoom-hover">
             <img src={article} alt="innovative" className="img-fluid" />
-            <div className="article-content overlay-text">
-              <p className="article-category mb-1">INNOVATIVE</p>
+            <div className="article-content">
+              <p className="article-category mb-1">TRENDS</p>
               <h5 className="article-title mb-2">
-                Discover our latest fashion trends exclusively
+                5 Must-Have Pieces for This Season Trends & Essentials
               </h5>
-              <p className="article-date">12 July 2024</p>
+              <p className="article-date">Tue Aug 19 2025</p>
             </div>
           </div>
         </motion.div>
@@ -82,12 +82,14 @@ const BlogSection = () => {
         ))}
       </motion.div>
 
-      <motion.div className="text-center mt-5" variants={fadeInVariants}>
-        <button className="read-more-btn">
-          <Link to="/blog" style={{ textDecoration: "none" }}>
-            READ MORE
-          </Link>
-        </button>
+      <motion.div
+        className="text-center"
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+      >
+        <a href="/blog" className="btn btn-outline-dark">
+          Read More
+        </a>
       </motion.div>
     </motion.div>
   );

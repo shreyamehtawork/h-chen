@@ -1,10 +1,10 @@
 import React, { useRef, useEffect } from "react";
-import { useLocation } from "react-router-dom"; // ✅ 1. Import this
+import { useLocation } from "react-router-dom";
 import "../styling/FilterSidebar.css";
 
 function FilterSidebar({ filters, handleFilterChange, resetFilters }) {
-  const location = useLocation(); // ✅ 2. Get current path
-  const showCategories = location.pathname === "/shop"; // ✅ 3. Check route
+  const location = useLocation();
+  const showCategories = location.pathname === "/shop";
 
   const categories = [
     "clo-zion",
@@ -14,7 +14,7 @@ function FilterSidebar({ filters, handleFilterChange, resetFilters }) {
     "clo-bear",
   ];
   const minRange = 100;
-  const maxRange = 10000;
+  const maxRange = 5000; // ✅ reduced to 5000
 
   const rangeTrackRef = useRef(null);
 
@@ -39,7 +39,7 @@ function FilterSidebar({ filters, handleFilterChange, resetFilters }) {
   }, [filters.price]);
 
   const handlePriceChange = (type, value) => {
-    const newVal = parseInt(value);
+    const newVal = parseInt(value, 10);
     if (type === "min" && newVal <= filters.price.max) {
       handleFilterChange({
         target: { name: "price", value: { ...filters.price, min: newVal } },
@@ -114,7 +114,6 @@ function FilterSidebar({ filters, handleFilterChange, resetFilters }) {
       </div>
 
       {/* Price Range Filter */}
-      {/* Price Range Filter */}
       <div className="filter-group">
         <label className="filter-subtitle">PRICE RANGE</label>
         <div className="range-slider-wrapper">
@@ -147,7 +146,7 @@ function FilterSidebar({ filters, handleFilterChange, resetFilters }) {
         </div>
       </div>
 
-      {/* ✅ Reset Filters Button */}
+      {/* Reset Filters Button */}
       <div className="filter-group mt-3">
         <button
           type="button"

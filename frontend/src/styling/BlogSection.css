@@ -1,6 +1,4 @@
-/* src/components/ArticlesSection.css */
-
-.article-wrapper {
+src/components/ArticlesSection.css .article-wrapper {
   position: relative;
   overflow: hidden;
   background-color: #fff;
@@ -21,14 +19,14 @@
   background-color: white;
 }
 
-.overlay-text {
+/* .overlay-text {
   position: absolute;
   bottom: 20px;
   left: 20px;
   color: white;
   background: none;
   padding: 0;
-}
+} */
 
 .article-category {
   font-size: 0.75rem;
@@ -79,4 +77,8 @@
 
 .zoom-hover:hover img {
   transform: scale(1.05);
+}
+.article-wrapper.featured .article-content {
+  background-color: #fff;
+  color: #000;
 }

@@ -21,7 +21,7 @@ const About4 = () => {
 
         <div className="col-md-10 mx-auto px-3 px-md-5">
           <p className="founder-paragraph">
-            Chloé is for the confident and the curious,
+            Chloe is for the confident and the curious,
             <br />
             The expressive and the evolving.
             <br />
@@ -40,7 +40,7 @@ const About4 = () => {
           </p>
 
           <h5 className="founder-signature mt-4">
-            Chloé — Where every identity is seen.
+            Chloe — Where every identity is seen.
             <br />
             Where elegance feels like home.
           </h5>

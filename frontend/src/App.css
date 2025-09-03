@@ -1,12 +1,4 @@
 @font-face {
-  font-family: "PlayfairDisplay";
-  src: url("/fonts/Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf")
-    format("oChampagnepentype");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
   font-family: "Champagne";
   src: url("/fonts/champagne---limousines/Champagne\ &\ Limousines.ttf");
 }
@@ -25,8 +17,28 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Libertinus";
+  src: url("/fonts/Libertinus_Serif_Display/LibertinusSerifDisplay-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Oswald";
+  src: url("/fonts/Oswald/Oswald-VariableFont_wght.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+/* .oswald-font {
+  font-family: "Oswald", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+} */
+
 body {
-  font-family: "PlayfairDisplay";
+  font-family: "Libertinus";
   overflow-x: hidden;
 }
 

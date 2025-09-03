@@ -1,5 +1,5 @@
 .brand-name {
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 500;
   /* margin-bottom: 2rem; */
 }
@@ -78,7 +78,6 @@ a:hover {
 
   .tagline {
     font-size: 15px;
-
   }
 
   .footer-links {

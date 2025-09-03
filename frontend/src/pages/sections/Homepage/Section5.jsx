@@ -26,7 +26,7 @@ function Section5() {
   };
 
   return (
-    <section className="bg-black">
+    <section className="bg-black mt-0">
       <motion.div
         className="section-5 text-center text-white"
         ref={sectionRef}

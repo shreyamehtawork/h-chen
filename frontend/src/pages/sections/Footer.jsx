@@ -2,12 +2,14 @@ import React from "react";
 import "../../styling/Footer.css";
 
 const Footer = () => {
+  const d = new Date();
+  let year = d.getFullYear();
   return (
     <div className="container py-5">
       <div className="row footer">
         {/* Left side */}
         <div className="col-md-6 ps-md-5 mb-md-0 left-side">
-          <h6 className="brand-name">CHLOE'S VENTURE</h6>
+          <h1 className="brand-name">CHLOE'S VENTURE</h1>
           <h2 className="tagline">
             Where every identity is seen.
             <br></br>
@@ -40,7 +42,7 @@ const Footer = () => {
       </div>
 
       <div className="small copyright">
-        © 2035 by H. Chen. Powered and secured by <a href="#">Wix</a>
+        © {year} by Chloe's Venture Pvt.Ltd
       </div>
     </div>
   );
