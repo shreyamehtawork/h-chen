@@ -10,12 +10,16 @@ import { addProductToCart, fetchCartItems } from "../store/cartSlice";
 import { createWhatsAppService } from "../services/whatsApp";
 import { FaWhatsapp } from "react-icons/fa";
 import { IoCartOutline, IoHeartOutline } from "react-icons/io5";
+import {
+  deleteWishlistItem,
+  addProductToWishlist,
+} from "../store/wishlistSlice";
 
 function SingleProductsView() {
   const { id, category } = useParams();
 
   const { userData } = useSelector((state) => state.auth);
-  // console.log("IAM THE USER:", userData.id);
+  console.log("IAM THE USER:", userData.id);
 
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.cart);
@@ -29,7 +33,7 @@ function SingleProductsView() {
   const fetchProduct = async () => {
     const res = await getProductDetails(id);
     if (res) {
-      // console.log("PRODUCT: ", res);
+      console.log("PRODUCT: ", res);
       // console.log("Whatsapp link: ", createWhatsAppService(res));
       res.whatsappLink = createWhatsAppService(res);
       setProduct(res);
@@ -69,6 +73,39 @@ function SingleProductsView() {
         // toast.error(err?.message || "Error adding product to cart")
         console.log("ERRORR THIS IUS", err)
       );
+  };
+
+  const { items: wishlistItems, loading: wishlistLoading } = useSelector(
+    (state) => state.wishlist
+  );
+
+  const handleWishlist = () => {
+    if (!product?._id) return;
+
+    // check if product is already in wishlist
+    const isInWishlist = wishlistItems?.some(
+      (item) => item._id === product._id
+    );
+
+    if (isInWishlist) {
+      dispatch(deleteWishlistItem({ productId: product._id }))
+        .unwrap()
+        .then(() => {
+          toast.info("Removed from wishlist");
+        })
+        .catch((err) => {
+          toast.error(err?.message || "Error removing from wishlist");
+        });
+    } else {
+      dispatch(addProductToWishlist({ productId: product._id }))
+        .unwrap()
+        .then(() => {
+          toast.success("Added to wishlist");
+        })
+        .catch((err) => {
+          toast.error(err?.message || "Error adding to wishlist");
+        });
+    }
   };
 
   const imageVariant = {
@@ -174,10 +211,17 @@ function SingleProductsView() {
                 <button
                   className="col-md-5 btn btn-outline-danger"
                   style={{ marginRight: "40px", padding: "10px 20px" }}
+                  onClick={handleWishlist}
+                  disabled={wishlistLoading}
                 >
                   <IoHeartOutline />
-                  WishList
+                  {wishlistItems?.some(
+                    (item) => item.productId?._id === product._id
+                  )
+                    ? "Remove from Wishlist"
+                    : "Add to Wishlist"}
                 </button>
+
                 <button
                   className="col-md-6 btn btn-outline-dark "
                   onClick={handleAddtoCart}
