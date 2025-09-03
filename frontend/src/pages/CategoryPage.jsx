@@ -97,7 +97,7 @@ function CategoryPage() {
         {/* Products */}
         <div className="col-md-9 mx-3">
           <h2 className="mb-2 text-capitalize">{category}</h2>
-          <p className="text-muted mb-4 col-md-6">tagline from backend</p>
+          {/* <p className="text-muted mb-4 col-md-6">tagline from backend</p> */}
           <div className="mb-2 fw-bold">{filteredProducts.length} Products</div>
           {loadingProducts ? (
             <Loader />
