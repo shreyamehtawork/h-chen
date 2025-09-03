@@ -54,7 +54,7 @@ export const POST = async (req: NextRequest) => {
         },
       },
     ]);
-    console.log(userWithWishlist);
+    // console.log(userWithWishlist);
     return NextResponse.json({user: userWithWishlist[0]}, { status: 200 });
 
   } catch (error) {

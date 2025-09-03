@@ -54,7 +54,7 @@ export const PUT = async (req: NextRequest) => {
         },
       },
     ]);
-    console.log(userWithWishlist);
+    // console.log(userWithWishlist);
       if (!userWithWishlist[0]?.products) {
       userWithWishlist = await Wishlist.find({ user: userId });
     }

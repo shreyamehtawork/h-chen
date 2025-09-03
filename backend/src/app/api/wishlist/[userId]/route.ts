@@ -34,7 +34,7 @@ export const GET = async (
         },
       },
     ]);
-    console.log(userWithWishlist);
+    // console.log(userWithWishlist);
     if (!userWithWishlist[0]?.products) {
       userWithWishlist = await Wishlist.find({ user: params.userId });
     }
