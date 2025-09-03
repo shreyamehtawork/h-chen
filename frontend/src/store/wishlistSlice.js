@@ -15,16 +15,16 @@ export const addProductToWishlist = createAsyncThunk(
     try {
       const { userData } = getState().auth;
 
-      const response = await api.put("/wishlist/add-to-wishlist", {
+      const response = await api.post("/wishlist/add-to-wishlist", {
         userId: userData.id,
         productId,
       });
 
-      toast.success("Added to wishlist");
-      console.log("wishlist res", response.data);
+      // toast.success("Added to wishlist");
+      // console.log("wishlist res", response.data);
       return response.data;
     } catch (error) {
-      console.log("wishlist error", error);
+      // console.log("wishlist error", error);
       return rejectWithValue(error.response?.data || { message: "Failed" });
     }
   }
@@ -50,16 +50,16 @@ export const deleteWishlistItem = createAsyncThunk(
   async ({ productId }, { rejectWithValue, getState }) => {
     try {
       const { userData } = getState().auth;
-      const response = await api.post("/wishlist/remove-from-wishlist", {
+      const response = await api.put("/wishlist/remove-from-wishlist", {
         userId: userData.id,
         productId,
       });
-      toast.info("Removed from wishlist");
+      // toast.info("Removed from wishlist");
       return response.data;
     } catch (error) {
-      toast.error(
-        error.response?.data?.message || "Failed to remove from wishlist"
-      );
+      // toast.error(
+      //   error.response?.data?.message || "Failed to remove from wishlist"
+      // );
       return rejectWithValue(error.response?.data || { message: "Failed" });
     }
   }
@@ -109,7 +109,7 @@ const wishlistSlice = createSlice({
       .addCase(deleteWishlistItem.fulfilled, (state, action) => {
         state.loading = false;
         state.items =
-          action.payload?.user?.wishlist_product_details || state.items;
+          action.payload?.user?.wishlist_product_details || [];
       })
       .addCase(deleteWishlistItem.rejected, (state, action) => {
         state.loading = false;

@@ -20,56 +20,59 @@ function Wishlist() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-[300px]">
+      <div className="d-flex justify-content-center align-items-center min-h-[300px]">
         <Spin size="large" />
       </div>
     );
   }
 
   return (
-    <div className="p-6">
-      <h1 className="text-3xl font-serif mb-6">My Wishlist</h1>
+    <div className="" style={{padding: "24px"}}>
+      <h1 className="text-3xl font-serif mb-6 ">My Wishlist</h1>
 
       {items.length === 0 ? (
         <Empty description="No items in your wishlist" />
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {items.map((item) => (
-            <div
-              key={item._id || item.id}
-              className="bg-white shadow-md rounded-2xl overflow-hidden border border-gray-200 flex flex-col"
-            >
-              {/* Product Image */}
-              <div className="h-48 w-full overflow-hidden flex justify-center items-center bg-gray-50">
-                <img
-                  src={item?.product?.image || "/placeholder.png"}
-                  alt={item?.product?.name}
-                  className="object-contain h-full"
-                />
-              </div>
+        <div className="container">
+          <div className="row g-4">
+            {items.map((item) => (
+              <div
+                className="col-12 col-sm-6 col-md-4 col-lg-3"
+                key={item._id || item.id}
+              >
+                <div className="card h-100 shadow-sm border rounded-3">
+                  {/* Product Image */}
+                  <div
+                    className="d-flex justify-content-center align-items-center bg-light"
+                    style={{ height: "200px" }}
+                  >
+                    <img
+                      src={item?.images[0] || "/placeholder.png"}
+                      alt={item?.title}
+                      className="img-fluid object-fit-cover h-100"
+                      style={{ maxHeight: "200px" }}
+                    />
+                  </div>
 
-              {/* Product Info */}
-              <div className="p-4 flex-1 flex flex-col justify-between">
-                <div>
-                  <h2 className="text-lg font-semibold">
-                    {item?.product?.name}
-                  </h2>
-                  <p className="text-gray-500 text-sm">
-                    ₹{item?.product?.price}
-                  </p>
+                  {/* Product Info */}
+                  <div className="card-body d-flex flex-column justify-content-between">
+                    <div>
+                      <h5 className="card-title">{item?.title}</h5>
+                      <p className="card-text text-muted">₹{item?.price}</p>
+                    </div>
+
+                    {/* Remove Button */}
+                    <button
+                      className="btn btn-danger mt-3"
+                      onClick={() => handleRemove(item?._id)}
+                    >
+                      Remove
+                    </button>
+                  </div>
                 </div>
-
-                {/* Remove Button */}
-                <Button
-                  danger
-                  className="mt-4"
-                  onClick={() => handleRemove(item?.product?._id)}
-                >
-                  Remove
-                </Button>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       )}
     </div>

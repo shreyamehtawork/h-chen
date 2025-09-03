@@ -19,7 +19,7 @@ function SingleProductsView() {
   const { id, category } = useParams();
 
   const { userData } = useSelector((state) => state.auth);
-  console.log("IAM THE USER:", userData.id);
+  // console.log("IAM THE USER:", userData.id);
 
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.cart);
@@ -79,13 +79,11 @@ function SingleProductsView() {
     (state) => state.wishlist
   );
 
+  let isInWishlist = wishlistItems?.some((item) => item._id === product._id);
   const handleWishlist = () => {
     if (!product?._id) return;
 
     // check if product is already in wishlist
-    const isInWishlist = wishlistItems?.some(
-      (item) => item._id === product._id
-    );
 
     if (isInWishlist) {
       dispatch(deleteWishlistItem({ productId: product._id }))
@@ -210,16 +208,14 @@ function SingleProductsView() {
               <div className="gap-1 mt-5">
                 <button
                   className="col-md-5 btn btn-outline-danger"
-                  style={{ marginRight: "40px", padding: "10px 20px" }}
+                  style={{ marginRight: "40px", padding: "10px 20px",  }}
                   onClick={handleWishlist}
                   disabled={wishlistLoading}
                 >
-                  <IoHeartOutline />
-                  {wishlistItems?.some(
-                    (item) => item.productId?._id === product._id
-                  )
-                    ? "Remove from Wishlist"
-                    : "Add to Wishlist"}
+                  <IoHeartOutline size={20} style={{ marginRight: "5px" }} />
+                  <span>
+                    {isInWishlist ? "Remove from Wishlist" : "Add to Wishlist"}
+                  </span>
                 </button>
 
                 <button
