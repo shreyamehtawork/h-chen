@@ -37,16 +37,15 @@ const Section4 = () => {
           <h2 className="faq-title">Common Questions</h2>
           <p className="faq-description ">
             Explore our frequently asked questions to find answers to queries
-            about our hats, services, and <br />
-            more. If you have additional questions, feel free to reach out to
-            our team for assistance.
+            about our hats, services, and more. If you have additional
+            questions, feel free to reach out to our team for assistance.
           </p>
         </div>
 
         <br></br>
         <div className="row">
           <div className="col-3"></div>
-          <div className="col-6">
+          <div className="col-md-6">
             {[
               // Use array to allow stagger
               {
