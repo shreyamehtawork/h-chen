@@ -14,7 +14,7 @@ function Home() {
       <Section1 />
 
       <Section2 />
-
+      <hr></hr>
       <Section3 />
       <ReviewSection />
       <Section5 />

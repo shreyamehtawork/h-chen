@@ -20,6 +20,11 @@ form > textarea {
   margin-top: 80px;
 }
 
+#contact-section label {
+  color: #000; /* or a dark gray */
+  font-weight: 500;
+}
+
 .contact-paragraph {
   font-size: 1.25rem;
   margin-top: 1.5rem;

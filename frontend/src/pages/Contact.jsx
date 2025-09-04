@@ -45,7 +45,9 @@ function Contact() {
       </div>
 
       {/* Contact Form Section */}
-      <section id="contact-section" className="text-white">
+      <section id="contact-section" className="text-dark">
+        <br></br>
+
         <div className="row mb-3">
           <motion.div
             className="col-md-5"
@@ -64,6 +66,8 @@ function Contact() {
             animate={isInView ? "visible" : "hidden"}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
+            <h3>ENTER YOUR DETAILS</h3>
+            <br></br>
             <form>
               {/* <h2>Enter Your Details</h2> */}
               <label>First Name: *</label>
