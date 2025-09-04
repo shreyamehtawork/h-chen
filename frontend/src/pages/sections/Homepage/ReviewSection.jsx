@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import "../../../styling/ReviewSection.css";
 
 const reviews = [
@@ -36,9 +36,6 @@ const reviews = [
 ];
 
 function TestimonialCarousel() {
-  const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { margin: "-100px" });
-
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(1); // 1 = next, -1 = prev
 
@@ -53,15 +50,6 @@ function TestimonialCarousel() {
   const prev = () => {
     setDirection(-1);
     setIndex((prev) => (prev - 1 + totalSlides) % totalSlides);
-  };
-
-  const fadeSection = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 1, type: "spring", stiffness: 70 },
-    },
   };
 
   const slideCard = {
@@ -82,13 +70,7 @@ function TestimonialCarousel() {
   };
 
   return (
-    <motion.section
-      className="testimonial-section container-fluid d-flex flex-wrap flex-md-nowrap"
-      ref={sectionRef}
-      variants={fadeSection}
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
-    >
+    <section className="testimonial-section container-fluid d-flex flex-wrap flex-md-nowrap">
       {/* LEFT TEXT */}
       <div className="testimonial-left d-flex flex-column justify-content-between">
         <div>
@@ -109,7 +91,7 @@ function TestimonialCarousel() {
         <AnimatePresence mode="wait" custom={direction}>
           {currentReviews.map((review, idx) => (
             <motion.div
-              key={`${index}-${idx}`} // unique per slide index
+              key={`${index}-${idx}`}
               className="testimonial-card"
               variants={slideCard}
               custom={direction}
@@ -127,7 +109,7 @@ function TestimonialCarousel() {
           ))}
         </AnimatePresence>
       </div>
-    </motion.section>
+    </section>
   );
 }
 
