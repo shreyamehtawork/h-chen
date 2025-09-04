@@ -121,8 +121,16 @@
   }
 }
 
-@media (max-width: 468px) {
+/* Reduce headline font on mobile */
+@media (max-width: 576px) {
   .headline {
-    font-size: 50px;
+    font-size: 0.8rem; /* smaller font size */
+    padding: 4px; /* reduce padding for compact look */
+  }
+}
+
+@media (max-width: 400px) {
+  .headline {
+    font-size: 0.7rem; /* even smaller on very tiny screens */
   }
 }
