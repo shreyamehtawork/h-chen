@@ -1,10 +1,12 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import "../styling/FilterSidebar.css";
 
 function FilterSidebar({ filters, handleFilterChange, resetFilters }) {
   const location = useLocation();
   const showCategories = location.pathname === "/shop";
+
+  const [isOpen, setIsOpen] = useState(false); // ✅ collapse toggle
 
   const categories = [
     "clo-zion",
@@ -13,8 +15,19 @@ function FilterSidebar({ filters, handleFilterChange, resetFilters }) {
     "clo-pixie",
     "clo-bear",
   ];
+  const colors = [
+    "Grey",
+    "Navy",
+    "Black",
+    "Beige",
+    "Blue",
+    "White",
+    "Yellow",
+    "Purple",
+  ];
+
   const minRange = 100;
-  const maxRange = 5000; // ✅ reduced to 5000
+  const maxRange = 5000;
 
   const rangeTrackRef = useRef(null);
 
@@ -62,99 +75,112 @@ function FilterSidebar({ filters, handleFilterChange, resetFilters }) {
     });
   };
 
-  return (
-    <div className="filter-sidebar">
-      <h6 className="section-title">Browse By</h6>
+  // ✅ Fix color filter
+  const handleColorChange = (e) => {
+    const { value, checked } = e.target;
+    const updatedColors = checked
+      ? [...filters.color, value]
+      : filters.color.filter((c) => c !== value);
 
-      {/* ✅ Only show category section on /shop */}
-      {showCategories && (
+    handleFilterChange({
+      target: { name: "color", value: updatedColors },
+    });
+  };
+
+  return (
+    <div className="filter-sidebar-wrapper">
+      {/* Toggle on mobile */}
+      <button
+        className="filter-toggle-btn d-md-none"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        {isOpen ? "✖ Hide Filters " : "☰ Filter & Sort "}
+      </button>
+
+      {/* Sidebar content */}
+      <div className={`filter-sidebar ${isOpen ? "open" : ""}`}>
+        <h6 className="section-title">Browse By</h6>
+
+        {showCategories && (
+          <div className="filter-group">
+            <label className="filter-subtitle">CATEGORIES</label>
+            {categories.map((c) => (
+              <div className="form-check checkbox-list" key={c}>
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  value={c}
+                  checked={filters.category.includes(c)}
+                  onChange={handleCategoryChange}
+                />
+                <label className="form-check-label">{c}</label>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Color Filter */}
+        {/* Color Filter */}
         <div className="filter-group">
-          <label className="filter-subtitle">CATEGORIES</label>
-          {categories.map((c) => (
-            <div className="form-check checkbox-list" key={c}>
+          <label className="filter-subtitle">COLOR</label>
+          {colors.map((color) => (
+            <div className="form-check checkbox-list" key={color}>
               <input
                 className="form-check-input"
                 type="checkbox"
-                name="category"
-                value={c}
-                checked={filters.category.includes(c)}
-                onChange={handleCategoryChange}
+                name="color" // ✅ Add name
+                value={color}
+                checked={filters.color.includes(color)}
+                onChange={handleColorChange} // ✅ Using correct handler
               />
-              <label className="form-check-label">{c}</label>
+              <label className="form-check-label">{color}</label>
             </div>
           ))}
         </div>
-      )}
 
-      {/* Color Filter */}
-      <div className="filter-group">
-        <label className="filter-subtitle">COLOR</label>
-        {[
-          "Grey",
-          "Navy",
-          "Black",
-          "Beige",
-          "Blue",
-          "White",
-          "Yellow",
-          "Purple",
-        ].map((color) => (
-          <div className="form-check checkbox-list" key={color}>
-            <input
-              className="form-check-input"
-              type="checkbox"
-              name="color"
-              value={color}
-              checked={filters.color.includes(color)}
-              onChange={handleFilterChange}
-            />
-            <label className="form-check-label">{color}</label>
+        {/* Price Filter (unchanged styling) */}
+        <div className="filter-group">
+          <label className="filter-subtitle">PRICE RANGE</label>
+          <div className="range-slider-wrapper">
+            <div className="tooltip-container">
+              <span className="tooltip">{filters.price.min}</span>
+              <span className="tooltip">{filters.price.max}</span>
+            </div>
+            <div className="range-slider-container">
+              <input
+                type="range"
+                min={minRange}
+                max={maxRange}
+                value={filters.price.min}
+                onChange={(e) => handlePriceChange("min", e.target.value)}
+              />
+              <input
+                type="range"
+                min={minRange}
+                max={maxRange}
+                value={filters.price.max}
+                onChange={(e) => handlePriceChange("max", e.target.value)}
+              />
+              <div className="range-slider-track" ref={rangeTrackRef}></div>
+            </div>
           </div>
-        ))}
-      </div>
 
-      {/* Price Range Filter */}
-      <div className="filter-group">
-        <label className="filter-subtitle">PRICE RANGE</label>
-        <div className="range-slider-wrapper">
-          <div className="tooltip-container">
-            <span className="tooltip">{filters.price.min}</span>
-            <span className="tooltip">{filters.price.max}</span>
-          </div>
-          <div className="range-slider-container">
-            <input
-              type="range"
-              min={minRange}
-              max={maxRange}
-              value={filters.price.min}
-              onChange={(e) => handlePriceChange("min", e.target.value)}
-            />
-            <input
-              type="range"
-              min={minRange}
-              max={maxRange}
-              value={filters.price.max}
-              onChange={(e) => handlePriceChange("max", e.target.value)}
-            />
-            <div className="range-slider-track" ref={rangeTrackRef}></div>
+          <div className="price-labels d-flex justify-content-between mt-2">
+            <span>₹{filters.price.min}</span>
+            <span>₹{filters.price.max}</span>
           </div>
         </div>
 
-        <div className="price-labels d-flex justify-content-between mt-2">
-          <span>₹{filters.price.min}</span>
-          <span>₹{filters.price.max}</span>
+        {/* Reset */}
+        <div className="filter-group mt-3">
+          <button
+            type="button"
+            className="btn btn-outline-secondary w-100"
+            onClick={resetFilters}
+          >
+            Reset Filters
+          </button>
         </div>
-      </div>
-
-      {/* Reset Filters Button */}
-      <div className="filter-group mt-3">
-        <button
-          type="button"
-          className="btn btn-outline-secondary w-100"
-          onClick={resetFilters}
-        >
-          Reset Filters
-        </button>
       </div>
     </div>
   );
