@@ -124,13 +124,13 @@
 /* Reduce headline font on mobile */
 @media (max-width: 576px) {
   .headline {
-    font-size: 5rem; /* smaller font size */
+    font-size: 0.8rem; /* smaller font size */
     padding: 4px; /* reduce padding for compact look */
   }
 }
 
 @media (max-width: 400px) {
   .headline {
-    font-size: 3rem; /* even smaller on very tiny screens */
+    font-size: 0.7rem; /* even smaller on very tiny screens */
   }
 }

@@ -48,7 +48,7 @@ function Nav() {
   return (
     <div className="mynavbar">
       <div className="headline">
-        <span>Unique Design • Premium Quality • Unbeatable Priceses</span>
+        <span>Unique Design • Premium Quality • Unbeatable Prices</span>
       </div>
 
       <div className="container-fluid">
