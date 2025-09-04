@@ -104,3 +104,25 @@
 
   padding: 10px 15px;
 }
+/* Default (mobile first) — left aligned */
+.navbar-nav {
+  display: flex;
+  justify-content: flex-start; /* left align */
+  align-items: flex-start;
+  flex-direction: column; /* stack vertically on collapse */
+}
+
+/* On larger screens (≥992px), center nav */
+@media (min-width: 992px) {
+  .navbar-nav {
+    justify-content: center; /* center on desktop */
+    align-items: center;
+    flex-direction: row; /* horizontal layout */
+  }
+}
+
+@media (max-width: 468px) {
+  .headline {
+    font-size: 50px;
+  }
+}

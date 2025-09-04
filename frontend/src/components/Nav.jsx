@@ -6,51 +6,37 @@ import slugify from "slugify";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "../store/authSlice";
 import { Link } from "react-router-dom";
-import { Badge, Flex } from "antd";
 import { getProducts } from "../services/productService";
 
 function Nav() {
-  const categories = [
-    "Clo-Aura",
-    "Clo-Prime",
-    "Clo-Pixie",
-    "Clo-Zion",
-    "Clo-Bear",
-  ];
-
+  const categories = ["Clo-Aura", "Clo-Prime", "Clo-Pixie", "Clo-Zion", "Clo-Bear"];
   const [products, setProducts] = useState([]);
   const [loadingProducts, setLoadingProducts] = useState(true);
-
-  const fetchProducts = async () => {
-    const res = await getProducts({});
-    console.log("Products:", res);
-    if (res) setProducts(res);
-    setLoadingProducts(false);
-  };
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResult, setSearchResult] = useState([]);
 
   const dispatch = useDispatch();
   const { isAuthenticated, userData } = useSelector((state) => state.auth);
   const { items } = useSelector((state) => state.cart);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [searchResult, setSearchResult] = useState([]);
 
-  const handleLogout = () => {
-    dispatch(logoutUser());
-  };
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const res = await getProducts({});
+      if (res) setProducts(res);
+      setLoadingProducts(false);
+    };
+    fetchProducts();
+  }, []);
+
+  const handleLogout = () => dispatch(logoutUser());
 
   const handleSearch = (e) => {
     let query = e.target.value;
     setSearchQuery(query);
-
-    const results = products.filter((product) =>
-      product.title.toLowerCase().includes(query.toLowerCase())
+    const results = products.filter((p) =>
+      p.title.toLowerCase().includes(query.toLowerCase())
     );
     setSearchResult(results);
-    console.log(query);
   };
 
   return (
@@ -61,212 +47,150 @@ function Nav() {
 
       <div className="container-fluid">
         <nav className="navbar navbar-expand-lg custom-navbar">
+          {/* Left Logo */}
           <a className="navbar-brand d-flex align-items-center" href="/">
             <div className="logo-circle d-flex align-items-center justify-content-center">
               <img src={logo} alt="logo" className="oval-logo" />
             </div>
             <span className="brand-text">CHLOE'S VENTURE</span>
           </a>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarsExample11"
-            aria-controls="navbarsExample11"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
 
-          <div
-            className="collapse navbar-collapse d-lg-flex "
-            id="navbarsExample11"
-          >
-            <ul className="navbar-nav ">
+          {/* Mobile Search + Toggler */}
+          <div className="d-flex d-lg-none align-items-center ms-auto">
+            <FaSearch
+              className="text-dark me-3"
+              data-bs-toggle="collapse"
+              data-bs-target="#searchCollapse"
+            />
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarsExample11"
+              aria-controls="navbarsExample11"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span className="navbar-toggler-icon"></span>
+            </button>
+          </div>
+
+          {/* Collapsing Menu */}
+          <div className="collapse navbar-collapse" id="navbarsExample11">
+            <ul className="navbar-nav mx-lg-auto">
               <li className="nav-item">
-                <a className="nav-link" href="/">
-                  Home
-                </a>
+                <Link className="nav-link" to="/">Home</Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/about">
-                  About
-                </a>
+                <Link className="nav-link" to="/about">About</Link>
               </li>
               <li className="nav-item dropdown hover-dropdown">
-                <a className="nav-link" href="/shop">
-                  Shop
-                </a>
+                <Link className="nav-link" to="/shop">Shop</Link>
                 <ul className="dropdown-menu show-on-hover">
-                  {categories.map((category, index) => {
+                  {categories.map((category, i) => {
                     const slug = slugify(category, { lower: true });
                     return (
-                      <li key={index}>
-                        <a className="dropdown-item" href={`/shop/${slug}`}>
+                      <li key={i}>
+                        <Link className="dropdown-item" to={`/shop/${slug}`}>
                           {category}
-                        </a>
+                        </Link>
                       </li>
                     );
                   })}
                 </ul>
               </li>
-
               <li className="nav-item">
-                <a className="nav-link" href="/blog">
-                  Blog
-                </a>
+                <Link className="nav-link" to="/blog">Blog</Link>
               </li>
-
               <li className="nav-item">
-                <a className="nav-link" href="/contact">
-                  Contact
-                </a>
+                <Link className="nav-link" to="/contact">Contact</Link>
               </li>
             </ul>
 
-            <div className="d-lg-flex justify-content-lg-end align-items-center">
+            {/* Desktop Right Side */}
+            <div className="d-none d-lg-flex align-items-center">
+              {/* Search */}
+              <div className="d-flex align-items-center position-relative search-wrapper me-3">
+                <FaSearch className="text-dark me-2" />
+                <input
+                  type="search"
+                  placeholder="Search"
+                  value={searchQuery}
+                  onChange={handleSearch}
+                  className="search-input"
+                />
+                {searchQuery && (
+                  <ul className="list-group position-absolute w-100 mt-1 shadow-sm">
+                    {loadingProducts ? (
+                      <li className="list-group-item text-center">Loading...</li>
+                    ) : searchResult.length === 0 ? (
+                      <li className="list-group-item text-center text-muted">No results found</li>
+                    ) : (
+                      searchResult.map((p, i) => (
+                        <Link
+                          key={i}
+                          to={`/product/${p._id}`}
+                          className="list-group-item list-group-item-action"
+                          onClick={() => setSearchQuery("")}
+                        >
+                          {p.title}
+                        </Link>
+                      ))
+                    )}
+                  </ul>
+                )}
+              </div>
+
+              {/* Cart */}
+              <Link to="/user/cart" className="text-dark me-3">🛒 My Cart</Link>
+
+              {/* User */}
+              {isAuthenticated ? (
+                <div className="dropdown">
+                  <a
+                    className="dropdown-toggle"
+                    data-bs-toggle="dropdown"
+                  >
+                    Hi, {userData?.name || "User"}
+                  </a>
+                  <ul className="dropdown-menu dropdown-menu-end">
+                    <li><Link className="dropdown-item" to="/user/order">My Orders</Link></li>
+                    <li><Link className="dropdown-item" to="/user/wishlist">Wishlist</Link></li>
+                    <li><button className="dropdown-item" onClick={handleLogout}>Logout</button></li>
+                  </ul>
+                </div>
+              ) : (
+                <Link to="/login" className="text-dark">Login / Register</Link>
+              )}
+            </div>
+
+            {/* Mobile User & Cart */}
+            <div className="d-lg-none mt-3">
+              <Link to="/user/cart" className="d-block mb-2">🛒 My Cart</Link>
               {isAuthenticated ? (
                 <>
-                  <div className="d-flex align-items-center position-relative search-wrapper">
-                    {/* Search Icon */}
-                    <FaSearch className="text-dark me-2" />
-
-                    {/* Search Input */}
-                    <input
-                      type="search"
-                      name="q"
-                      autoComplete="off"
-                      placeholder="Search"
-                      style={{ minWidth: "250px", outline: "none", border: "1px solid #ccc" }}
-                      value={searchQuery}
-                      onChange={handleSearch}
-                    />
-
-                    {/* Dropdown Results */}
-                    {searchQuery && (
-                      <ul
-                        className="list-group position-absolute w-100 mt-1 shadow-sm"
-                        style={{ top: "100%", zIndex: 1050 }}
-                      >
-                        {loadingProducts ? (
-                          <li className="list-group-item text-center">
-                            Loading...
-                          </li>
-                        ) : searchResult.length === 0 ? (
-                          <li className="list-group-item text-center text-muted">
-                            No results found
-                          </li>
-                        ) : (
-                          searchResult.map((product, index) => (
-                            <Link
-                              key={index}
-                              to={`/product/${product._id}`}
-                              className="list-group-item list-group-item-action"
-                              onClick={() => setSearchQuery("")}
-                            >
-                              {product.title}
-                            </Link>
-                          ))
-                        )}
-                      </ul>
-                    )}
-                  </div>
-
-                  <div
-                    className="d-flex align-items-center"
-                    style={{ marginLeft: "5px", marginRight: "10px" }}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="25"
-                      height="25"
-                      fill="currentColor"
-                      className="bi bi-cart-dash text-dark me-1"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M6.5 7a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1z" />
-                      <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
-                    </svg>
-                    <Link
-                      to={"/user/cart"}
-                      className="text-decoration-none text-dark"
-                    >
-                      My Cart
-                    </Link>
-                  </div>
-
-                  <div className="dropdown">
-                    <a
-                      className=" dropdown-toggle"
-                      type="button"
-                      id="userDropdown"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
-                      Hi, {userData?.name || "User"}
-                    </a>
-                    <ul
-                      className="dropdown-menu dropdown-menu-end "
-                      aria-labelledby="userDropdown"
-                    >
-                      <li>
-                        <button className="dropdown-item">
-                          <a
-                            href="/user/order"
-                            style={{ textDecoration: "none" }}
-                          >
-                            My Orders
-                          </a>
-                        </button>
-                      </li>
-                      <li>
-                        <button className="dropdown-item">
-                          <a
-                            href="/user/wishlist"
-                            style={{ textDecoration: "none" }}
-                          >
-                            Wishlist
-                          </a>
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          className="dropdown-item"
-                          onClick={handleLogout}
-                        >
-                          Logout
-                        </button>
-                      </li>
-                    </ul>
-                  </div>
+                  <Link to="/user/order" className="d-block mb-1">My Orders</Link>
+                  <Link to="/user/wishlist" className="d-block mb-1">Wishlist</Link>
+                  <button className="btn btn-link p-0 text-start" onClick={handleLogout}>
+                    Logout
+                  </button>
                 </>
               ) : (
-                <>
-                  <div
-                    className="d-flex align-items-center"
-                    style={{ marginLeft: "5px", marginRight: "20px" }}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="22"
-                      height="22"
-                      fill="currentColor"
-                      className="bi bi-person"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
-                    </svg>
-                    <Link
-                      to={"/login"}
-                      className="text-decoration-none text-dark"
-                      style={{ padding: " 0px 7px " }}
-                    >
-                      Login / Register
-                    </Link>
-                  </div>
-                </>
+                <Link to="/login" className="d-block">Login / Register</Link>
               )}
+            </div>
+          </div>
+
+          {/* Collapsible Search for Mobile */}
+          <div className="collapse" id="searchCollapse">
+            <div className="p-2">
+              <input
+                type="search"
+                className="form-control"
+                placeholder="Search products..."
+                value={searchQuery}
+                onChange={handleSearch}
+              />
             </div>
           </div>
         </nav>

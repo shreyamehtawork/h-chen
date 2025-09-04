@@ -66,7 +66,7 @@ function Contact() {
           >
             <form>
               {/* <h2>Enter Your Details</h2> */}
-              <label>First Name *</label>
+              <label>First Name: *</label>
               <input
                 className="form form-control"
                 type="text"
