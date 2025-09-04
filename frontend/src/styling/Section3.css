@@ -186,6 +186,20 @@
   text-align: center;
 }
 
+.arrow-btn {
+  background: none;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.arrow-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
 @media (max-width: 992px) {
   .section3-card {
     flex: 0 0 33.33%; /* 3 per row on tablet */
@@ -199,5 +213,22 @@
 
   .section3-img {
     height: 200px; /* smaller images so both fit nicely */
+  }
+}
+
+/* Tablet adjustments */
+@media (max-width: 992px) {
+  .arrow-btn {
+    font-size: 1.3rem;
+    padding: 4px 10px;
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 576px) {
+  .arrow-btn {
+    font-size: 0.8rem; /* smaller icon */
+    padding: 3px 8px; /* smaller circle */
+    border-width: 1.5px; /* thinner border */
   }
 }

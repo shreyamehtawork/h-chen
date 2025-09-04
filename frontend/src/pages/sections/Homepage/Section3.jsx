@@ -94,7 +94,7 @@ function Section3() {
           onClick={handlePrev}
           disabled={startIndex === 0}
         >
-          ←
+          &lt;
         </button>
 
         <motion.div
@@ -147,7 +147,7 @@ function Section3() {
           onClick={handleNext}
           disabled={startIndex + visibleCount >= allProducts.length}
         >
-          →
+          &gt;
         </button>
       </div>
 
