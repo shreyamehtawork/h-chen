@@ -9,7 +9,13 @@ import { Link } from "react-router-dom";
 import { getProducts } from "../services/productService";
 
 function Nav() {
-  const categories = ["Clo-Aura", "Clo-Prime", "Clo-Pixie", "Clo-Zion", "Clo-Bear"];
+  const categories = [
+    "Clo-Aura",
+    "Clo-Prime",
+    "Clo-Pixie",
+    "Clo-Zion",
+    "Clo-Bear",
+  ];
   const [products, setProducts] = useState([]);
   const [loadingProducts, setLoadingProducts] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
@@ -42,7 +48,7 @@ function Nav() {
   return (
     <div className="mynavbar">
       <div className="headline">
-        <span>Unique Design • Premium Quality • Unbeatable Prices</span>
+        <span>Unique Design • Premium Quality • Unbeatable Priceses</span>
       </div>
 
       <div className="container-fluid">
@@ -79,13 +85,19 @@ function Nav() {
           <div className="collapse navbar-collapse" id="navbarsExample11">
             <ul className="navbar-nav mx-lg-auto">
               <li className="nav-item">
-                <Link className="nav-link" to="/">Home</Link>
+                <Link className="nav-link" to="/">
+                  Home
+                </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/about">About</Link>
+                <Link className="nav-link" to="/about">
+                  About
+                </Link>
               </li>
               <li className="nav-item dropdown hover-dropdown">
-                <Link className="nav-link" to="/shop">Shop</Link>
+                <Link className="nav-link" to="/shop">
+                  Shop
+                </Link>
                 <ul className="dropdown-menu show-on-hover">
                   {categories.map((category, i) => {
                     const slug = slugify(category, { lower: true });
@@ -100,10 +112,14 @@ function Nav() {
                 </ul>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/blog">Blog</Link>
+                <Link className="nav-link" to="/blog">
+                  Blog
+                </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/contact">Contact</Link>
+                <Link className="nav-link" to="/contact">
+                  Contact
+                </Link>
               </li>
             </ul>
 
@@ -122,9 +138,13 @@ function Nav() {
                 {searchQuery && (
                   <ul className="list-group position-absolute w-100 mt-1 shadow-sm">
                     {loadingProducts ? (
-                      <li className="list-group-item text-center">Loading...</li>
+                      <li className="list-group-item text-center">
+                        Loading...
+                      </li>
                     ) : searchResult.length === 0 ? (
-                      <li className="list-group-item text-center text-muted">No results found</li>
+                      <li className="list-group-item text-center text-muted">
+                        No results found
+                      </li>
                     ) : (
                       searchResult.map((p, i) => (
                         <Link
@@ -142,41 +162,65 @@ function Nav() {
               </div>
 
               {/* Cart */}
-              <Link to="/user/cart" className="text-dark me-3">🛒 My Cart</Link>
+              <Link to="/user/cart" className="text-dark me-3">
+                🛒 My Cart
+              </Link>
 
               {/* User */}
               {isAuthenticated ? (
                 <div className="dropdown">
-                  <a
-                    className="dropdown-toggle"
-                    data-bs-toggle="dropdown"
-                  >
+                  <a className="dropdown-toggle" data-bs-toggle="dropdown">
                     Hi, {userData?.name || "User"}
                   </a>
                   <ul className="dropdown-menu dropdown-menu-end">
-                    <li><Link className="dropdown-item" to="/user/order">My Orders</Link></li>
-                    <li><Link className="dropdown-item" to="/user/wishlist">Wishlist</Link></li>
-                    <li><button className="dropdown-item" onClick={handleLogout}>Logout</button></li>
+                    <li>
+                      <Link className="dropdown-item" to="/user/order">
+                        My Orders
+                      </Link>
+                    </li>
+                    <li>
+                      <Link className="dropdown-item" to="/user/wishlist">
+                        Wishlist
+                      </Link>
+                    </li>
+                    <li>
+                      <button className="dropdown-item" onClick={handleLogout}>
+                        Logout
+                      </button>
+                    </li>
                   </ul>
                 </div>
               ) : (
-                <Link to="/login" className="text-dark">Login / Register</Link>
+                <Link to="/login" className="text-dark">
+                  Login / Register
+                </Link>
               )}
             </div>
 
             {/* Mobile User & Cart */}
             <div className="d-lg-none mt-3">
-              <Link to="/user/cart" className="d-block mb-2">🛒 My Cart</Link>
+              <Link to="/user/cart" className="d-block mb-2">
+                🛒 My Cart
+              </Link>
               {isAuthenticated ? (
                 <>
-                  <Link to="/user/order" className="d-block mb-1">My Orders</Link>
-                  <Link to="/user/wishlist" className="d-block mb-1">Wishlist</Link>
-                  <button className="btn btn-link p-0 text-start" onClick={handleLogout}>
+                  <Link to="/user/order" className="d-block mb-1">
+                    My Orders
+                  </Link>
+                  <Link to="/user/wishlist" className="d-block mb-1">
+                    Wishlist
+                  </Link>
+                  <button
+                    className="btn btn-link p-0 text-start"
+                    onClick={handleLogout}
+                  >
                     Logout
                   </button>
                 </>
               ) : (
-                <Link to="/login" className="d-block">Login / Register</Link>
+                <Link to="/login" className="d-block">
+                  Login / Register
+                </Link>
               )}
             </div>
           </div>
