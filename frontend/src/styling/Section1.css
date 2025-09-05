@@ -124,7 +124,7 @@
 }
 
 .hero-section {
-  min-height: 100vh;
+  min-height: 150vh;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -310,11 +310,14 @@ html {
 /* Headline block */
 .mobile-heading {
   font-family: "Oswald", sans-serif;
-  font-weight: 900;
+  font-weight: bolder;
   text-transform: uppercase;
-  font-size: 2.2rem;
-  line-height: 1.2;
+  font-size: 3rem;
+  margin-right: 0;
+  line-height: 1;
   margin-bottom: 1rem;
+  color: #444;
+  letter-spacing: -0.05em;
 }
 
 .mobile-heading .highlight {
@@ -328,7 +331,7 @@ html {
   font-size: 1rem;
   color: #444;
   margin: 0 auto 1.5rem;
-  max-width: 90%;
+  max-width: 100%;
 }
 
 /* Image with badge */
@@ -337,21 +340,13 @@ html {
   display: inline-block;
 }
 
-/* .hero-model-img {
-  height: auto;
-  max-height: 320px;
-  width: auto;
-  margin: 0 auto;
-  display: block;
-} */
-
 /* Sale badge placement */
 .mobile-image-container .sale-badge {
   position: absolute;
-  bottom: -20px;
-  right: -20px;
-  width: 120px;
-  height: 120px;
+  bottom: 50%;
+  right: -80%;
+  width: 100px;
+  height: 100px;
   background: black;
   border-radius: 50%;
   display: flex;
@@ -360,8 +355,8 @@ html {
 }
 
 .mobile-image-container .sale-badge .inner-circle {
-  width: 75px;
-  height: 75px;
+  width: 60px;
+  height: 60px;
   background: #ff9364;
   border-radius: 50%;
   display: flex;
@@ -371,12 +366,12 @@ html {
 }
 
 .mobile-image-container .sale-badge .discount {
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: bold;
 }
 
 .mobile-image-container .sale-badge .text {
-  font-size: 0.7rem;
+  font-size: 0.6rem;
 }
 
 .mobile-image-container .circular-text {
@@ -384,5 +379,24 @@ html {
   height: 100%;
   font-size: 10px;
   fill: white;
-  letter-spacing: 1.5px;
+  /* letter-spacing: 1.5px; */
 }
+
+.mobile-image-container .hero-model-img {
+  max-height: 150vh; /* Limit the maximum height to the viewport height */
+  width: 100%;
+  object-fit: contain; /* Use 'contain' to ensure the whole image is visible, or 'cover' if you want it to fill and crop */
+  display: block; /* Helps with centering */
+  margin: auto;
+}
+
+@media (max-width: 768px) {
+  .hero-model-img {
+    width: 90%;         /* take most of the screen width */
+    max-width: 400px;   /* optional: cap it so it doesn’t get too huge */
+    height: auto;       /* let height scale naturally */
+    margin: 1.5rem auto;
+    object-fit: contain;
+  }
+}
+
