@@ -70,7 +70,7 @@
 
 .cart-icon {
   font-size: 32px;
-  color: black;
+  color: white;
 }
 
 .cart-badge {
@@ -80,7 +80,7 @@
   transform: translate(-50%, -50%);
   background: none; /* no bubble */
   color: white; /* number inside cart */
-  font-size: 12px;
+  font-size: 10px;
   font-weight: bold;
   z-index: 2;
   pointer-events: none;

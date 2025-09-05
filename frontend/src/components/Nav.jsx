@@ -203,7 +203,9 @@ function Nav() {
                 {searchQuery && (
                   <ul className="list-group position-absolute w-100 mt-1 shadow-sm">
                     {loadingProducts ? (
-                      <li className="list-group-item text-center">Loading...</li>
+                      <li className="list-group-item text-center">
+                        Loading...
+                      </li>
                     ) : searchResult.length === 0 ? (
                       <li className="list-group-item text-center text-muted">
                         No results found
@@ -224,8 +226,11 @@ function Nav() {
                 )}
               </div>
 
-              <Link to="/user/cart" className="text-dark me-3 position-relative">
-                <FaShoppingCart size={22} />
+              <Link
+                to="/user/cart"
+                className="text-dark me-3 position-relative"
+              >
+                <FaShoppingCart size={25} />
                 {items.length > 0 && (
                   <span className="cart-badge">{items.length}</span>
                 )}
