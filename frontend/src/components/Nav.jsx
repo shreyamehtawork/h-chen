@@ -46,6 +46,24 @@ function Nav() {
     setSearchResult(results);
   };
 
+  // helper: close navbar collapse
+  const closeMobileMenu = () => {
+    const navbar = document.getElementById("navbarsExample11");
+    if (navbar && navbar.classList.contains("show")) {
+      const collapse = new window.bootstrap.Collapse(navbar);
+      collapse.hide();
+    }
+  };
+
+  // helper: close search collapse
+  const closeSearchCollapse = () => {
+    const search = document.getElementById("searchCollapse");
+    if (search && search.classList.contains("show")) {
+      const collapse = new window.bootstrap.Collapse(search);
+      collapse.hide();
+    }
+  };
+
   return (
     <div className="mynavbar">
       <div className="headline">
@@ -97,17 +115,21 @@ function Nav() {
           <div className="collapse navbar-collapse" id="navbarsExample11">
             <ul className="navbar-nav mx-lg-auto">
               <li className="nav-item">
-                <Link className="nav-link" to="/">
+                <Link className="nav-link" to="/" onClick={closeMobileMenu}>
                   Home
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/about">
+                <Link
+                  className="nav-link"
+                  to="/about"
+                  onClick={closeMobileMenu}
+                >
                   About
                 </Link>
               </li>
               <li className="nav-item dropdown hover-dropdown">
-                <Link className="nav-link" to="/shop">
+                <Link className="nav-link" to="/shop" onClick={closeMobileMenu}>
                   Shop
                 </Link>
                 <ul className="dropdown-menu show-on-hover">
@@ -115,7 +137,11 @@ function Nav() {
                     const slug = slugify(category, { lower: true });
                     return (
                       <li key={i}>
-                        <Link className="dropdown-item" to={`/shop/${slug}`}>
+                        <Link
+                          className="dropdown-item"
+                          to={`/shop/${slug}`}
+                          onClick={closeMobileMenu}
+                        >
                           {category}
                         </Link>
                       </li>
@@ -124,12 +150,16 @@ function Nav() {
                 </ul>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/blog">
+                <Link className="nav-link" to="/blog" onClick={closeMobileMenu}>
                   Blog
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/contact">
+                <Link
+                  className="nav-link"
+                  to="/contact"
+                  onClick={closeMobileMenu}
+                >
                   Contact
                 </Link>
               </li>
@@ -192,12 +222,20 @@ function Nav() {
                   </a>
                   <ul className="dropdown-menu dropdown-menu-end">
                     <li>
-                      <Link className="dropdown-item" to="/user/order">
+                      <Link
+                        className="dropdown-item"
+                        to="/user/order"
+                        onClick={closeMobileMenu}
+                      >
                         My Orders
                       </Link>
                     </li>
                     <li>
-                      <Link className="dropdown-item" to="/user/wishlist">
+                      <Link
+                        className="dropdown-item"
+                        to="/user/wishlist"
+                        onClick={closeMobileMenu}
+                      >
                         Wishlist
                       </Link>
                     </li>
@@ -209,31 +247,46 @@ function Nav() {
                   </ul>
                 </div>
               ) : (
-                <Link to="/login" className="text-dark">
+                <Link
+                  to="/login"
+                  className="text-dark"
+                  onClick={closeMobileMenu}
+                >
                   Login / Register
                 </Link>
               )}
             </div>
 
-            {/* Mobile User Links (cart removed, stays outside) */}
+            {/* Mobile User Links */}
             <div className="d-lg-none mt-3">
               {isAuthenticated ? (
                 <>
-                  <Link to="/user/order" className="d-block mb-1">
+                  <Link
+                    to="/user/order"
+                    className="d-block mb-1"
+                    onClick={closeMobileMenu}
+                  >
                     My Orders
                   </Link>
-                  <Link to="/user/wishlist" className="d-block mb-1">
+                  <Link
+                    to="/user/wishlist"
+                    className="d-block mb-1"
+                    onClick={closeMobileMenu}
+                  >
                     Wishlist
                   </Link>
                   <button
                     className="btn btn-link p-0 text-start"
-                    onClick={handleLogout}
+                    onClick={() => {
+                      handleLogout();
+                      closeMobileMenu();
+                    }}
                   >
                     Logout
                   </button>
                 </>
               ) : (
-                <Link to="/login" className="d-block">
+                <Link to="/login" className="d-block" onClick={closeMobileMenu}>
                   Login / Register
                 </Link>
               )}
@@ -264,7 +317,10 @@ function Nav() {
                         key={i}
                         to={`/product/${p._id}`}
                         className="list-group-item list-group-item-action"
-                        onClick={() => setSearchQuery("")}
+                        onClick={() => {
+                          setSearchQuery("");
+                          closeSearchCollapse();
+                        }}
                       >
                         {p.title}
                       </Link>
