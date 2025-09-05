@@ -7,12 +7,6 @@
   font-weight: bold;
 }
 
-/* .chloenav {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-} */
-
 .navbar {
   padding-top: 0px;
 }
@@ -23,28 +17,29 @@
   letter-spacing: 1px;
 }
 
-.search {
-  border: none;
-  width: 70px;
-}
-
-/* Make nav items center */
+/* Nav items */
 .navbar-nav {
   display: flex;
-  justify-content: center; /* centers horizontally */
-  align-items: center;
-  flex: 1; /* take full available space */
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
 }
 
-/* Ensure brand logo stays on left, nav in center, user/cart on right */
-.custom-navbar {
-  display: flex;
-  justify-content: space-between; /* logo left, nav center, user section right */
-  align-items: center;
-  width: 100%;
+@media (min-width: 992px) {
+  .navbar-nav {
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+  }
 }
 
-/* Logo container */
+.navbar-nav .nav-link {
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 10px 15px;
+}
+
+/* Logo */
 .logo-circle {
   height: 50px;
   width: 55px;
@@ -56,82 +51,52 @@
   align-items: center;
   justify-content: center;
   margin-right: 10px;
-  /* padding: 10px;
-  padding-top: 25px; */
-
-  position: relative;
-  /* top: 0px; */
 }
 
-/* Logo image */
 .oval-logo {
   display: block;
   height: 70%;
   width: auto;
   object-fit: contain;
-  margin: 0;
-}
-/* Hover dropdown behavior */
-.hover-dropdown:hover .show-on-hover {
-  display: block;
-  margin-top: 0;
 }
 
-.hover-dropdown .dropdown-menu {
-  display: none;
-  transition: all 0.3s ease;
-  border: none;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Optional styling for dropdown items */
-.dropdown-menu .dropdown-item {
-  font-family: Geo, sans-serif;
-  font-weight: bold;
-  letter-spacing: 1px;
-  font-size: 1rem;
-  padding: 10px 20px;
-}
-.navbar-nav {
-  display: flex;
-  justify-content: center; /* center the nav links */
+/* Cart icon + badge */
+.cart-icon-container {
+  position: relative;
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
 }
 
-.navbar-nav .nav-link {
-  font-size: 1rem;
+.cart-icon {
+  font-size: 32px;
+  color: black;
+}
+
+.cart-badge {
+  position: absolute;
+  top: 42%; /* lower into bucket */
+  left: 58%; /* nudge right */
+  transform: translate(-50%, -50%);
+  background: none; /* no bubble */
+  color: white; /* number inside cart */
+  font-size: 12px;
   font-weight: bold;
-
-  padding: 10px 15px;
-}
-/* Default (mobile first) — left aligned */
-.navbar-nav {
-  display: flex;
-  justify-content: flex-start; /* left align */
-  align-items: flex-start;
-  flex-direction: column; /* stack vertically on collapse */
+  z-index: 2;
+  pointer-events: none;
 }
 
-/* On larger screens (≥992px), center nav */
-@media (min-width: 992px) {
-  .navbar-nav {
-    justify-content: center; /* center on desktop */
-    align-items: center;
-    flex-direction: row; /* horizontal layout */
-  }
-}
-
-/* Reduce headline font on mobile */
+/* Mobile tweaks */
 @media (max-width: 576px) {
   .headline {
-    font-size: 0.8rem; /* smaller font size */
-    padding: 4px; /* reduce padding for compact look */
+    font-size: 0.8rem;
+    padding: 4px;
   }
 }
 
 @media (max-width: 400px) {
   .headline {
-    font-size: 0.7rem; /* even smaller on very tiny screens */
+    font-size: 0.7rem;
   }
   .brand-text {
     font-size: 0.9rem;
@@ -139,38 +104,8 @@
   .logo-circle {
     height: 40px;
     width: 40px;
-    border-radius: 0px 0px 200px 200px;
-    background-color: white;
-    border: 1px solid #1e1e1e;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* margin-right: 10px; */
-    /* padding: 10px;
-  padding-top: 25px; */
-
-    position: relative;
-    /* top: 0px; */
   }
-
-  /* Logo image */
   .oval-logo {
-    display: block;
     height: 60%;
-    width: auto;
-    object-fit: contain;
-    margin: 0;
   }
-}
-/* Ensure cart badge looks good on mobile */
-.cart-badge {
-  position: absolute;
-  top: -6px;
-  right: -10px;
-  background: red;
-  color: white;
-  font-size: 0.7rem;
-  border-radius: 50%;
-  padding: 2px 5px;
 }

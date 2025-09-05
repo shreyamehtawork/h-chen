@@ -9,7 +9,13 @@ import { Link } from "react-router-dom";
 import { getProducts } from "../services/productService";
 
 function Nav() {
-  const categories = ["Clo-Aura", "Clo-Prime", "Clo-Pixie", "Clo-Zion", "Clo-Bear"];
+  const categories = [
+    "Clo-Aura",
+    "Clo-Prime",
+    "Clo-Pixie",
+    "Clo-Zion",
+    "Clo-Bear",
+  ];
   const [products, setProducts] = useState([]);
   const [loadingProducts, setLoadingProducts] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
@@ -39,7 +45,6 @@ function Nav() {
     setSearchResult(results);
   };
 
-  // Close mobile menu after clicking a link
   const closeMobileMenu = () => {
     const navbar = document.getElementById("navbarsExample11");
     if (navbar && navbar.classList.contains("show")) {
@@ -71,14 +76,13 @@ function Nav() {
               data-bs-toggle="collapse"
               data-bs-target="#searchCollapse"
             />
-            <Link
-              to="/user/cart"
-              className="text-dark me-3 position-relative"
-              onClick={closeMobileMenu}
-            >
-              <FaShoppingCart size={22} />
-              {items.length > 0 && <span className="cart-badge">{items.length}</span>}
+
+            {/* Mobile Cart */}
+            <Link to="/user/cart" className="cart-icon-container">
+              <FaShoppingCart size={32} className="cart-icon" />
+              <span className="cart-badge">{items.length}</span>
             </Link>
+
             <button
               className="navbar-toggler"
               type="button"
@@ -101,13 +105,16 @@ function Nav() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/about" onClick={closeMobileMenu}>
+                <Link
+                  className="nav-link"
+                  to="/about"
+                  onClick={closeMobileMenu}
+                >
                   About
                 </Link>
               </li>
 
-              {/* Shop (desktop vs mobile) */}
-              {/* Desktop: hover dropdown + click navigates */}
+              {/* Shop */}
               <li className="nav-item dropdown hover-dropdown d-none d-lg-block">
                 <Link className="nav-link" to="/shop">
                   Shop
@@ -130,7 +137,7 @@ function Nav() {
                 </ul>
               </li>
 
-              {/* Mobile: collapsible dropdown only */}
+              {/* Mobile shop dropdown */}
               <li className="nav-item d-lg-none">
                 <button
                   className="nav-link d-flex justify-content-between align-items-center w-100 btn btn-link text-start"
@@ -193,7 +200,9 @@ function Nav() {
                 {searchQuery && (
                   <ul className="list-group position-absolute w-100 mt-1 shadow-sm">
                     {loadingProducts ? (
-                      <li className="list-group-item text-center">Loading...</li>
+                      <li className="list-group-item text-center">
+                        Loading...
+                      </li>
                     ) : searchResult.length === 0 ? (
                       <li className="list-group-item text-center text-muted">
                         No results found
@@ -214,10 +223,10 @@ function Nav() {
                 )}
               </div>
 
-              {/* Cart */}
-              <Link to="/user/cart" className="text-dark me-3 position-relative">
-                <FaShoppingCart size={22} />
-                {items.length > 0 && <span className="cart-badge">{items.length}</span>}
+              {/* Desktop Cart */}
+              <Link to="/user/cart" className="cart-icon-container me-3">
+                <FaShoppingCart size={32} className="cart-icon" />
+                <span className="cart-badge">{items.length}</span>
               </Link>
 
               {/* User */}
@@ -228,12 +237,20 @@ function Nav() {
                   </a>
                   <ul className="dropdown-menu dropdown-menu-end">
                     <li>
-                      <Link className="dropdown-item" to="/user/order" onClick={closeMobileMenu}>
+                      <Link
+                        className="dropdown-item"
+                        to="/user/order"
+                        onClick={closeMobileMenu}
+                      >
                         My Orders
                       </Link>
                     </li>
                     <li>
-                      <Link className="dropdown-item" to="/user/wishlist" onClick={closeMobileMenu}>
+                      <Link
+                        className="dropdown-item"
+                        to="/user/wishlist"
+                        onClick={closeMobileMenu}
+                      >
                         Wishlist
                       </Link>
                     </li>
@@ -250,53 +267,9 @@ function Nav() {
                 </Link>
               )}
             </div>
-
-            {/* Mobile User Links */}
-            <ul className="navbar-nav d-lg-none mt-3">
-              {isAuthenticated ? (
-                <>
-                  <li className="nav-item">
-                    <Link
-                      className="nav-link"
-                      to="/user/order"
-                      onClick={closeMobileMenu}
-                    >
-                      My Orders
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link
-                      className="nav-link"
-                      to="/user/wishlist"
-                      onClick={closeMobileMenu}
-                    >
-                      Wishlist
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link
-                      className="nav-link"
-                      to="/"
-                      onClick={() => {
-                        handleLogout();
-                        closeMobileMenu();
-                      }}
-                    >
-                      Logout
-                    </Link>
-                  </li>
-                </>
-              ) : (
-                <li className="nav-item">
-                  <Link className="nav-link" to="/login" onClick={closeMobileMenu}>
-                    Login / Register
-                  </Link>
-                </li>
-              )}
-            </ul>
           </div>
 
-          {/* Collapsible Search for Mobile */}
+          {/* Mobile Search Collapse */}
           <div className="collapse" id="searchCollapse">
             <div className="p-2">
               <input
