@@ -62,13 +62,24 @@ function Nav() {
             <span className="brand-text">CHLOE'S VENTURE</span>
           </a>
 
-          {/* Mobile Search + Toggler */}
+          {/* Mobile Search + Cart + Toggler */}
           <div className="d-flex d-lg-none align-items-center ms-auto">
+            {/* Search icon toggles collapse search */}
             <FaSearch
               className="text-dark me-3"
               data-bs-toggle="collapse"
               data-bs-target="#searchCollapse"
             />
+
+            {/* Cart outside collapse */}
+            <Link to="/user/cart" className="text-dark me-3 position-relative">
+              <FaShoppingCart size={22} />
+              {items.length > 0 && (
+                <span className="cart-badge">{items.length}</span>
+              )}
+            </Link>
+
+            {/* Hamburger toggler */}
             <button
               className="navbar-toggler"
               type="button"
@@ -162,8 +173,7 @@ function Nav() {
                 )}
               </div>
 
-              {/* Cart */}
-              {/* Cart */}
+              {/* Cart (desktop) */}
               <Link
                 to="/user/cart"
                 className="text-dark me-3 position-relative"
@@ -205,19 +215,8 @@ function Nav() {
               )}
             </div>
 
-            {/* Mobile User & Cart */}
+            {/* Mobile User Links (cart removed, stays outside) */}
             <div className="d-lg-none mt-3">
-              {/* Cart */}
-              <Link
-                to="/user/cart"
-                className="text-dark me-3 position-relative"
-              >
-                <FaShoppingCart size={22} />
-                {items.length > 0 && (
-                  <span className="cart-badge">{items.length}</span>
-                )}
-              </Link>
-
               {isAuthenticated ? (
                 <>
                   <Link to="/user/order" className="d-block mb-1">
@@ -251,6 +250,28 @@ function Nav() {
                 value={searchQuery}
                 onChange={handleSearch}
               />
+              {searchQuery && (
+                <ul className="list-group mt-1 shadow-sm w-100">
+                  {loadingProducts ? (
+                    <li className="list-group-item text-center">Loading...</li>
+                  ) : searchResult.length === 0 ? (
+                    <li className="list-group-item text-center text-muted">
+                      No results found
+                    </li>
+                  ) : (
+                    searchResult.map((p, i) => (
+                      <Link
+                        key={i}
+                        to={`/product/${p._id}`}
+                        className="list-group-item list-group-item-action"
+                        onClick={() => setSearchQuery("")}
+                      >
+                        {p.title}
+                      </Link>
+                    ))
+                  )}
+                </ul>
+              )}
             </div>
           </div>
         </nav>

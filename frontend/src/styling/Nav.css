@@ -133,4 +133,44 @@
   .headline {
     font-size: 0.7rem; /* even smaller on very tiny screens */
   }
+  .brand-text {
+    font-size: 0.9rem;
+  }
+  .logo-circle {
+    height: 40px;
+    width: 40px;
+    border-radius: 0px 0px 200px 200px;
+    background-color: white;
+    border: 1px solid #1e1e1e;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* margin-right: 10px; */
+    /* padding: 10px;
+  padding-top: 25px; */
+
+    position: relative;
+    /* top: 0px; */
+  }
+
+  /* Logo image */
+  .oval-logo {
+    display: block;
+    height: 60%;
+    width: auto;
+    object-fit: contain;
+    margin: 0;
+  }
+}
+/* Ensure cart badge looks good on mobile */
+.cart-badge {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  background: red;
+  color: white;
+  font-size: 0.7rem;
+  border-radius: 50%;
+  padding: 2px 5px;
 }
