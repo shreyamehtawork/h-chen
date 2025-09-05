@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "../store/authSlice";
 import { Link } from "react-router-dom";
 import { getProducts } from "../services/productService";
+import { FaShoppingCart } from "react-icons/fa";
 
 function Nav() {
   const categories = [
@@ -162,8 +163,15 @@ function Nav() {
               </div>
 
               {/* Cart */}
-              <Link to="/user/cart" className="text-dark me-3">
-                🛒 My Cart
+              {/* Cart */}
+              <Link
+                to="/user/cart"
+                className="text-dark me-3 position-relative"
+              >
+                <FaShoppingCart size={22} />
+                {items.length > 0 && (
+                  <span className="cart-badge">{items.length}</span>
+                )}
               </Link>
 
               {/* User */}
@@ -199,9 +207,17 @@ function Nav() {
 
             {/* Mobile User & Cart */}
             <div className="d-lg-none mt-3">
-              <Link to="/user/cart" className="d-block mb-2">
-                🛒 My Cart
+              {/* Cart */}
+              <Link
+                to="/user/cart"
+                className="text-dark me-3 position-relative"
+              >
+                <FaShoppingCart size={22} />
+                {items.length > 0 && (
+                  <span className="cart-badge">{items.length}</span>
+                )}
               </Link>
+
               {isAuthenticated ? (
                 <>
                   <Link to="/user/order" className="d-block mb-1">

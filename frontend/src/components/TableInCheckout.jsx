@@ -1,56 +1,89 @@
-import React from "react";
-import ModalImage from "react-modal-image";
-import { CloseSquareFilled } from "@ant-design/icons";
-import { useDispatch } from "react-redux";
-import { deleteCartItem } from "../store/cartSlice"; // adjust path if needed
+// src/pages/Cart.jsx
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCartItems } from "../../store/cartSlice";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
+import CartItemCard from "../../components/CartItemCard";
 
-function TableInCheckout({ item }) {
+export default function Cart() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleDeleteItem = () => {
-    dispatch(
-      deleteCartItem({
-        productId: item.product._id,
-        color: item.color,
-        size: item.size,
-      })
-    )
-      .unwrap()
-      .then(() => toast.success("Item removed from cart"))
-      .catch((err) => console.log(err.message));
-  };
+  const { userData } = useSelector((state) => state.auth);
+  const { items, loading } = useSelector((state) => state.cart);
+
+  useEffect(() => {
+    if (!userData) {
+      navigate("/login");
+      toast.info("Please sign up or log in to view your cart");
+    }
+  }, [userData, navigate]);
+
+  useEffect(() => {
+    if (userData) {
+      dispatch(fetchCartItems());
+    }
+  }, [dispatch, userData]);
+
+  if (loading) return <div className="p-6 text-center">Loading...</div>;
+
+  if (!items || items.length === 0) {
+    return (
+      <div className="p-6 text-center">
+        <h2 className="text-lg font-semibold">Your cart is empty</h2>
+        <button
+          className="mt-4 px-4 py-2 bg-black text-white rounded"
+          onClick={() => navigate("/shop")}
+        >
+          Continue Shopping
+        </button>
+      </div>
+    );
+  }
 
   return (
-    <tbody>
-      <tr>
-        <td>
-          <div>
-            <div className="checkout-img-wrapper">
-              <ModalImage
-                small={item.product.images[0]}
-                large={item.product.images[0]}
-              />
-            </div>
+    <div className="container py-4">
+      <div className="row g-4">
+        {/* Cart Items */}
+        <div className="col-12 col-lg-8">
+          <h4 className="mb-3">Shopping Cart ({items.length} items)</h4>
+          <div className="d-flex flex-column gap-3">
+            {items.map((item) => (
+              <CartItemCard key={item.product._id} item={item} />
+            ))}
           </div>
-        </td>
-        <td>
-          <Link to={`/product/${item.product._id}`}>{item.product.title}</Link>
-        </td>
-        <td>₹ {item.product.price}</td>
-        <td>{item.color}</td>
-        <td>{item.size}</td>
-        <td>{item.quantity}</td>
-        <td>
-          <CloseSquareFilled
-            className="checkout-remove-icon text-danger cursor-pointer text-xl"
-            onClick={handleDeleteItem}
-          />
-        </td>
-      </tr>
-    </tbody>
+        </div>
+
+        {/* Order Summary */}
+        <div className="col-12 col-lg-4">
+          <div
+            className="p-4 border rounded shadow-sm"
+            style={{ position: "sticky", top: "80px" }}
+          >
+            <h5 className="mb-3">Order Summary</h5>
+            {items.map((item, i) => (
+              <p key={i} className="mb-2 text-muted small">
+                {item.product.title} × {item.quantity} = ₹
+                {item.product.price * item.quantity}
+              </p>
+            ))}
+            <hr />
+            <h5>
+              Total: ₹
+              {items.reduce(
+                (acc, item) => acc + item.product.price * item.quantity,
+                0
+              )}
+            </h5>
+            <Link to="/user/checkout">
+              <button className="btn btn-dark w-100 mt-3 py-2 rounded">
+                Proceed to Checkout
+              </button>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
-
-export default TableInCheckout;

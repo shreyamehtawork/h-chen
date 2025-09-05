@@ -4,16 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchCartItems } from "../../store/cartSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import TableInCheckout from "../../components/TableInCheckout";
+import CartItemCard from "../../components/CartItemComponents";
 
 export default function Cart() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { userData } = useSelector((state) => state.auth); // Auth user
+  const { userData } = useSelector((state) => state.auth);
   const { items, loading } = useSelector((state) => state.cart);
-  // console.log("Mien items hu", items);
-  // 🔹 Redirect if not logged in
+
   useEffect(() => {
     if (!userData) {
       navigate("/login");
@@ -21,65 +20,11 @@ export default function Cart() {
     }
   }, [userData, navigate]);
 
-  // 🔹 Fetch cart items
   useEffect(() => {
     if (userData) {
       dispatch(fetchCartItems());
     }
   }, [dispatch, userData]);
-
-  // 🔹 Remove item from cart
-  const handleRemove = (id) => {
-    dispatch(removeFromCart(id))
-      .unwrap()
-      .then(() => toast.success("Item removed from cart"))
-      .catch(() => toast.error("Error removing item"));
-  };
-
-  function showCartItems() {
-    return (
-      <table
-        className="table table-bordered"
-        style={{
-          textAlign: "center",
-
-          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.05)",
-          borderRadius: "5px",
-          overflow: "hidden",
-        }}
-      >
-        <thead>
-          <tr>
-            {[
-              "Image",
-              "Title",
-              "Price",
-              "Color",
-              "Size",
-              "Quantity",
-              "Remove",
-            ].map((header) => (
-              <th
-                key={header}
-                scope="col"
-                style={{
-                  backgroundColor: "black",
-                  color: "white",
-                  fontSize: "16px",
-                }}
-              >
-                {header}
-              </th>
-            ))}
-          </tr>
-        </thead>
-
-        {items.map((item) => (
-          <TableInCheckout key={item.product._id} item={item} />
-        ))}
-      </table>
-    );
-  }
 
   if (loading) return <div className="p-6 text-center">Loading...</div>;
 
@@ -98,87 +43,47 @@ export default function Cart() {
   }
 
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-md-8 pt-2">
-          <h4>Your Cart / {items.length} Product(s)</h4>
-          <hr></hr>
-          {showCartItems()}
+    <div className="container py-4">
+      <div className="row g-4">
+        {/* Cart Items */}
+        <div className="col-12 col-lg-8">
+          <h4 className="mb-3">Shopping Cart ({items.length} items)</h4>
+          <div className="d-flex flex-column gap-3">
+            {items.map((item) => (
+              <CartItemCard key={item.product._id} item={item} />
+            ))}
+          </div>
         </div>
-        <div className="col-md-4 pt-2">
-          <h4>Order Summary</h4>
-          <hr></hr>
-          <p style={{ fontSize: "15px" }}>Products</p>
-          {items.map((item, i) => (
-            <div key={i}>
-              <p style={{ fontSize: "15px" }}>
-                {item.product.title} x {item.quantity} = ₹{" "}
+
+        {/* Order Summary */}
+        <div className="col-12 col-lg-4">
+          <div
+            className="p-4 border rounded shadow-sm"
+            style={{ position: "sticky", top: "80px" }}
+          >
+            <h5 className="mb-3">Order Summary</h5>
+            {items.map((item, i) => (
+              <p key={i} className="mb-2 text-muted small">
+                {item.product.title} × {item.quantity} pc(s) = ₹
                 {item.product.price * item.quantity}
               </p>
-            </div>
-          ))}
-
-          <div className="border-t flex justify-between items-center">
-            <hr></hr>
-            <h4 className="font-bold">
+            ))}
+            <hr />
+            <h5>
               Total: ₹
               {items.reduce(
                 (acc, item) => acc + item.product.price * item.quantity,
                 0
               )}
-            </h4>
-            <hr></hr>
-            <br></br>
-            <button className="btn btn-dark px-4 py-2 rounded">
-              {" "}
-              {/* <Link to="/user/checkout">Proceed To Checkout</Link> */}
-              <Link
-                to={"/user/checkout"}
-                style={{ textDecoration: "none", color: "white" }}
-              >
-                Proceed To Checkout
-              </Link>
-            </button>
+            </h5>
+            <Link to="/user/checkout">
+              <button className="btn btn-dark w-100 mt-3 py-2 rounded">
+                Proceed to Checkout
+              </button>
+            </Link>
           </div>
         </div>
       </div>
     </div>
   );
 }
-// {items.map((product, i) => (
-//           <div
-//             key={item._id}
-//             className="flex items-center justify-between border-b pb-4"
-//           >
-//             {/* Product Info */}
-//             <div className="flex items-center space-x-4" key={i}>
-//               <img
-//                 src={item.i}
-//                 alt={item.name}
-//                 className="w-20 h-20 object-cover rounded"
-//               />
-//               <div>
-//                 <h2 className="font-semibold">{item.name}</h2>
-//                 <p className="text-gray-500 text-sm">₹{item.price}</p>
-//                 {item.color && (
-//                   <p className="text-sm text-gray-500">Color: {item.color}</p>
-//                 )}
-//                 {item.size && (
-//                   <p className="text-sm text-gray-500">Size: {item.size}</p>
-//                 )}
-//               </div>
-//             </div>
-
-//             {/* Actions */}
-//             <div className="flex flex-col items-end">
-//               <p className="font-semibold">₹{item.price * item.quantity}</p>
-//               <button
-//                 className="mt-2 px-3 py-1 text-sm bg-red-500 text-white rounded"
-//                 onClick={() => handleRemove(item._id)}
-//               >
-//                 Remove
-//               </button>
-//             </div>
-//           </div>
-//         ))}
-//       </div>
