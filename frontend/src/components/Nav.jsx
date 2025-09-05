@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../styling/Nav.css";
-import { FaSearch, FaShoppingCart, FaChevronDown } from "react-icons/fa";
+import { FaSearch, FaShoppingCart } from "react-icons/fa";
 import logo from "../assets/logofinal.png";
 import slugify from "slugify";
 import { useSelector, useDispatch } from "react-redux";
@@ -61,7 +61,7 @@ function Nav() {
 
       <div className="container-fluid">
         <nav className="navbar navbar-expand-lg custom-navbar">
-          {/* Left Logo */}
+          {/* Logo */}
           <a className="navbar-brand d-flex align-items-center" href="/">
             <div className="logo-circle d-flex align-items-center justify-content-center">
               <img src={logo} alt="logo" className="oval-logo" />
@@ -76,13 +76,16 @@ function Nav() {
               data-bs-toggle="collapse"
               data-bs-target="#searchCollapse"
             />
-
-            {/* Mobile Cart */}
-            <Link to="/user/cart" className="cart-icon-container">
-              <FaShoppingCart size={32} className="cart-icon" />
-              <span className="cart-badge">{items.length}</span>
+            <Link
+              to="/user/cart"
+              className="text-dark me-3 position-relative"
+              onClick={closeMobileMenu}
+            >
+              <FaShoppingCart size={22} />
+              {items.length > 0 && (
+                <span className="cart-badge">{items.length}</span>
+              )}
             </Link>
-
             <button
               className="navbar-toggler"
               type="button"
@@ -114,7 +117,7 @@ function Nav() {
                 </Link>
               </li>
 
-              {/* Shop */}
+              {/* Shop Dropdown (Desktop) */}
               <li className="nav-item dropdown hover-dropdown d-none d-lg-block">
                 <Link className="nav-link" to="/shop">
                   Shop
@@ -137,36 +140,37 @@ function Nav() {
                 </ul>
               </li>
 
-              {/* Mobile shop dropdown */}
-              <li className="nav-item d-lg-none">
-                <button
-                  className="nav-link d-flex justify-content-between align-items-center w-100 btn btn-link text-start"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#mobileShopCollapse"
+              {/* Mobile Shop Dropdown */}
+              <li className="nav-item dropdown d-lg-none">
+                <a
+                  className="nav-link dropdown-toggle"
+                  href="#"
+                  id="mobileShopDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
                   aria-expanded="false"
-                  aria-controls="mobileShopCollapse"
                 >
-                  Shop <FaChevronDown />
-                </button>
-                <div className="collapse" id="mobileShopCollapse">
-                  <ul className="list-unstyled ps-3">
-                    {categories.map((category, i) => {
-                      const slug = slugify(category, { lower: true });
-                      return (
-                        <li key={i}>
-                          <Link
-                            className="d-block py-1"
-                            to={`/shop/${slug}`}
-                            onClick={closeMobileMenu}
-                          >
-                            {category}
-                          </Link>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
+                  Shop
+                </a>
+                <ul
+                  className="dropdown-menu"
+                  aria-labelledby="mobileShopDropdown"
+                >
+                  {categories.map((category, i) => {
+                    const slug = slugify(category, { lower: true });
+                    return (
+                      <li key={i}>
+                        <Link
+                          className="dropdown-item"
+                          to={`/shop/${slug}`}
+                          onClick={closeMobileMenu}
+                        >
+                          {category}
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
               </li>
 
               <li className="nav-item">
@@ -187,7 +191,6 @@ function Nav() {
 
             {/* Desktop Right Side */}
             <div className="d-none d-lg-flex align-items-center">
-              {/* Search */}
               <div className="d-flex align-items-center position-relative search-wrapper me-3">
                 <FaSearch className="text-dark me-2" />
                 <input
@@ -200,9 +203,7 @@ function Nav() {
                 {searchQuery && (
                   <ul className="list-group position-absolute w-100 mt-1 shadow-sm">
                     {loadingProducts ? (
-                      <li className="list-group-item text-center">
-                        Loading...
-                      </li>
+                      <li className="list-group-item text-center">Loading...</li>
                     ) : searchResult.length === 0 ? (
                       <li className="list-group-item text-center text-muted">
                         No results found
@@ -223,13 +224,13 @@ function Nav() {
                 )}
               </div>
 
-              {/* Desktop Cart */}
-              <Link to="/user/cart" className="cart-icon-container me-3">
-                <FaShoppingCart size={32} className="cart-icon" />
-                <span className="cart-badge">{items.length}</span>
+              <Link to="/user/cart" className="text-dark me-3 position-relative">
+                <FaShoppingCart size={22} />
+                {items.length > 0 && (
+                  <span className="cart-badge">{items.length}</span>
+                )}
               </Link>
 
-              {/* User */}
               {isAuthenticated ? (
                 <div className="dropdown">
                   <a className="dropdown-toggle" data-bs-toggle="dropdown">
@@ -237,20 +238,12 @@ function Nav() {
                   </a>
                   <ul className="dropdown-menu dropdown-menu-end">
                     <li>
-                      <Link
-                        className="dropdown-item"
-                        to="/user/order"
-                        onClick={closeMobileMenu}
-                      >
+                      <Link className="dropdown-item" to="/user/order">
                         My Orders
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        className="dropdown-item"
-                        to="/user/wishlist"
-                        onClick={closeMobileMenu}
-                      >
+                      <Link className="dropdown-item" to="/user/wishlist">
                         Wishlist
                       </Link>
                     </li>
@@ -267,9 +260,57 @@ function Nav() {
                 </Link>
               )}
             </div>
+
+            {/* Mobile User Links */}
+            <ul className="navbar-nav d-lg-none mt-3">
+              {isAuthenticated ? (
+                <>
+                  <li className="nav-item">
+                    <Link
+                      className="nav-link"
+                      to="/user/order"
+                      onClick={closeMobileMenu}
+                    >
+                      My Orders
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link
+                      className="nav-link"
+                      to="/user/wishlist"
+                      onClick={closeMobileMenu}
+                    >
+                      Wishlist
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link
+                      className="nav-link"
+                      to="/"
+                      onClick={() => {
+                        handleLogout();
+                        closeMobileMenu();
+                      }}
+                    >
+                      Logout
+                    </Link>
+                  </li>
+                </>
+              ) : (
+                <li className="nav-item">
+                  <Link
+                    className="nav-link"
+                    to="/login"
+                    onClick={closeMobileMenu}
+                  >
+                    Login / Register
+                  </Link>
+                </li>
+              )}
+            </ul>
           </div>
 
-          {/* Mobile Search Collapse */}
+          {/* Collapsible Search for Mobile */}
           <div className="collapse" id="searchCollapse">
             <div className="p-2">
               <input

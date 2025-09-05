@@ -109,3 +109,10 @@
     height: 60%;
   }
 }
+/* Show dropdown on hover (desktop only) */
+@media (min-width: 992px) {
+  .hover-dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+  }
+}
