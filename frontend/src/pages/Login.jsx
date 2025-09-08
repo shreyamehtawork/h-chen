@@ -1,9 +1,14 @@
 import { FcGoogle } from "react-icons/fc";
 import logo from "../assets/logofinal.png";
+import { useLocation } from "react-router-dom";
 
 export default function Login() {
+  const location = useLocation();
+  const redirectPath = location.state?.from?.pathname || "/";
+
   const handleLogin = () => {
-    window.location.href = `${import.meta.env.VITE_SERVER_BASE_URL}/api/auth/google`;
+    // send redirect path to backend
+    window.location.href = `${import.meta.env.VITE_SERVER_BASE_URL}/api/auth/google?redirect=${redirectPath}`;
   };
 
   return (
@@ -23,7 +28,6 @@ export default function Login() {
           <img
             src={logo}
             alt="Brand Aesthetics"
-            height="10"
             className="img-fluid rounded"
           />
         </div>
@@ -43,18 +47,6 @@ export default function Login() {
           >
             <FcGoogle size={28} /> Login with Google
           </button>
-
-          <p className="small text-muted text-center mt-3">
-            By logging in, you agree to our{" "}
-            <a href="#" className="text-decoration-none text-primary">
-              Terms of Service
-            </a>{" "}
-            and{" "}
-            <a href="#" className="text-decoration-none text-primary">
-              Privacy Policy
-            </a>
-            .
-          </p>
         </div>
       </div>
     </div>

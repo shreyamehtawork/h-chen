@@ -1,21 +1,51 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchWishlistItems,
   deleteWishlistItem,
 } from "../../store/wishlistSlice";
-import { Button, Spin, Empty } from "antd";
+import { addProductToCart, fetchCartItems } from "../../store/cartSlice";
+import { Spin, Empty } from "antd";
+import { toast } from "react-toastify";
 
 function Wishlist() {
   const dispatch = useDispatch();
   const { items, loading } = useSelector((state) => state.wishlist);
+
+  // Local state to track loading for each item
+  const [addingToCart, setAddingToCart] = useState({});
 
   useEffect(() => {
     dispatch(fetchWishlistItems());
   }, [dispatch]);
 
   const handleRemove = (productId) => {
-    dispatch(deleteWishlistItem({ productId }));
+    dispatch(deleteWishlistItem({ productId }))
+      .unwrap()
+      .then(() => toast.info("Removed from wishlist"));
+  };
+
+  const handleAddToCart = (product) => {
+    setAddingToCart((prev) => ({ ...prev, [product._id]: true }));
+
+    dispatch(
+      addProductToCart({
+        productId: product._id,
+        quantity: 1,
+        size: product.sizes?.[0] || null,
+        color: product.colors?.[0] || null,
+      })
+    )
+      .unwrap()
+      .then(() => {
+        toast.success("Added to cart!");
+        dispatch(fetchCartItems());
+        dispatch(deleteWishlistItem({ productId: product._id })); // remove from wishlist
+      })
+      .catch(() => toast.error("Failed to add to cart"))
+      .finally(() =>
+        setAddingToCart((prev) => ({ ...prev, [product._id]: false }))
+      );
   };
 
   if (loading) {
@@ -27,8 +57,8 @@ function Wishlist() {
   }
 
   return (
-    <div className="" style={{padding: "24px"}}>
-      <h1 className="text-3xl font-serif mb-6 ">My Wishlist</h1>
+    <div style={{ padding: "24px" }}>
+      <h1 className="text-3xl font-serif mb-6">My Wishlist</h1>
 
       {items.length === 0 ? (
         <Empty description="No items in your wishlist" />
@@ -47,7 +77,7 @@ function Wishlist() {
                     style={{ height: "200px" }}
                   >
                     <img
-                      src={item?.images[0] || "/placeholder.png"}
+                      src={item?.images?.[0] || "/placeholder.png"}
                       alt={item?.title}
                       className="img-fluid object-fit-cover h-100"
                       style={{ maxHeight: "200px" }}
@@ -61,13 +91,22 @@ function Wishlist() {
                       <p className="card-text text-muted">₹{item?.price}</p>
                     </div>
 
-                    {/* Remove Button */}
-                    <button
-                      className="btn btn-danger mt-3"
-                      onClick={() => handleRemove(item?._id)}
-                    >
-                      Remove
-                    </button>
+                    {/* Action Buttons */}
+                    <div className="d-flex flex-column gap-2 mt-3">
+                      <button
+                        className="btn btn-dark"
+                        onClick={() => handleAddToCart(item)}
+                        disabled={addingToCart[item._id]}
+                      >
+                        {addingToCart[item._id] ? "Adding..." : "Add to Cart"}
+                      </button>
+                      <button
+                        className="btn btn-danger"
+                        onClick={() => handleRemove(item?._id)}
+                      >
+                        Remove
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>

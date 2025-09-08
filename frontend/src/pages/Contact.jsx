@@ -1,15 +1,41 @@
 import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import emailjs from "emailjs-com";
 import hatStore from "../assets/contact.avif";
 import "../styling/contact.css";
+import { toast } from "react-toastify";
 
 function Contact() {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { threshold: 0.2, once: false });
+  const formRef = useRef();
 
   const fadeSlideUp = {
     hidden: { opacity: 0, y: 40, scale: 0.95 },
     visible: { opacity: 1, y: 0, scale: 1 },
+  };
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        "service_q5qtve9", // replace with your EmailJS service ID
+        "template_3si98eg", // replace with your EmailJS template ID
+        formRef.current,
+        "j9smbM-3RzacSiu2P" // replace with your EmailJS public key
+      )
+      .then(
+        (result) => {
+          toast.success(
+            "Message sent successfully! Our team shall connect to you shortly."
+          );
+          formRef.current.reset();
+        },
+        (error) => {
+          toast.error("Failed to send message, please try again.");
+        }
+      );
   };
 
   return (
@@ -46,7 +72,7 @@ function Contact() {
 
       {/* Contact Form Section */}
       <section id="contact-section" className="text-dark">
-        <br></br>
+        <br />
 
         <div className="row mb-3">
           <motion.div
@@ -67,19 +93,21 @@ function Contact() {
             transition={{ duration: 0.8, delay: 0.3 }}
           >
             <h3>ENTER YOUR DETAILS</h3>
-            <br></br>
-            <form>
-              {/* <h2>Enter Your Details</h2> */}
-              <label>First Name: *</label>
+            <br />
+            <form ref={formRef} onSubmit={sendEmail}>
+              <label>First Name *</label>
               <input
                 className="form form-control"
                 type="text"
+                name="firstName"
                 placeholder="Enter your first name."
+                required
               />
               <label>Last Name *</label>
               <input
                 className="form form-control"
                 type="text"
+                name="lastName"
                 placeholder="Enter your last name."
                 required
               />
@@ -87,23 +115,23 @@ function Contact() {
               <input
                 className="form form-control"
                 type="email"
+                name="email"
                 placeholder="Enter your email id."
                 required
               />
               <label>Message</label>
               <textarea
+                name="message"
                 className="form form-control"
                 placeholder="Enter your query."
               ></textarea>
-              <a
-                href="mailto:xyz@gmail.com?subject=Mail to H.CHEN&body=My email"
-                target="_blank"
-                rel="noopener noreferrer"
+
+              <button
+                type="submit"
+                className="btn btn-outline-dark contact-btn"
               >
-                <button className="btn btn-outline-dark contact-btn">
-                  Send
-                </button>
-              </a>
+                Send
+              </button>
             </form>
           </motion.div>
         </div>

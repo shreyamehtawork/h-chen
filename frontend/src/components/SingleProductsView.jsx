@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -19,13 +19,20 @@ function SingleProductsView() {
   const { id, category } = useParams();
   const { userData } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const { loading } = useSelector((state) => state.cart);
+  const { items: wishlistItems, loading: wishlistLoading } = useSelector(
+    (state) => state.wishlist
+  );
 
   const [product, setProduct] = useState(null);
   const [loadingProduct, setLoadingProduct] = useState(true);
   const [quantity, setQuantity] = useState(1);
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
+  const [addedToCart, setAddedToCart] = useState(false);
 
   const fetchProduct = async () => {
     const res = await getProductDetails(id);
@@ -41,6 +48,12 @@ function SingleProductsView() {
   }, [category, id]);
 
   const handleAddtoCart = () => {
+    if (!userData) {
+      // save current location & redirect to login
+      navigate("/login", { state: { from: location } });
+      return;
+    }
+
     if (!selectedColor || selectedColor === "Select") {
       toast.error("Please select a color");
       return;
@@ -61,18 +74,20 @@ function SingleProductsView() {
       .unwrap()
       .then(() => {
         toast.success("Product added to cart!");
+        setAddedToCart(true);
         dispatch(fetchCartItems());
       })
       .catch((err) => console.log("ERROR:", err));
   };
 
-  const { items: wishlistItems, loading: wishlistLoading } = useSelector(
-    (state) => state.wishlist
-  );
-
-  let isInWishlist = wishlistItems?.some((item) => item._id === product._id);
+  let isInWishlist = wishlistItems?.some((item) => item._id === product?._id);
 
   const handleWishlist = () => {
+    if (!userData) {
+      navigate("/login", { state: { from: location } });
+      return;
+    }
+
     if (!product?._id) return;
 
     if (isInWishlist) {
@@ -200,22 +215,34 @@ function SingleProductsView() {
 
               {/* Buttons */}
               <div className="d-flex flex-column flex-sm-row gap-3 mt-4">
+                {/* Wishlist */}
                 <button
                   className="btn btn-outline-danger w-100 w-sm-auto flex-fill"
                   onClick={handleWishlist}
                   disabled={wishlistLoading}
                 >
                   <IoHeartOutline size={20} className="me-2" />
-                  {isInWishlist ? "Remove from Wishlist" : "Add to Wishlist"}
+                  {!userData
+                    ? "Login to Wishlist"
+                    : isInWishlist
+                      ? "Remove from Wishlist"
+                      : "Add to Wishlist"}
                 </button>
 
+                {/* Cart */}
                 <button
                   className="btn btn-outline-dark w-100 w-sm-auto flex-fill"
                   onClick={handleAddtoCart}
                   disabled={loading}
                 >
                   <IoCartOutline className="me-1" />
-                  {loading ? "Adding..." : "Add to Cart"}
+                  {!userData
+                    ? "Login to Add to Cart"
+                    : addedToCart
+                      ? "Added"
+                      : loading
+                        ? "Adding..."
+                        : "Add to Cart"}
                 </button>
               </div>
 

@@ -24,6 +24,7 @@ function Nav() {
   const dispatch = useDispatch();
   const { isAuthenticated, userData } = useSelector((state) => state.auth);
   const { items } = useSelector((state) => state.cart);
+  const { totalQuantity } = useSelector((state) => state.cart);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -62,12 +63,12 @@ function Nav() {
       <div className="container-fluid">
         <nav className="navbar navbar-expand-lg custom-navbar">
           {/* Logo */}
-          <a className="navbar-brand d-flex align-items-center" href="/">
+          <span className="navbar-brand d-flex align-items-center">
             <div className="logo-circle d-flex align-items-center justify-content-center">
               <img src={logo} alt="logo" className="oval-logo" />
             </div>
             <span className="brand-text">CHLOE'S VENTURE</span>
-          </a>
+          </span>
 
           {/* Mobile Search + Cart + Toggler */}
           <div className="d-flex d-lg-none align-items-center ms-auto">
@@ -82,10 +83,10 @@ function Nav() {
               onClick={closeMobileMenu}
             >
               <FaShoppingCart size={22} />
-              {items.length > 0 && (
-                <span className="cart-badge">{items.length}</span>
-              )}
+
+              <span className="cart-badge">{totalQuantity}</span>
             </Link>
+
             <button
               className="navbar-toggler"
               type="button"
@@ -231,9 +232,8 @@ function Nav() {
                 className="text-dark me-3 position-relative"
               >
                 <FaShoppingCart size={25} />
-                {items.length > 0 && (
-                  <span className="cart-badge">{items.length}</span>
-                )}
+
+                <span className="cart-badge">{totalQuantity}</span>
               </Link>
 
               {isAuthenticated ? (
