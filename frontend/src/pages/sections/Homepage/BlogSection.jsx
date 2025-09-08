@@ -1,10 +1,8 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
-import "../../../styling/BlogSection.css";
 import { Link } from "react-router-dom";
-
-import article from "../../../assets/images/article.avif";
-import articles from "../../BlogData";
+import { getPosts } from "../../../services/sanityServices"; // adjust path
+import "../../../styling/BlogSection.css";
 
 const fadeInVariants = {
   hidden: { opacity: 0 },
@@ -27,6 +25,20 @@ const BlogSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { margin: "-100px", once: true });
 
+  const [blogs, setBlogs] = useState([]);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await getPosts();
+        setBlogs(response.slice(0, 3)); // only show 4 blogs
+      } catch (err) {
+        console.error("Failed to fetch blog posts", err);
+      }
+    };
+    fetchPosts();
+  }, []);
+
   return (
     <motion.div
       className="container my-5"
@@ -43,53 +55,52 @@ const BlogSection = () => {
       </motion.h1>
 
       <motion.div className="row g-4" variants={containerVariants}>
-        <motion.div className="col-md-6" variants={fadeInVariants}>
-          <div className="article-wrapper zoom-hover">
-            <img src={article} alt="innovative" className="img-fluid" />
-            <div className="article-content">
-              <p className="article-category mb-1">TRENDS</p>
-              <h5 className="article-title mb-2">
-                5 Must-Have Pieces for This Season Trends & Essentials
-              </h5>
-              <p className="article-date">Tue Aug 19 2025</p>
-            </div>
-          </div>
-        </motion.div>
-
-        {articles.map((item, index) => (
+        {blogs.map((blog, index) => (
           <motion.div
-            className="col-md-3"
+            className={index === 0 ? "col-md-6" : "col-md-3"}
             key={index}
             variants={fadeInVariants}
           >
-            <div
-              className={`article-wrapper ${
-                item.darkOverlay ? "with-overlay" : ""
-              } zoom-hover`}
+            <Link
+              to={`/blog/${blog?.slug?.current}`}
+              className="text-decoration-none text-dark"
             >
-              <img src={item.image} alt={item.title} className="img-fluid" />
               <div
-                className={`article-content ${
-                  item.darkOverlay ? "overlay-text" : ""
+                className={`article-wrapper zoom-hover ${
+                  index === 0 ? "with-overlay" : ""
                 }`}
               >
-                <p className="article-category mb-1">{item.category}</p>
-                <h5 className="article-title mb-2">{item.title}</h5>
-                <p className="article-date">{item.date}</p>
+                <img
+                  src={blog?.coverImage?.asset?.url}
+                  alt={blog?.title}
+                  className="img-fluid"
+                />
+
+                <div
+                  className={`article-content ${
+                    index === 0 ? "overlay-text" : ""
+                  }`}
+                >
+                  <p className="article-category mb-1">{blog?.tag}</p>
+                  <h5 className="article-title mb-2">{blog?.title}</h5>
+                  <p className="article-date">
+                    {new Date(blog?.date).toDateString()}
+                  </p>
+                </div>
               </div>
-            </div>
+            </Link>
           </motion.div>
         ))}
       </motion.div>
 
       <motion.div
-        className="text-center"
+        className="text-center mt-4"
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
       >
-        <a href="/blog" className="btn btn-outline-dark">
+        <Link to="/blog" className="btn btn-dark mt-2">
           Read More
-        </a>
+        </Link>
       </motion.div>
     </motion.div>
   );
