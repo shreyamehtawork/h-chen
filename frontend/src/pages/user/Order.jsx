@@ -51,10 +51,10 @@ function Order() {
                           order.status === "Delivered"
                             ? "bg-success"
                             : order.status === "Pending"
-                            ? "bg-warning text-dark"
-                            : order.status === "Processing"
-                            ? "bg-info text-dark"
-                            : "bg-secondary"
+                              ? "bg-warning text-dark"
+                              : order.status === "Processing"
+                                ? "bg-info text-dark"
+                                : "bg-secondary"
                         }`}
                       >
                         {order.status}
@@ -97,7 +97,10 @@ function Order() {
                             {item.size}
                           </span>
                         </div>
-                        <span className="badge bg-light text-dark border" style={{ fontSize: "20px" }}>
+                        <span
+                          className="badge bg-light text-dark border"
+                          style={{ fontSize: "20px" }}
+                        >
                           × {item.quantity}
                         </span>
                       </li>
@@ -105,14 +108,14 @@ function Order() {
                   </ul>
 
                   {/* Footer */}
-                  <div className="mt-3 text-end">
+                  {/* <div className="mt-3 text-end">
                     <button className="btn btn-outline-primary btn-sm">
                       View Details
                     </button>
                     <button className="btn btn-primary btn-sm ms-2">
                       Track Order
                     </button>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

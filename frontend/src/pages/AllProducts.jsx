@@ -80,7 +80,10 @@ function AllProducts() {
           filters.category.includes(product.category.toLowerCase());
 
         const inColor =
-          filters.color.length === 0 || filters.color.includes(product.color);
+          filters.color.length === 0 ||
+          (Array.isArray(product.color)
+            ? product.color.some((c) => filters.color.includes(c))
+            : filters.color.includes(product.color));
 
         const inPriceRange =
           product.price >= filters.price.min &&

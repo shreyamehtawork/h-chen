@@ -215,7 +215,7 @@ function Nav() {
                       searchResult.map((p, i) => (
                         <Link
                           key={i}
-                          to={`/product/${p._id}`}
+                          to={`/${p.category}/${p._id}`}
                           className="list-group-item list-group-item-action"
                           onClick={() => setSearchQuery("")}
                         >

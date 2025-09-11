@@ -9,6 +9,7 @@ import { fetchCartItems, clearCart } from "../store/cartSlice";
 import { createOrder } from "../store/orderSlice";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { applyCouponCode } from "../services/couponService"; // 👈 import
 
 export default function CheckoutPage() {
   const dispatch = useDispatch();
@@ -44,10 +45,20 @@ export default function CheckoutPage() {
 
   const [showAddressForm, setShowAddressForm] = useState(false);
 
+  // 👇 Coupon State
+  const [couponCode, setCouponCode] = useState("");
+  const [discount, setDiscount] = useState(0);
+  const [finalTotal, setFinalTotal] = useState(totalPrice);
+
   useEffect(() => {
     dispatch(getAllAddresses());
     dispatch(fetchCartItems());
   }, [dispatch]);
+
+  useEffect(() => {
+    // recalc final total whenever totalPrice or discount changes
+    setFinalTotal(totalPrice - discount);
+  }, [totalPrice, discount]);
 
   const handleAddressSelect = (addr) => {
     dispatch(setSelectedAddress(addr));
@@ -76,6 +87,28 @@ export default function CheckoutPage() {
     });
   };
 
+  const handleApplyCoupon = async () => {
+    if (!couponCode) {
+      toast.error("Please enter a coupon code");
+      return;
+    }
+
+    try {
+      const response = await applyCouponCode({
+        code: couponCode,
+        userId: userData?._id,
+      });
+
+      if (response && response.success) {
+        toast.success(`Coupon applied! You saved ${response.discount}% 🎉`);
+        const discountAmount = (totalPrice * response.discount) / 100;
+        setDiscount(discountAmount);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const handlePlaceOrder = () => {
     if (!selectedAddress) {
       toast.error("Please select an address before placing the order");
@@ -96,7 +129,7 @@ export default function CheckoutPage() {
         size: item.size,
       })),
       billingMethod: "cod",
-      totalPrice: totalPrice,
+      totalPrice: finalTotal, // 👈 after discount
     };
 
     dispatch(createOrder(orderDetails)).then((res) => {
@@ -111,7 +144,7 @@ export default function CheckoutPage() {
     <div className="container my-5">
       <h2 className="fw-bold mb-4">Checkout</h2>
       <div className="row">
-        {/* Address Section */}
+        {/* ---------------- Address Section ---------------- */}
         <div className="col-md-8 mb-4">
           <h4 className="mb-3">Select Delivery Address</h4>
           {addressLoading ? (
@@ -277,7 +310,7 @@ export default function CheckoutPage() {
           )}
         </div>
 
-        {/* Order Summary */}
+        {/* ---------------- Order Summary ---------------- */}
         <div className="col-md-4 mb-4">
           <h4 className="mb-3">Order Summary</h4>
           {cartLoading ? (
@@ -298,10 +331,37 @@ export default function CheckoutPage() {
                   <span>₹{item.product.price * item.quantity}</span>
                 </div>
               ))}
+
+              {/* Coupon Input */}
+              {/* <div className="d-flex mb-3">
+                <input
+                  type="text"
+                  className="form-control me-2"
+                  placeholder="Enter coupon code"
+                  value={couponCode}
+                  onChange={(e) => setCouponCode(e.target.value)}
+                />
+                <button
+                  className="btn btn-dark"
+                  type="button"
+                  onClick={handleApplyCoupon}
+                >
+                  Apply
+                </button>
+              </div>
+
+              Discount & Final Price
+              {discount > 0 && (
+                <div className="d-flex justify-content-between text-success mb-2">
+                  <span>Discount</span>
+                  <span>- ₹{discount}</span>
+                </div>
+              )} */}
               <div className="d-flex justify-content-between fw-bold mb-3">
                 <span>Total</span>
-                <span>₹{totalPrice}</span>
+                <span>₹{finalTotal}</span>
               </div>
+
               <button
                 onClick={handlePlaceOrder}
                 disabled={items.length === 0 || !selectedAddress}
