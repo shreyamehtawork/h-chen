@@ -30,8 +30,10 @@ const Footer = () => {
             </p>
           </div>
           <div className="d-flex justify-content-between flex-wrap mt-4">
-            <ul className="footer-links list-unstyled mb-0">
-              <li>Privacy Policy</li>
+            <ul className="footer-links list-unstyled mb-0 ">
+              <li>
+                <a href="/privacy-policy">Privacy Policy</a>
+              </li>
               <li>Accessibility Statement</li>
               <li>Shipping Policy</li>
               <li>Terms & Conditions</li>

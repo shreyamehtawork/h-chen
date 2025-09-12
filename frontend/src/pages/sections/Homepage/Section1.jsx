@@ -78,11 +78,13 @@ function HeroSection() {
                     d="M 100, 100 m -75, 0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0"
                   />
                 </defs>
-                <text>
-                  <textPath href="#circlePathMobile" startOffset="0%">
-                    * Summer Sale * Summer Sale * Summer Sale
-                  </textPath>
-                </text>
+                <g className="rotate-text">
+                  <text>
+                    <textPath href="#circlePathMobile" startOffset="0%">
+                      * Summer Sale * Summer Sale * Summer Sale * Summer Sale
+                    </textPath>
+                  </text>
+                </g>
               </svg>
             </div>
           </div>
@@ -175,20 +177,13 @@ function HeroSection() {
                     d="M 100, 100 m -75, 0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0"
                   />
                 </defs>
-                <text>
-                  <motion.textPath
-                    href="#circlePath"
-                    startOffset="0%"
-                    animate={{ startOffset: ["0%", "100%"] }}
-                    transition={{
-                      repeat: Infinity,
-                      duration: 10,
-                      ease: "linear",
-                    }}
-                  >
-                    * Summer Sale * Summer Sale * Summer Sale
-                  </motion.textPath>
-                </text>
+                <g className="rotate-text">
+                  <text>
+                    <textPath href="#circlePath" startOffset="0%">
+                      * Summer Sale * Summer Sale * Summer Sale * Summer Sale
+                    </textPath>
+                  </text>
+                </g>
               </svg>
             </motion.div>
           </div>

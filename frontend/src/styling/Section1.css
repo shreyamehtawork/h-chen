@@ -94,14 +94,14 @@
 }
 
 .inner-circle .text {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
 }
 
 .circular-text {
   width: 100%;
   height: 100%;
   fill: white;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: bold;
   letter-spacing: 2px;
   transform: rotate(-10deg); /* adjust rotation */
@@ -192,9 +192,9 @@ html {
   width: 100%;
   height: 100%;
   fill: white;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: bold;
-  letter-spacing: 2px;
+  /* letter-spacing: 2px; */
   transform: rotate(-10deg);
 }
 .discover-text {
@@ -377,7 +377,7 @@ html {
 .mobile-image-container .circular-text {
   width: 100%;
   height: 100%;
-  font-size: 10px;
+  font-size: 12px;
   fill: white;
   /* letter-spacing: 1.5px; */
 }
@@ -392,11 +392,24 @@ html {
 
 @media (max-width: 768px) {
   .hero-model-img {
-    width: 90%;         /* take most of the screen width */
-    max-width: 400px;   /* optional: cap it so it doesn’t get too huge */
-    height: auto;       /* let height scale naturally */
+    width: 90%; /* take most of the screen width */
+    max-width: 400px; /* optional: cap it so it doesn’t get too huge */
+    height: auto; /* let height scale naturally */
     margin: 1.5rem auto;
     object-fit: contain;
   }
 }
 
+.rotate-text {
+  animation: rotateAround 12s linear infinite;
+  transform-origin: 50% 50%; /* center of the svg */
+}
+
+@keyframes rotateAround {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

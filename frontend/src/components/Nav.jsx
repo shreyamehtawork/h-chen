@@ -83,8 +83,9 @@ function Nav() {
               onClick={closeMobileMenu}
             >
               <FaShoppingCart size={22} />
-
-              <span className="cart-badge">{totalQuantity}</span>
+              {totalQuantity > 0 && (
+                <span className="cart-badge">{totalQuantity}</span>
+              )}
             </Link>
 
             <button
@@ -232,8 +233,9 @@ function Nav() {
                 className="text-dark me-3 position-relative"
               >
                 <FaShoppingCart size={25} />
-
-                <span className="cart-badge">{totalQuantity}</span>
+                {totalQuantity > 0 && (
+                  <span className="cart-badge">{totalQuantity}</span>
+                )}
               </Link>
 
               {isAuthenticated ? (
@@ -337,7 +339,7 @@ function Nav() {
                     searchResult.map((p, i) => (
                       <Link
                         key={i}
-                        to={`/product/${p._id}`}
+                        to={`/${p.category}/${p._id}`}
                         className="list-group-item list-group-item-action"
                         onClick={() => {
                           setSearchQuery("");

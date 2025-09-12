@@ -25,6 +25,7 @@ import { fetchCartItems } from "./store/cartSlice";
 import { getPosts } from "./services/sanityServices";
 import Blog from "./pages/Blog";
 import BlogDetails from "./pages/BlogDetails";
+import PrivacyPolicy from "./pages/footer/PrivacyPolicy";
 
 function App() {
   const { isAuthenticated, token } = useSelector((state) => state.auth);
@@ -69,6 +70,7 @@ function App() {
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/register/complete" element={<RegisterComplete />} />
         <Route exact path="/shop" element={<AllProducts />} />
+        <Route exact path="/privacy-policy" element={<PrivacyPolicy />} />
 
         <Route path="/user/*" element={<UserRoute />}></Route>
       </Routes>
