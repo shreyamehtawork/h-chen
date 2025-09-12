@@ -32,12 +32,31 @@ const Footer = () => {
           <div className="d-flex justify-content-between flex-wrap mt-4">
             <ul className="footer-links list-unstyled mb-0 ">
               <li>
-                <a href="/privacy-policy">Privacy Policy</a>
+                <a href="/privacy-policy" style={{ textDecoration: "none" }}>
+                  Privacy Policy
+                </a>
               </li>
-              <li>Accessibility Statement</li>
-              <li>Shipping Policy</li>
-              <li>Terms & Conditions</li>
-              <li>Refund Policy</li>
+
+              <li>
+                <a href="/shipping-policy" style={{ textDecoration: "none" }}>
+                  Shipping Policy
+                </a>
+              </li>
+              <li>
+                {" "}
+                <a href="/refund-policy" style={{ textDecoration: "none" }}>
+                  {" "}
+                  Refund Policy
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/termsandconditions"
+                  style={{ textDecoration: "none" }}
+                >
+                  Terms & Conditions
+                </a>
+              </li>
             </ul>
           </div>
         </div>

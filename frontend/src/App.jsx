@@ -26,6 +26,9 @@ import { getPosts } from "./services/sanityServices";
 import Blog from "./pages/Blog";
 import BlogDetails from "./pages/BlogDetails";
 import PrivacyPolicy from "./pages/footer/PrivacyPolicy";
+import RefundPolicy from "./pages/footer/RefundPolicy";
+import TermsandConditions from "./pages/footer/TermsandConditions";
+import ShippingPolicy from "./pages/footer/ShippingPolicy";
 
 function App() {
   const { isAuthenticated, token } = useSelector((state) => state.auth);
@@ -71,6 +74,13 @@ function App() {
         <Route exact path="/register/complete" element={<RegisterComplete />} />
         <Route exact path="/shop" element={<AllProducts />} />
         <Route exact path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route exact path="/refund-policy" element={<RefundPolicy />} />
+        <Route
+          exact
+          path="/termsandconditions"
+          element={<TermsandConditions />}
+        />
+        <Route exact path="/shipping-policy" element={<ShippingPolicy />} />
 
         <Route path="/user/*" element={<UserRoute />}></Route>
       </Routes>

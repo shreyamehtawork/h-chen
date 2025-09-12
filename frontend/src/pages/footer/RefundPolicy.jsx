@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function PrivacyPolicy() {
+export default function RefundPolicy() {
   return (
     <div className="container py-4">
       <div className="row justify-content-center">
@@ -12,7 +12,7 @@ export default function PrivacyPolicy() {
               fontWeight: "400",
             }}
           >
-            Privacy Policy
+            Refund Policy
           </h1>
 
           <h2
@@ -35,13 +35,13 @@ export default function PrivacyPolicy() {
           >
             The explanations and information provided on this page are only
             general and high-level explanations and information on how to write
-            your own document of a Privacy Policy. You should not rely on this
+            your own document of a Refund Policy. You should not rely on this
             article as legal advice or as recommendations regarding what you
             should actually do, because we cannot know in advance what are the
-            specific privacy policies you wish to establish between your
-            business and your customers and visitors. We recommend that you seek
-            legal advice to help you understand and to assist you in the
-            creation of your own Privacy Policy.
+            specific refund policies that you wish to establish between your
+            business and your customers. We recommend that you seek legal advice
+            to help you understand and to assist you in the creation of your own
+            Refund Policy.
           </p>
 
           <h2
@@ -51,7 +51,7 @@ export default function PrivacyPolicy() {
               fontWeight: "400",
             }}
           >
-            Privacy Policy - the basics
+            Refund Policy - the basics
           </h2>
           <p
             style={{
@@ -62,13 +62,15 @@ export default function PrivacyPolicy() {
               fontWeight: "bold",
             }}
           >
-            Having said that, a privacy policy is a statement that discloses
-            some or all of the ways a website collects, uses, discloses,
-            processes, and manages the data of its visitors and customers. It
-            usually also includes a statement regarding the website’s commitment
-            to protecting its visitors’ or customers’ privacy, and an
-            explanation about the different mechanisms the website is
-            implementing in order to protect privacy.
+            Having said that, a Refund Policy is a legally binding document that
+            is meant to establish the legal relations between you and your
+            customers regarding how and if you will provide them with a refund.
+            Online businesses selling products are sometimes required (depending
+            on local laws and regulations) to present their product return
+            policy and refund policy. In some jurisdictions, this is needed in
+            order to comply with consumer protection laws. It may also help you
+            avoid legal claims from customers that are not satisfied with the
+            products they purchased.
           </p>
 
           <h2
@@ -78,7 +80,7 @@ export default function PrivacyPolicy() {
               fontWeight: "400",
             }}
           >
-            What to include in the Privacy Policy
+            What to include in the Refund Policy
           </h2>
           <p
             style={{
@@ -89,14 +91,10 @@ export default function PrivacyPolicy() {
               fontWeight: "bold",
             }}
           >
-            Generally speaking, a Privacy Policy often addresses these types of
-            issues: the types of information the website is collecting and the
-            manner in which it collects the data; an explanation about why is
-            the website collecting these types of information; what are the
-            website’s practices on sharing the information with third parties;
-            ways in which your visitors and customers can exercise their rights
-            according to the relevant privacy legislation; the specific
-            practices regarding minors’ data collection; and much, much more.
+            Generally speaking, a Refund Policy often addresses these types of
+            issues: the timeframe for asking for a refund; will the refund be
+            full or partial; under which conditions will the customer receive a
+            refund; and much, much more.
           </p>
         </div>
       </div>
