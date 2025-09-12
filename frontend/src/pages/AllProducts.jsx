@@ -10,7 +10,7 @@ function AllProducts() {
   const [filters, setFilters] = useState({
     category: [],
     color: [],
-    price: { min: 100, max: 10000 },
+    price: { min: 100, max: 5000 },
   });
 
   const [products, setProducts] = useState([]);
@@ -69,7 +69,7 @@ function AllProducts() {
     setFilters({
       category: category ? [category.toLowerCase()] : [],
       color: [],
-      price: { min: 100, max: 10000 },
+      price: { min: 100, max: 5000 },
     });
   };
 
@@ -77,13 +77,14 @@ function AllProducts() {
     ? products.filter((product) => {
         const inCategory =
           filters.category.length === 0 ||
-          filters.category.includes(product.category.toLowerCase());
+          filters.category.includes(product.category?.toLowerCase());
 
         const inColor =
           filters.color.length === 0 ||
-          (Array.isArray(product.color)
-            ? product.color.some((c) => filters.color.includes(c))
-            : filters.color.includes(product.color));
+          (Array.isArray(product.colors) &&
+            product.colors.some(
+              (c) => c && filters.color.includes(c.toLowerCase())
+            ));
 
         const inPriceRange =
           product.price >= filters.price.min &&
@@ -97,7 +98,7 @@ function AllProducts() {
     <div className="container mt-5">
       <div className="row">
         {/* Sidebar */}
-        <div className="col-md-3">
+        <div className="col-md-2">
           <FilterSidebar
             filters={filters}
             handleFilterChange={handleFilterChange}

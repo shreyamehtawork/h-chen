@@ -14,14 +14,13 @@ function CategoryPage() {
   const [filters, setFilters] = useState({
     category: [],
     color: [],
-    price: { min: 100, max: 10000 },
+    price: { min: 100, max: 5000 },
   });
 
   // Fetch products for the selected category
   const fetchProducts = async () => {
     setLoadingProducts(true);
     const res = await getProducts({ category });
-    // console.log("Category Products:", res);
     if (res) setProducts(res);
     setLoadingProducts(false);
   };
@@ -38,49 +37,45 @@ function CategoryPage() {
     }));
   }, [category]);
 
+  // ✅ Just accept the value from FilterSidebar
   const handleFilterChange = (e) => {
-    const { name, value, checked, type } = e.target;
-
-    if (type === "checkbox") {
-      setFilters((prev) => {
-        const updatedArray = checked
-          ? [...prev[name], value]
-          : prev[name].filter((item) => item !== value);
-        return { ...prev, [name]: updatedArray };
-      });
-    } else if (name === "price") {
-      setFilters((prev) => ({
-        ...prev,
-        price: value,
-      }));
-    }
+    const { name, value } = e.target;
+    setFilters((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
+  // ✅ Reset filters (keep category + match price range)
   const resetFilters = () => {
     setFilters({
       category: category ? [category.toLowerCase()] : [],
       color: [],
-      price: { min: 100, max: 10000 },
+      price: { min: 100, max: 5000 },
     });
   };
 
-  const filteredProducts = products.filter((product) => {
-    const matchCategory =
-      filters.category.length > 0
-        ? filters.category.includes(product.category.toLowerCase())
-        : true;
+  // ✅ Filtering logic
+  const filteredProducts = products.length
+    ? products.filter((product) => {
+        const inCategory =
+          filters.category.length === 0 ||
+          filters.category.includes(product.category?.toLowerCase());
 
-    const matchColor =
-      filters.color.length > 0
-        ? filters.color.includes(product.color)
-        : true;
+        const inColor =
+          filters.color.length === 0 ||
+          (Array.isArray(product.colors) &&
+            product.colors.some(
+              (c) => c && filters.color.includes(c.toLowerCase())
+            ));
 
-    const matchPrice =
-      product.price >= filters.price.min &&
-      product.price <= filters.price.max;
+        const inPriceRange =
+          product.price >= filters.price.min &&
+          product.price <= filters.price.max;
 
-    return matchCategory && matchColor && matchPrice;
-  });
+        return inCategory && inColor && inPriceRange;
+      })
+    : [];
 
   return (
     <div className="container mt-5">
@@ -97,7 +92,6 @@ function CategoryPage() {
         {/* Products */}
         <div className="col-md-9 mx-3">
           <h2 className="mb-2 text-capitalize">{category}</h2>
-          {/* <p className="text-muted mb-4 col-md-6">tagline from backend</p> */}
           <div className="mb-2 fw-bold">{filteredProducts.length} Products</div>
           {loadingProducts ? (
             <Loader />

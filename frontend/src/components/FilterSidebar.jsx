@@ -6,7 +6,7 @@ function FilterSidebar({ filters, handleFilterChange, resetFilters }) {
   const location = useLocation();
   const showCategories = location.pathname === "/shop";
 
-  const [isOpen, setIsOpen] = useState(false); // ✅ collapse toggle
+  const [isOpen, setIsOpen] = useState(false);
 
   const categories = [
     "clo-zion",
@@ -15,15 +15,17 @@ function FilterSidebar({ filters, handleFilterChange, resetFilters }) {
     "clo-pixie",
     "clo-bear",
   ];
+
+  // ✅ lowercase values, but display with proper case in labels
   const colors = [
-    "Grey",
-    "Navy",
-    "Black",
-    "Beige",
-    "Blue",
-    "White",
-    "Yellow",
-    "Purple",
+    "gray",
+    "navy",
+    "black",
+    "beige",
+    "blue",
+    "white",
+    "yellow",
+    "purple",
   ];
 
   const minRange = 100;
@@ -75,12 +77,13 @@ function FilterSidebar({ filters, handleFilterChange, resetFilters }) {
     });
   };
 
-  // ✅ Fix color filter
+  // ✅ Normalize colors to lowercase
   const handleColorChange = (e) => {
     const { value, checked } = e.target;
+    const colorValue = value.toLowerCase();
     const updatedColors = checked
-      ? [...filters.color, value]
-      : filters.color.filter((c) => c !== value);
+      ? [...filters.color, colorValue]
+      : filters.color.filter((c) => c !== colorValue);
 
     handleFilterChange({
       target: { name: "color", value: updatedColors },
@@ -89,7 +92,6 @@ function FilterSidebar({ filters, handleFilterChange, resetFilters }) {
 
   return (
     <div className="filter-sidebar-wrapper">
-      {/* Toggle on mobile */}
       <button
         className="filter-toggle-btn d-md-none"
         onClick={() => setIsOpen(!isOpen)}
@@ -97,9 +99,8 @@ function FilterSidebar({ filters, handleFilterChange, resetFilters }) {
         {isOpen ? "✖ Hide Filters " : "☰ Filter & Sort "}
       </button>
 
-      {/* Sidebar content */}
       <div className={`filter-sidebar ${isOpen ? "open" : ""}`}>
-        <h6 className="section-title">Browse By</h6>
+        <h6 className="section-title">BROWSE BY</h6>
 
         {showCategories && (
           <div className="filter-group">
@@ -119,8 +120,7 @@ function FilterSidebar({ filters, handleFilterChange, resetFilters }) {
           </div>
         )}
 
-        {/* Color Filter */}
-        {/* Color Filter */}
+        {/* ✅ Color Filter */}
         <div className="filter-group">
           <label className="filter-subtitle">COLOR</label>
           {colors.map((color) => (
@@ -128,17 +128,20 @@ function FilterSidebar({ filters, handleFilterChange, resetFilters }) {
               <input
                 className="form-check-input"
                 type="checkbox"
-                name="color" // ✅ Add name
+                name="color"
                 value={color}
                 checked={filters.color.includes(color)}
-                onChange={handleColorChange} // ✅ Using correct handler
+                onChange={handleColorChange}
               />
-              <label className="form-check-label">{color}</label>
+              {/* Show capitalized label */}
+              <label className="form-check-label">
+                {color.charAt(0).toUpperCase() + color.slice(1)}
+              </label>
             </div>
           ))}
         </div>
 
-        {/* Price Filter (unchanged styling) */}
+        {/* Price Filter */}
         <div className="filter-group">
           <label className="filter-subtitle">PRICE RANGE</label>
           <div className="range-slider-wrapper">
@@ -171,7 +174,6 @@ function FilterSidebar({ filters, handleFilterChange, resetFilters }) {
           </div>
         </div>
 
-        {/* Reset */}
         <div className="filter-group mt-3">
           <button
             type="button"
