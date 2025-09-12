@@ -83,7 +83,7 @@ function Nav() {
                 className="text-dark me-3 position-relative"
                 onClick={closeMobileMenu}
               >
-                <FaShoppingCart size={22} />
+                <FaShoppingCart size={24} />
                 {totalQuantity > 0 && (
                   <span className="cart-badge">{totalQuantity}</span>
                 )}
@@ -236,7 +236,7 @@ function Nav() {
                   className="text-dark me-3 position-relative"
                   onClick={closeMobileMenu}
                 >
-                  <FaShoppingCart size={22} />
+                  <FaShoppingCart size={28} />
                   {totalQuantity > 0 && (
                     <span className="cart-badge">{totalQuantity}</span>
                   )}
