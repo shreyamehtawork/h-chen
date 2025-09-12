@@ -77,16 +77,18 @@ function Nav() {
               data-bs-toggle="collapse"
               data-bs-target="#searchCollapse"
             />
-            <Link
-              to="/user/cart"
-              className="text-dark me-3 position-relative"
-              onClick={closeMobileMenu}
-            >
-              <FaShoppingCart size={22} />
-              {totalQuantity > 0 && (
-                <span className="cart-badge">{totalQuantity}</span>
-              )}
-            </Link>
+            {isAuthenticated && (
+              <Link
+                to="/user/cart"
+                className="text-dark me-3 position-relative"
+                onClick={closeMobileMenu}
+              >
+                <FaShoppingCart size={22} />
+                {totalQuantity > 0 && (
+                  <span className="cart-badge">{totalQuantity}</span>
+                )}
+              </Link>
+            )}
 
             <button
               className="navbar-toggler"
@@ -228,15 +230,18 @@ function Nav() {
                 )}
               </div>
 
-              <Link
-                to="/user/cart"
-                className="text-dark me-3 position-relative"
-              >
-                <FaShoppingCart size={25} />
-                {totalQuantity > 0 && (
-                  <span className="cart-badge">{totalQuantity}</span>
-                )}
-              </Link>
+              {isAuthenticated && (
+                <Link
+                  to="/user/cart"
+                  className="text-dark me-3 position-relative"
+                  onClick={closeMobileMenu}
+                >
+                  <FaShoppingCart size={22} />
+                  {totalQuantity > 0 && (
+                    <span className="cart-badge">{totalQuantity}</span>
+                  )}
+                </Link>
+              )}
 
               {isAuthenticated ? (
                 <div className="dropdown">
