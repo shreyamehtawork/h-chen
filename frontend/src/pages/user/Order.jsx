@@ -36,10 +36,10 @@ function Order() {
                   {/* Order Header */}
                   <div className="d-flex justify-content-between align-items-center border-bottom pb-3 mb-3">
                     <div>
-                      <h5 className="card-title mb-1 fw-bold">
+                      <h6 className="card-title mb-1 fw-bold">
                         Order ID:{" "}
                         <span className="text-primary">{order._id}</span>
-                      </h5>
+                      </h6>
                       <small className="text-muted">
                         Placed on:{" "}
                         {new Date(order.createdAt).toLocaleDateString()}
