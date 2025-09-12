@@ -90,7 +90,7 @@ function CategoryPage() {
         </div>
 
         {/* Products */}
-        <div className="col-md-9 mx-3">
+        <div className="col-md-9">
           <h2 className="mb-2 text-capitalize">{category}</h2>
           <div className="mb-2 fw-bold">{filteredProducts.length} Products</div>
           {loadingProducts ? (

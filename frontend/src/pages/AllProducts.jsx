@@ -107,7 +107,7 @@ function AllProducts() {
         </div>
 
         {/* Products */}
-        <div className="col-md-9">
+        <div className="col-md-9 mx-0">
           <h2 className="mb-2 text-capitalize">
             {category ? category : "All Products"}
           </h2>
