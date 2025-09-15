@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import "../../../styling/About1.css";
-import aboutImage from "../../../assets/images/infants/image10.jpg";
+import aboutImage from "../../../assets/images/cvbox.jpg";
 
 function About1() {
   const sectionRef = useRef(null);
@@ -13,12 +13,11 @@ function About1() {
       <div className="text-center pt-5">
         <motion.h4
           id="abouttitle"
-          style={{ fontSize: "50px" }}
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
           transition={{ duration: 0.8 }}
         >
-          WHY CHLOE
+          WHY CHOOSE US?
         </motion.h4>
         <motion.h5
           className="mt-5 aboutsubtitle"
@@ -41,19 +40,16 @@ function About1() {
           animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
           transition={{ duration: 0.9 }}
         >
-          <p>
-            We created Chloe for{" "}
-            <strong>every soul who’s ever felt unseen</strong>.
-            <br />
-            For women who carry grace like fire,
-            <br />
-            Men who choose tenderness without apology,
-            <br />
-            Children who dream in color,
-            <br />
-            And every beautiful human in between —<br />
-            across identities and spectrums.
-          </p>
+          <div className="col-lg-8">
+            <h5 className="pb-3">Our Vision </h5>
+            <p>
+              To establish Chloe’s Venture as a house of rarity and refinement,
+              where fashion is not consumed but curated. We envision a world
+              where luxury comes fabric by fabric, customized with precision,
+              never repeated, and eventually expands into a complete lifestyle
+              empire.
+            </p>
+          </div>
         </motion.div>
 
         <motion.div

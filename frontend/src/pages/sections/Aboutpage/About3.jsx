@@ -16,7 +16,7 @@ function About3() {
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.8 }}
           >
-            OUR BELIEFS
+            OUR MISSION
           </motion.h2>
         </div>
 
@@ -28,11 +28,11 @@ function About3() {
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
               transition={{ duration: 0.8 }}
             >
-              Our Philosophy
+              Our Goal & Aim
             </motion.div>
 
             <motion.div
-              className="col-md-6 px-5 py-5"
+              className="col-lg-7 py-5"
               id="about-right"
               initial={{ opacity: 0, x: 50, filter: "blur(4px)" }}
               animate={
@@ -43,20 +43,27 @@ function About3() {
               transition={{ duration: 0.9 }}
             >
               <p>
-                At Chloe, we don’t dress bodies —
-                <br />
-                We <strong>honor stories</strong>.
-                <br />
-                Each piece is carefully crafted to celebrate individuality with
-                elegance, blending heritage artistry with a{" "}
-                <em>quiet luxury</em> that doesn’t scream — it speaks.
-              </p>
-              <br />
-              <p>
-                Because *premium* isn’t about price tags, It’s about purpose,
-                precision, and presence. It’s how a product makes you *feel*.
-                And we want you to feel *valued*, **understood**, and
-                **beautifully bold** — just as you are.
+                Chloe’s Venture is committed to: <br></br>
+                <br></br>
+                <ul className="points">
+                  <li>
+                    Introducing exclusive fabrics, one launch at a time,
+                    ensuring every edition is rare.
+                  </li>
+                  <li>
+                    Offering customization so that each garment reflects
+                    individuality, not mass trends.
+                  </li>
+                  <li>
+                    Expanding gradually from clothing into accessories,
+                    interiors, and lifestyle products, creating an ecosystem of
+                    elegance.{" "}
+                  </li>
+                </ul>{" "}
+                <br></br>Standing for rarity, legacy & permanence — not
+                overproduction and clearance.
+                <br></br>Serving those who invest in timeless elegance, not
+                temporary fashion.
               </p>
             </motion.div>
           </div>

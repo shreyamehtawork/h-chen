@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import image1 from "../../../assets/images/women/image1.jpg";
+import image1 from "../../../assets/images/cvbox.jpg";
 import "../../../styling/Section2.css";
 
 function Section2() {

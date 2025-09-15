@@ -1,6 +1,6 @@
 import React from "react";
 import "../../../styling/Section6.css";
-import herovideo from "../../../assets/hero.mp4";
+import herovideo from "../../../assets/herofinal.mp4";
 
 function Section6() {
   return (

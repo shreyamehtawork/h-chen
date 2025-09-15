@@ -2,15 +2,15 @@
   padding: 20px 0;
 }
 
-.about2-image {
-  width: 70vw;
+.about2vd {
+  width: 100vw;
   height: 90vh;
-  object-fit: fill;
+  object-fit: cover;
   object-position: top center;
   /* max-width: 100%; */
   display: block;
   margin: 0 auto;
-} 
+}
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
