@@ -17,6 +17,7 @@ function About() {
       <About1 />
       <About3 />
       <About2 />
+      {/* <hr></hr> */}
       <About5 />
       <About6 />
       <About4 />

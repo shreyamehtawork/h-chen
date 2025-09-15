@@ -10,14 +10,14 @@ function About6() {
   return (
     <div className="about6-section" ref={sectionRef}>
       {/* Title & Subtitle */}
-      <div className="text-center pt-5">
+      <div className="text-center">
         <motion.h4
           id="about6title"
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
           transition={{ duration: 0.8 }}
         >
-          BUT WHY TRUST , WHEN WE ARE NEW ?
+          BUT WHY TRUST ,<br></br> WHEN WE ARE NEW ?
         </motion.h4>
         <motion.h5
           className="mt-5 about6subtitle"

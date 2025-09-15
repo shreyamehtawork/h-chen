@@ -9,7 +9,7 @@ function About5() {
   const isInView = useInView(sectionRef, { threshold: 0.3 });
 
   return (
-    <section ref={sectionRef} id="about-section" className="about5-section">
+    <section ref={sectionRef} id="about5-section" className="about5-section">
       <Container>
         <Row className="align-items-center" style={{ gap: "100px" }}>
           {/* Image Section */}
