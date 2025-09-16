@@ -30,7 +30,7 @@ function About6() {
       {/* Section: Identity */}
       <div className="row text-center about6-content">
         <motion.div
-          className="col-md-6 px-5 py-5"
+          className="col-md-6 px-1 py-2"
           id="about6-right"
           initial={{ opacity: 0, x: -50 }}
           animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}

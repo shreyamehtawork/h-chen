@@ -41,7 +41,7 @@ function About1() {
           transition={{ duration: 0.9 }}
         >
           <div className="col-lg-8">
-            <h5 className="pb-3">Our Vision </h5>
+            <h5 className="pb-3 fw-bold">Our Vision </h5>
             <p>
               To establish Chloe’s Venture as a house of rarity and refinement,
               where fashion is not consumed but curated. We envision a world

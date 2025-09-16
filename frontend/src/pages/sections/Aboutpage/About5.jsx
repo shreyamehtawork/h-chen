@@ -32,7 +32,7 @@ function About5() {
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.8 }}
             >
-              Why Choose Chloe ?
+              Why Chloe ?
             </motion.h2>
 
             <motion.div
@@ -51,16 +51,16 @@ function About5() {
                   never repeated.
                 </li>
                 <li>
-                  <strong>Customization: </strong> Your garment is your identity,
-                  not just another piece in a rack.
+                  <strong>Customization: </strong> Your garment is your
+                  identity, not just another piece in a rack.
                 </li>
                 <li>
                   <strong>Rarity: </strong> Our limited editions make ownership
                   feel like a privilege.
                 </li>
                 <li>
-                  <strong>Vision Beyond Clothing: </strong> We are not building a
-                  label; we are building a luxury house.
+                  <strong>Vision Beyond Clothing: </strong> We are not building
+                  a label; we are building a luxury house.
                 </li>
                 <li>
                   <strong>Wealth Mindset: </strong> No sales, no discounts —
