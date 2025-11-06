@@ -107,13 +107,6 @@ function Nav() {
           <div className="collapse navbar-collapse" id="navbarsExample11">
             <ul className="navbar-nav mx-lg-auto">
               <li className="nav-item">
-                <Link
-                  className="nav-link"
-                  to="/chloes-ai"
-                  onClick={closeMobileMenu}
-                >
-                  Chloes AI
-                </Link>
                 <Link className="nav-link" to="/" onClick={closeMobileMenu}>
                   Home
                 </Link>
@@ -127,6 +120,7 @@ function Nav() {
                   About
                 </Link>
               </li>
+             
 
               {/* Shop Dropdown (Desktop) */}
               <li className="nav-item dropdown hover-dropdown d-none d-lg-block">
@@ -198,10 +192,18 @@ function Nav() {
                   Contact
                 </Link>
               </li>
+               <Link
+                className="nav-link"
+                to="/chloes-ai"
+                onClick={closeMobileMenu}
+              >
+                Chloes AI
+              </Link>
             </ul>
 
             {/* Desktop Right Side */}
             <div className="d-none d-lg-flex align-items-center">
+            
               <div className="d-flex align-items-center position-relative search-wrapper me-3">
                 <FaSearch className="text-dark me-2" />
                 <input
