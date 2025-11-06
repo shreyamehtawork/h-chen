@@ -107,6 +107,13 @@ function Nav() {
           <div className="collapse navbar-collapse" id="navbarsExample11">
             <ul className="navbar-nav mx-lg-auto">
               <li className="nav-item">
+                <Link
+                  className="nav-link"
+                  to="/chloes-ai"
+                  onClick={closeMobileMenu}
+                >
+                  Chloes AI
+                </Link>
                 <Link className="nav-link" to="/" onClick={closeMobileMenu}>
                   Home
                 </Link>
