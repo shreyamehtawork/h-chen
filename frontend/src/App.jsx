@@ -74,7 +74,7 @@ function App() {
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/register/complete" element={<RegisterComplete />} />
         <Route exact path="/shop" element={<AllProducts />} />
-        <Route exact path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route exact path="/privacypolicy" element={<PrivacyPolicy />} />
         <Route exact path="/refund-policy" element={<RefundPolicy />} />
         <Route exact path="/chloes-ai" element={<ComingSoon />} />
         <Route
