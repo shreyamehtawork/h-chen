@@ -93,6 +93,10 @@
   }
 
   .comingsoon-wrapper {
-    height: 70vh;
+    margin-top: 5vh;
+    height: 80vh;
+  }
+  .emailinput {
+    width: 60vw;
   }
 }

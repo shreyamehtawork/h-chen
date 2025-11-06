@@ -80,13 +80,13 @@ const ComingSoon = () => {
       <h5>Stay Tuned for the Launch!</h5>
 
       {/* Email form */}
-      <form ref={formRef} onSubmit={sendEmail} className="notify-form mt-4">
+      <form ref={formRef} onSubmit={sendEmail} className="notify-form mt-4 ">
         <input
           type="email"
           name="user_email"
           placeholder="Enter your email"
           required
-          className="p-1 fs-5 me-2"
+          className="p-1 fs-5 me-2 emailinput"
         />
         <button
           type="submit"
