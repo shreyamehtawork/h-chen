@@ -29,6 +29,7 @@ import PrivacyPolicy from "./pages/footer/PrivacyPolicy";
 import RefundPolicy from "./pages/footer/RefundPolicy";
 import TermsandConditions from "./pages/footer/TermsandConditions";
 import ShippingPolicy from "./pages/footer/ShippingPolicy";
+import ComingSoon from "./pages/ComingSoon";
 
 function App() {
   const { isAuthenticated, token } = useSelector((state) => state.auth);
@@ -75,6 +76,7 @@ function App() {
         <Route exact path="/shop" element={<AllProducts />} />
         <Route exact path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route exact path="/refund-policy" element={<RefundPolicy />} />
+        <Route exact path="/chloes-ai" element={<ComingSoon />} />
         <Route
           exact
           path="/termsandconditions"
